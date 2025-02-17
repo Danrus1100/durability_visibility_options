@@ -1,0 +1,16 @@
+{
+  "durability_visibility_options.config.title": "Настройки Вида Прочности",
+  "durability_visibility_options.config.category.bar": "Шкала",
+  "durability_visibility_options.config.category.percents": "Проценты",
+
+  "durability_visibility_options.config.show": "Показывать",
+  "durability_visibility_options.config.horizontal_offset": "Горизонтальное Смещение",
+  "durability_visibility_options.config.vertical_offset": "Вертикальное Смещение",
+  "durability_visibility_options.config.show_from_percent": "Показывать С Процентов",
+
+  "durability_visibility_options.config.color_min": "Цвет Мин.",
+  "durability_visibility_options.config.color_max": "Цвет Макс.",
+
+  "durability_visibility_options.config.show_percent_symbol": "Показывать \"%\"",
+  "durability_visibility_options.config.color": "Цвет"
+}

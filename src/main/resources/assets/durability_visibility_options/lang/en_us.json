@@ -1,0 +1,16 @@
+{
+  "durability_visibility_options.config.title": "Durability Visibility Options",
+  "durability_visibility_options.config.category.bar": "Bar",
+  "durability_visibility_options.config.category.percents": "Percents",
+
+  "durability_visibility_options.config.show": "Show",
+  "durability_visibility_options.config.horizontal_offset": "Horizontal Offset",
+  "durability_visibility_options.config.vertical_offset": "Vertical Offset",
+  "durability_visibility_options.config.show_from_percent": "Show From Percents",
+
+  "durability_visibility_options.config.color_min": "Color Min.",
+  "durability_visibility_options.config.color_max": "Color Max.",
+
+  "durability_visibility_options.config.show_percent_symbol": "Show \"%\"",
+  "durability_visibility_options.config.color": "Color"
+}

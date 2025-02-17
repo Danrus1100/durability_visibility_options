@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.danrus.durability_visibility_options.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ItemMixin",
+    "DrawContextMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

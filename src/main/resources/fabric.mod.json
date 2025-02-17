@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "durability_visibility_options",
+  "version": "${version}",
+  "name": "Durability Visibility Options",
+  "description": "A large number of settings for the visual appearance of the durability bar.",
+  "authors": ["Danrus110_"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/durability_visibility_options/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.danrus.durability_visibility_options.client.Durability_visibility_optionsClient"
+    ],
+    "modmenu": [
+      "com.danrus.durability_visibility_options.client.config.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "durability_visibility_options.mixins.json",
+    {
+      "config": "durability_visibility_options.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
