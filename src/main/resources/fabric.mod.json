@@ -5,11 +5,15 @@
   "name": "Durability Visibility Options",
   "description": "A large number of settings for the visual appearance of the durability bar.",
   "authors": ["Danrus110_"],
-  "contact": {},
+  "contact": {
+    "homepage": "https://modrinth.com/mod/durability_visibility_options",
+    "sources": "https://github.com/Danrus1100/durability_visibility_options",
+    "issues": "https://github.com/Danrus1100/durability_visibility_options/issues"
+  },
   "license": "MIT",
   "icon": "assets/durability_visibility_options/icon.png",
   "environment": "client",
-  "entrypoints": {
+  "entrypoint": {
     "client": [
       "com.danrus.durability_visibility_options.client.Durability_visibility_optionsClient"
     ],
@@ -18,7 +22,6 @@
     ]
   },
   "mixins": [
-    "durability_visibility_options.mixins.json",
     {
       "config": "durability_visibility_options.client.mixins.json",
       "environment": "client"
