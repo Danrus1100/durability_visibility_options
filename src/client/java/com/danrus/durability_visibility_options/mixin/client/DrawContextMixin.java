@@ -2,6 +2,7 @@ package com.danrus.durability_visibility_options.mixin.client;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -10,6 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.danrus.durability_visibility_options.client.config.ModConfig;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(DrawContext.class)
 public class DrawContextMixin {
@@ -73,6 +75,34 @@ public class DrawContextMixin {
         }
     }
 
+    @ModifyArgs(
+            method = "drawItemBar",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/DrawContext;fill(Lnet/minecraft/client/render/RenderLayer;IIIIII)V"
+    ))
+    private void modifyBarColor(Args args) {
+        int x1 = args.get(1);
+        int y1 = args.get(2);
+        int x2 = args.get(3);
+        int y2 = args.get(4);
+
+        if (!ModConfig.isVertical) {
+            args.set(1, x1);
+            args.set(2, y1);
+            args.set(3, x2);
+            args.set(4, y2);
+        } else {
+            int barStep = x2 - x1;
+            int barHeight = y2 - y1;
+            args.set(1, x1);
+            args.set(2, y1);
+            args.set(3, x1 + barHeight);
+            args.set(4, y1 + barStep);
+        }
+
+    }
+
     @ModifyVariable(
             method = "drawItemBar",
             at = @At(
@@ -81,7 +111,11 @@ public class DrawContextMixin {
             ordinal = 1,
             argsOnly = true)
     private int modifyBarY(int y){
-        return y-ModConfig.durabilityBarOffsetY;
+        int verticalOffset = 0;
+        if (ModConfig.isVertical) {
+            verticalOffset = 11;
+        }
+        return y-ModConfig.durabilityBarOffsetY-verticalOffset;
     }
 
     @ModifyVariable(
@@ -92,6 +126,7 @@ public class DrawContextMixin {
             ordinal = 0,
             argsOnly = true)
     private int modifyBarX(int x){
+
         return x+ModConfig.durabilityBarOffsetX-1;
     }
 

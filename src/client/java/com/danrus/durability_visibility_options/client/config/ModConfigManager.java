@@ -15,6 +15,7 @@ public class ModConfigManager {
         public int durabilityBarColor = ModConfig.durabilityBarColor;
         public int durabilityBarColor2 = ModConfig.durabilityBarColor2;
         public boolean showDurability = ModConfig.showDurability;
+        public boolean isVertical = ModConfig.isVertical;
         public int showDurabilityBarFromPercent = ModConfig.showDurabilityBarFromPercent;
         public int durabilityBarOffsetX = ModConfig.durabilityBarOffsetX;
         public int durabilityBarOffsetY = ModConfig.durabilityBarOffsetY;
@@ -42,6 +43,7 @@ public class ModConfigManager {
                 ModConfig.durabilityBarColor = data.durabilityBarColor;
                 ModConfig.durabilityBarColor2 = data.durabilityBarColor2;
                 ModConfig.showDurability = data.showDurability;
+                ModConfig.isVertical = data.isVertical;
                 ModConfig.showDurabilityBarFromPercent = data.showDurabilityBarFromPercent;
                 ModConfig.durabilityBarOffsetX = data.durabilityBarOffsetX;
                 ModConfig.durabilityBarOffsetY = data.durabilityBarOffsetY;

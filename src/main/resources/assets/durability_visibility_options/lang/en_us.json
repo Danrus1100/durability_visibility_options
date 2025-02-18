@@ -10,6 +10,7 @@
 
   "durability_visibility_options.config.color_min": "Color Min.",
   "durability_visibility_options.config.color_max": "Color Max.",
+  "durability_visibility_options.config.is_vertical": "Make Vertical",
 
   "durability_visibility_options.config.show_percent_symbol": "Show \"%\"",
   "durability_visibility_options.config.color": "Color"

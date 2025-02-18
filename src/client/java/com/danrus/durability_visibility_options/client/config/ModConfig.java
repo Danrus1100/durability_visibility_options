@@ -10,6 +10,7 @@ public class ModConfig {
     public static int durabilityBarColor = 0x00FF00;
     public static int durabilityBarColor2 = 0xFF0000;
     public static boolean showDurability = true;
+    public static boolean isVertical = false;
     public static int showDurabilityBarFromPercent = 100;
     public static int durabilityBarOffsetX = 0;
     public static int durabilityBarOffsetY = 0;
@@ -42,6 +43,13 @@ public class ModConfig {
                 entryBuilder.startBooleanToggle(Text.translatable("durability_visibility_options.config.show"), showDurability)
                         .setDefaultValue(true)
                         .setSaveConsumer(value -> showDurability = value)
+                        .build()
+        );
+
+        bar.addEntry(
+                entryBuilder.startBooleanToggle(Text.translatable("durability_visibility_options.config.is_vertical"), isVertical)
+                        .setDefaultValue(false)
+                        .setSaveConsumer(value -> isVertical = value)
                         .build()
         );
 

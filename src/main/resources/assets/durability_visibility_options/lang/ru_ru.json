@@ -10,6 +10,7 @@
 
   "durability_visibility_options.config.color_min": "Цвет Мин.",
   "durability_visibility_options.config.color_max": "Цвет Макс.",
+  "durability_visibility_options.config.is_vertical": "Cделать Вертикальной",
 
   "durability_visibility_options.config.show_percent_symbol": "Показывать \"%\"",
   "durability_visibility_options.config.color": "Цвет"
