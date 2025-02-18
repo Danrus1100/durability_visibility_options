@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class ModConfigManager {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final File CONFIG_FILE = new File("config/mymod.json");
+    private static final File CONFIG_FILE = new File("config/durability_visibility_options.json");
 
     public static class ConfigData {
         public int durabilityBarColor = ModConfig.durabilityBarColor;
@@ -20,7 +20,7 @@ public class ModConfigManager {
         public int durabilityBarOffsetY = ModConfig.durabilityBarOffsetY;
 
         public boolean showDurabilityPercent = ModConfig.showDurabilityPercent;
-        public boolean showPrecentSymbol = ModConfig.showPrecentSymbol;
+        public boolean showPercentSymbol = ModConfig.showPercentSymbol;
         public int durabilityPercentOffsetX = ModConfig.durabilityPercentOffsetX;
         public int durabilityPercentOffsetY = ModConfig.durabilityPercentOffsetY;
         public int durabilityPercentColor = ModConfig.durabilityPercentColor;
@@ -47,7 +47,7 @@ public class ModConfigManager {
                 ModConfig.durabilityBarOffsetY = data.durabilityBarOffsetY;
 
                 ModConfig.showDurabilityPercent = data.showDurabilityPercent;
-                ModConfig.showPrecentSymbol = data.showPrecentSymbol;
+                ModConfig.showPercentSymbol = data.showPercentSymbol;
                 ModConfig.durabilityPercentOffsetX = data.durabilityPercentOffsetX;
                 ModConfig.durabilityPercentOffsetY = data.durabilityPercentOffsetY;
                 ModConfig.durabilityPercentColor = data.durabilityPercentColor;

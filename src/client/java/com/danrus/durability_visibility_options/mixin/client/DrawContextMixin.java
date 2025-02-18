@@ -2,7 +2,6 @@ package com.danrus.durability_visibility_options.mixin.client;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -38,7 +37,7 @@ public class DrawContextMixin {
         int percents = (int) ((float) (stack.getMaxDamage() - stack.getDamage()) / stack.getMaxDamage() * 100);
         if (ModConfig.showDurabilityPercent && stack.getMaxDamage() > 0 && ModConfig.showDurabilityPercentsFromPercent >= percents) {
             String durability = String.valueOf(percents);
-            if (ModConfig.showPrecentSymbol) {
+            if (ModConfig.showPercentSymbol) {
                 durability += "%";
             }
 

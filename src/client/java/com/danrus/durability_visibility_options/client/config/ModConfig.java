@@ -5,7 +5,6 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableTextContent;
 
 public class ModConfig {
     public static int durabilityBarColor = 0x00FF00;
@@ -16,7 +15,7 @@ public class ModConfig {
     public static int durabilityBarOffsetY = 0;
 
     public static boolean showDurabilityPercent = false;
-    public static boolean showPrecentSymbol = true;
+    public static boolean showPercentSymbol = true;
     public static int durabilityPercentOffsetX = 0;
     public static int durabilityPercentOffsetY = 0;
     public static int showDurabilityPercentsFromPercent = 99;
@@ -93,9 +92,9 @@ public class ModConfig {
         );
 
         percent.addEntry(
-                entryBuilder.startBooleanToggle(Text.translatable("durability_visibility_options.config.show_percent_symbol"), showPrecentSymbol)
+                entryBuilder.startBooleanToggle(Text.translatable("durability_visibility_options.config.show_percent_symbol"), showPercentSymbol)
                         .setDefaultValue(true)
-                        .setSaveConsumer(value -> showPrecentSymbol = value)
+                        .setSaveConsumer(value -> showPercentSymbol = value)
                         .build()
         );
 
