@@ -13,7 +13,7 @@
   "license": "MIT",
   "icon": "assets/durability_visibility_options/icon.png",
   "environment": "client",
-  "entrypoint": {
+  "entrypoints": {
     "client": [
       "com.danrus.durability_visibility_options.client.Durability_visibility_optionsClient"
     ],
