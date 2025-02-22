@@ -2,9 +2,11 @@ package com.danrus.durability_visibility_options.mixin.client;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,16 +24,13 @@ public class DrawContextMixin {
 
     @Final
     @Shadow
-    private void drawItemBar(ItemStack stack, int x, int y) {
-
-    }
+    private net.minecraft.client.MinecraftClient client;
 
     @Inject(
-            method = "drawStackOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
+            method = "drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/DrawContext;drawStackCount(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
-                    shift = At.Shift.AFTER
+                    target = "Lnet/minecraft/entity/player/ItemCooldownManager;getCooldownProgress(Lnet/minecraft/item/Item;F)F"
             )
     )
     private void drawStackOverlayMixin(TextRenderer textRenderer, ItemStack stack, int x, int y, String stackCountText, CallbackInfo ci){
@@ -57,29 +56,57 @@ public class DrawContextMixin {
     }
 
     @Inject(
-            method = "drawItemBar",
-            at = @At(
-                    value = "HEAD"
-
-            ),
-            cancellable = true
+            method = "drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
+            at = @At("HEAD")
     )
-    private void drawItemBarMixin(ItemStack stack, int x, int y, CallbackInfo ci){
-        if (ModConfig.showDurability) {
-            int percents = (int) ((float) (stack.getMaxDamage() - stack.getDamage()) / stack.getMaxDamage() * 100);
-            if (ModConfig.showDurabilityBarFromPercent < percents) {
-                ci.cancel();
+
+    private void drawBarMixin(TextRenderer textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci){
+        DrawContext drawContext = (DrawContext)(Object)this;
+        int percents = (int) ((float) (stack.getMaxDamage() - stack.getDamage()) / stack.getMaxDamage() * 100);
+        if (!stack.isEmpty()) {
+            this.matrices.push();
+            if (stack.getCount() != 1 || countOverride != null) {
+                String string = countOverride == null ? String.valueOf(stack.getCount()) : countOverride;
+                this.matrices.translate(0.0F, 0.0F, 200.0F);
+                drawContext.drawText(textRenderer, string, x + 19 - 2 - textRenderer.getWidth(string), y + 6 + 3, 16777215, true);
             }
-        } else {
-            ci.cancel();
+
+            if (stack.isItemBarVisible() && ModConfig.showDurabilityBarFromPercent < percents) {
+                int i = stack.getItemBarStep();
+                int j = stack.getItemBarColor();
+                int k = x + 2;
+                int l = y + 13;
+
+                k = k+ModConfig.durabilityBarOffsetX-1;
+
+                int verticalOffset = 0;
+                if (ModConfig.isVertical) {
+                    verticalOffset = 16; //TODO: correct this value
+                }
+                l = l-ModConfig.durabilityBarOffsetY-verticalOffset;
+
+
+                drawContext.fill(RenderLayer.getGuiOverlay(), k, l, k + 13, l + 2, -16777216);
+                drawContext.fill(RenderLayer.getGuiOverlay(), k, l, k + i, l + 1, j | -16777216); //TODO: make custom color usage
+            }
+
+            ClientPlayerEntity clientPlayerEntity = this.client.player;
+            float f = clientPlayerEntity == null ? 0.0F : clientPlayerEntity.getItemCooldownManager().getCooldownProgress(stack.getItem(), this.client.getRenderTickCounter().getTickDelta(true));
+            if (f > 0.0F) {
+                int k = y + MathHelper.floor(16.0F * (1.0F - f));
+                int l = k + MathHelper.ceil(16.0F * f);
+                drawContext.fill(RenderLayer.getGuiOverlay(), x, k, x + 16, l, Integer.MAX_VALUE);
+            }
+
+            this.matrices.pop();
         }
     }
 
     @ModifyArgs(
-            method = "drawItemBar",
+            method = "drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/DrawContext;fill(Lnet/minecraft/client/render/RenderLayer;IIIIII)V"
+                    target = "Lnet/minecraft/client/gui/DrawContext;fill(Lnet/minecraft/client/render/RenderLayer;IIIII)V"
     ))
     private void modifyBarColor(Args args) {
         int x1 = args.get(1);
@@ -101,33 +128,6 @@ public class DrawContextMixin {
             args.set(4, y1 + barStep);
         }
 
-    }
-
-    @ModifyVariable(
-            method = "drawItemBar",
-            at = @At(
-                    value = "HEAD"
-            ),
-            ordinal = 1,
-            argsOnly = true)
-    private int modifyBarY(int y){
-        int verticalOffset = 0;
-        if (ModConfig.isVertical) {
-            verticalOffset = 11;
-        }
-        return y-ModConfig.durabilityBarOffsetY-verticalOffset;
-    }
-
-    @ModifyVariable(
-            method = "drawItemBar",
-            at = @At(
-                    value = "HEAD"
-            ),
-            ordinal = 0,
-            argsOnly = true)
-    private int modifyBarX(int x){
-
-        return x+ModConfig.durabilityBarOffsetX-1;
     }
 
 
