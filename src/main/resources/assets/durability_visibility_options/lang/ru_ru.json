@@ -2,16 +2,42 @@
   "durability_visibility_options.config.title": "Настройки Вида Прочности",
   "durability_visibility_options.config.category.bar": "Шкала",
   "durability_visibility_options.config.category.percents": "Проценты",
+  "durability_visibility_options.config.category.armor_hud": "HUD Брони",
 
   "durability_visibility_options.config.show": "Показывать",
   "durability_visibility_options.config.horizontal_offset": "Горизонтальное Смещение",
   "durability_visibility_options.config.vertical_offset": "Вертикальное Смещение",
-  "durability_visibility_options.config.show_from_percent": "Показывать С Процентов",
+  "durability_visibility_options.config.show_from_percent": "Показывать От Процента",
+  "durability_visibility_options.config.show_percent_symbol": "Показывать \"%\"",
 
   "durability_visibility_options.config.color_min": "Цвет Мин.",
   "durability_visibility_options.config.color_max": "Цвет Макс.",
-  "durability_visibility_options.config.is_vertical": "Cделать Вертикальной",
+  "durability_visibility_options.config.is_vertical": "Сделать Вертикальным",
 
-  "durability_visibility_options.config.show_percent_symbol": "Показывать \"%\"",
-  "durability_visibility_options.config.color": "Цвет"
+  "durability_visibility_options.config.color": "Цвет",
+
+  "durability_visibility_options.config.armor_hud.show": "Показывать Интерфейс Брони",
+
+  "durability_visibility_options.config.margin": "Отступ",
+  "durability_visibility_options.config.scale": "Размер",
+  "durability_visibility_options.config.show_in_creative": "Показывать в Творческом Режиме",
+
+  "durability_visibility_options.config.armor_hud.position_horizontal": "Горизонтальное Положение",
+  "durability_visibility_options.config.armor_hud.position_horizontal.left": "Слева",
+  "durability_visibility_options.config.armor_hud.position_horizontal.center": "По Центру",
+  "durability_visibility_options.config.armor_hud.position_horizontal.right": "Справа",
+
+
+  "durability_visibility_options.config.armor_hud.position_vertical": "Вертикальное Положение",
+  "durability_visibility_options.config.armor_hud.position_vertical.top": "Сверху",
+  "durability_visibility_options.config.armor_hud.position_vertical.center": "По Центру",
+  "durability_visibility_options.config.armor_hud.position_vertical.bottom": "Снизу",
+
+  "durability_visibility_options.config.armor_hud.alignment": "Выравнивание",
+  "durability_visibility_options.config.armor_hud.alignment.horizontal": "Горизонтальное",
+  "durability_visibility_options.config.armor_hud.alignment.vertical": "Вертикальное",
+
+  "durability_visibility_options.config.armor_hud.display_style": "Стиль Отображения",
+  "durability_visibility_options.config.armor_hud.display_style.icon_percent": "Иконка - Процент",
+  "durability_visibility_options.config.armor_hud.display_style.percent_icon": "Процент - Иконка"
 }

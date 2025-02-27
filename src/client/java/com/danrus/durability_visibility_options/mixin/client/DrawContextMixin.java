@@ -2,7 +2,6 @@ package com.danrus.durability_visibility_options.mixin.client;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -20,11 +19,6 @@ public class DrawContextMixin {
     @Shadow
     private MatrixStack matrices;
 
-    @Final
-    @Shadow
-    private void drawItemBar(ItemStack stack, int x, int y) {
-
-    }
 
     @Inject(
             method = "drawStackOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",

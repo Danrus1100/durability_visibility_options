@@ -2,16 +2,42 @@
   "durability_visibility_options.config.title": "Durability Visibility Options",
   "durability_visibility_options.config.category.bar": "Bar",
   "durability_visibility_options.config.category.percents": "Percents",
+  "durability_visibility_options.config.category.armor_hud": "Armor HUD",
 
   "durability_visibility_options.config.show": "Show",
   "durability_visibility_options.config.horizontal_offset": "Horizontal Offset",
   "durability_visibility_options.config.vertical_offset": "Vertical Offset",
   "durability_visibility_options.config.show_from_percent": "Show From Percents",
+  "durability_visibility_options.config.show_percent_symbol": "Show \"%\"",
 
   "durability_visibility_options.config.color_min": "Color Min.",
   "durability_visibility_options.config.color_max": "Color Max.",
   "durability_visibility_options.config.is_vertical": "Make Vertical",
 
-  "durability_visibility_options.config.show_percent_symbol": "Show \"%\"",
-  "durability_visibility_options.config.color": "Color"
+  "durability_visibility_options.config.color": "Color",
+
+  "durability_visibility_options.config.armor_hud.show": "Show Armor HUD",
+
+  "durability_visibility_options.config.margin": "Margin",
+  "durability_visibility_options.config.scale": "Scale",
+  "durability_visibility_options.config.show_in_creative": "Show in Creative Mode",
+
+  "durability_visibility_options.config.armor_hud.position_horizontal": "Horizontal Position",
+    "durability_visibility_options.config.armor_hud.position_horizontal.left": "Left",
+    "durability_visibility_options.config.armor_hud.position_horizontal.center": "Center",
+    "durability_visibility_options.config.armor_hud.position_horizontal.right": "Right",
+
+
+  "durability_visibility_options.config.armor_hud.position_vertical": "Vertical Position",
+    "durability_visibility_options.config.armor_hud.position_vertical.top": "Top",
+    "durability_visibility_options.config.armor_hud.position_vertical.center": "Center",
+    "durability_visibility_options.config.armor_hud.position_vertical.bottom": "Bottom",
+
+  "durability_visibility_options.config.armor_hud.alignment": "Alignment",
+  "durability_visibility_options.config.armor_hud.alignment.horizontal": "Horizontal",
+  "durability_visibility_options.config.armor_hud.alignment.vertical": "Vertical",
+
+  "durability_visibility_options.config.armor_hud.display_style": "Display Style",
+  "durability_visibility_options.config.armor_hud.display_style.icon_percent": "Icon - Percent",
+  "durability_visibility_options.config.armor_hud.display_style.percent_icon": "Percent - Icon"
 }
