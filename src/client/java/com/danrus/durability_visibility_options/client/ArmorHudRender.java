@@ -1,7 +1,6 @@
 package com.danrus.durability_visibility_options.client;
 
 import com.danrus.durability_visibility_options.client.config.ModConfig;
-import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -112,7 +111,6 @@ public class ArmorHudRender implements HudRenderCallback {
 
         int x = switch (ModConfig.armorHudPositionHorizontal) {
             case LEFT -> calculateHorizontalOffset() + iconWidth;
-//            case CENTER -> (width / 2) + calculateHorizontalOffset();
             case CENTER -> switch (ModConfig.armorHudAlignment) {
                 case HORIZONTAL -> ((width / 2) - (getArmorItems().size() * (iconWidth + textMaxWidth + ModConfig.armorDurabilityHudMirgin - 24)) / 2) + calculateHorizontalOffset();
                 case VERTICAL -> (width / 2) + calculateHorizontalOffset();
@@ -134,19 +132,15 @@ public class ArmorHudRender implements HudRenderCallback {
     }
 
     private int calculateHorizontalOffset() {
-//        return ModConfig.armorDurabilityHudOffsetX;
         return switch (ModConfig.armorHudPositionHorizontal){
-            case LEFT -> ModConfig.armorDurabilityHudOffsetX;
-            case CENTER -> ModConfig.armorDurabilityHudOffsetX;
+            case LEFT, CENTER -> ModConfig.armorDurabilityHudOffsetX;
             case RIGHT -> -ModConfig.armorDurabilityHudOffsetX;
         };
     }
 
     private int calculateVerticalOffset() {
-//        return ModConfig.armorDurabilityHudOffsetY;
         return switch (ModConfig.armorHudPositionVertical){
-            case TOP -> ModConfig.armorDurabilityHudOffsetY;
-            case CENTER -> ModConfig.armorDurabilityHudOffsetX;
+            case TOP, CENTER -> ModConfig.armorDurabilityHudOffsetY;
             case BOTTOM -> -ModConfig.armorDurabilityHudOffsetY;
         };
     }

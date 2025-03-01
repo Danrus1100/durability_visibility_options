@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "ItemMixin",
-    "DrawContextMixin"
+    "NewDrawContextMixin"
   ],
   "injectors": {
     "defaultRequire": 1
