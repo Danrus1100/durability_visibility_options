@@ -15,7 +15,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.danrus.durability_visibility_options.client.Durability_visibility_optionsClient"
+      "com.danrus.durability_visibility_options.client.DurabilityVisibilityOptions"
     ],
     "modmenu": [
       "com.danrus.durability_visibility_options.client.config.ModMenuIntegration"
@@ -23,13 +23,13 @@
   },
   "mixins": [
     {
-      "config": "durability_visibility_options.client.mixins.json",
+      "config": "durability_visibility_options.mixins.json",
       "environment": "client"
     }
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric": "*",
+    "fabricloader": ">=0.16",
+    "fabric-api": "*",
     "minecraft": "${minecraft_version}"
   }
 }

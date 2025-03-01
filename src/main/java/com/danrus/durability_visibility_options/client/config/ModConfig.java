@@ -110,7 +110,8 @@ public class ModConfig {
         );
 
         bar.addEntry(
-                entryBuilder.startColorField(Text.translatable("durability_visibility_options.config.color_max"), durabilityBarColor)
+//                entryBuilder.startColorField(Text.translatable("durability_visibility_options.config.color_max"), durabilityBarColor)
+                entryBuilder.startColorField(Text.translatable("durability_visibility_options.config.color"), durabilityBarColor)
                         .setDefaultValue(0x00FF00)
                         .setSaveConsumer(value -> durabilityBarColor = value)
                         .build()
@@ -118,12 +119,12 @@ public class ModConfig {
 
 
 
-        bar.addEntry(
-                entryBuilder.startColorField(Text.translatable("durability_visibility_options.config.color_min"), durabilityBarColor2)
-                        .setDefaultValue(0xFF0000)
-                        .setSaveConsumer(value -> durabilityBarColor2 = value)
-                        .build()
-        );
+//        bar.addEntry(
+//                entryBuilder.startColorField(Text.translatable("durability_visibility_options.config.color_min"), durabilityBarColor2)
+//                        .setDefaultValue(0xFF0000)
+//                        .setSaveConsumer(value -> durabilityBarColor2 = value)
+//                        .build()
+//        );
 
         ConfigCategory percent = builder.getOrCreateCategory(Text.translatable("durability_visibility_options.config.category.percents"));
 
