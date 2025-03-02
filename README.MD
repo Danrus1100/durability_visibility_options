@@ -1,5 +1,6 @@
 # Durability Visibility Options
 <center>
+<p>
 <a href="https://modrinth.com/mod/durability_visibility_options">
 <img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg">
 </a>
@@ -7,6 +8,8 @@
 <img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg">
 </a>
 </center>
+</p>
+<p>
 <center>
 <a href="https://modrinth.com/mod/fabric-api">
 <img alt="fabric-api" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/requires/fabric-api_vector.svg">
@@ -15,6 +18,7 @@
 <img alt="fabric-api" height="56" src="https://raw.githubusercontent.com/Danrus1100/durability_visibility_options/refs/heads/dev/assets/YACL.svg">
 </a>
 </center>
+</p>
 A large number of settings for the visual appearance of the durability bar!
 
 ## Features
