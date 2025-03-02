@@ -1,4 +1,20 @@
 # Durability Visibility Options
+<center>
+<a href="https://modrinth.com/mod/durability_visibility_options">
+<img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg">
+</a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/durability-visibility-options">
+<img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg">
+</a>
+</center>
+<center>
+<a href="https://modrinth.com/mod/fabric-api">
+<img alt="fabric-api" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/requires/fabric-api_vector.svg">
+</a>
+<a href="https://modrinth.com/mod/yacl">
+<img alt="fabric-api" height="56" src="/assets/yacl.svg">
+</a>
+</center>
 A large number of settings for the visual appearance of the durability bar!
 
 ## Features
