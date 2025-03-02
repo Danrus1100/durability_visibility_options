@@ -12,7 +12,7 @@
 <img alt="fabric-api" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/requires/fabric-api_vector.svg">
 </a>
 <a href="https://modrinth.com/mod/yacl">
-<img alt="fabric-api" height="56" src="/assets/yacl.svg">
+<img alt="fabric-api" height="56" src="assets/yacl.svg">
 </a>
 </center>
 A large number of settings for the visual appearance of the durability bar!
