@@ -21,6 +21,7 @@
   "durability_visibility_options.config.margin": "Margin",
   "durability_visibility_options.config.scale": "Scale",
   "durability_visibility_options.config.show_in_creative": "Show in Creative Mode",
+  "durability_visibility_options.config.show_vanilla_armor_hud": "Show Vanilla Armor HUD",
 
   "durability_visibility_options.config.armor_hud.position_horizontal": "Horizontal Position",
     "durability_visibility_options.config.armor_hud.position_horizontal.left": "Left",

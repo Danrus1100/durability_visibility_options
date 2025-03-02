@@ -7,34 +7,35 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 
 public class DurabilityRender {
+
     public static void renderBar(DrawContext drawContext, int percents, int itemBarStep, int x, int y) {
-        if (ModConfig.showDurabilityBarFromPercent <= percents) {
+        if (ModConfig.get().showDurabilityBarFromPercent <= percents) {
             return;
         }
         int i = x + 2;
         int j = y + 13;
-        if (ModConfig.isVertical) {
-            i += ModConfig.durabilityBarOffsetX - 2;
-            j -= ModConfig.durabilityBarOffsetY + 11;
+        if (ModConfig.get().isVertical) {
+            i += ModConfig.get().durabilityBarOffsetX - 2;
+            j -= ModConfig.get().durabilityBarOffsetY + 11;
             drawContext.fill(RenderLayer.getGui(), i, j, i + 2, j + 13, 200, -16777216);
-            drawContext.fill(RenderLayer.getGui(),i+1, j+13, i, j + 13 - itemBarStep, 200, ModConfig.durabilityBarColor | 0xFF000000);
+            drawContext.fill(RenderLayer.getGui(),i+1, j+13, i, j + 13 - itemBarStep, 200, ModConfig.get().durabilityBarColor | 0xFF000000);
         } else {
-            i += ModConfig.durabilityBarOffsetX;
-            j -= ModConfig.durabilityBarOffsetY;
+            i += ModConfig.get().durabilityBarOffsetX;
+            j -= ModConfig.get().durabilityBarOffsetY;
             drawContext.fill(RenderLayer.getGui(), i, j, i + 13, j + 2, 200, -16777216);
-            drawContext.fill(RenderLayer.getGui(), i, j, i + itemBarStep, j + 1, 200, ModConfig.durabilityBarColor | 0xFF000000);
+            drawContext.fill(RenderLayer.getGui(), i, j, i + itemBarStep, j + 1, 200, ModConfig.get().durabilityBarColor | 0xFF000000);
         }
     }
 
     public static void renderPercents(DrawContext drawContext, int percents, int x, int y) {
-        if (ModConfig.showDurabilityPercent) {
-            if (ModConfig.showDurabilityPercentsFromPercent >= percents) {
+        if (ModConfig.get().showDurabilityPercent) {
+            if (ModConfig.get().showDurabilityPercentsFromPercent >= percents) {
                 String durability = String.valueOf(percents);
-                if (ModConfig.showPercentSymbol) {
+                if (ModConfig.get().showPercentSymbol) {
                     durability += "%";
                 }
                 TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-                drawContext.drawCenteredTextWithShadow(textRenderer, durability, x + 17 + ModConfig.durabilityPercentOffsetX, y + 23 - ModConfig.durabilityPercentOffsetY, ModConfig.durabilityPercentColor);
+                drawContext.drawCenteredTextWithShadow(textRenderer, durability, x + 17 + ModConfig.get().durabilityPercentOffsetX, y + 23 - ModConfig.get().durabilityPercentOffsetY, ModConfig.get().durabilityPercentColor);
             }
         }
     }

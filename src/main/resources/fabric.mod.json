@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "durability_visibility_options",
-  "version": "${version}",
+  "version": "${version}-MC-${minecraft_version}",
   "name": "Durability Visibility Options",
   "description": "A large number of settings for the visual appearance of the durability bar.",
   "authors": ["Danrus110_"],

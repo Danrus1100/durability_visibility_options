@@ -21,6 +21,7 @@
   "durability_visibility_options.config.margin": "Отступ",
   "durability_visibility_options.config.scale": "Размер",
   "durability_visibility_options.config.show_in_creative": "Показывать в Творческом Режиме",
+  "durability_visibility_options.config.show_vanilla_armor_hud": "Показывать Ванильный Интерфейс Брони",
 
   "durability_visibility_options.config.armor_hud.position_horizontal": "Горизонтальное Положение",
   "durability_visibility_options.config.armor_hud.position_horizontal.left": "Слева",
