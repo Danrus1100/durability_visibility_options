@@ -21,5 +21,5 @@ A large number of settings for the visual appearance of the durability bar!
 ## Dependencies
  - [Cloth Config](https://modrinth.com/mod/cloth-config)
 
-## Spetial thanks
+## Speсial thanks
 [jackborrie](https://github.com/jackborrie/duraview) - creator of "duraview"
