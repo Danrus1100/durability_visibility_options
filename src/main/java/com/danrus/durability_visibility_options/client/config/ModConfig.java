@@ -7,6 +7,7 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import dev.isxander.yacl3.platform.YACLPlatform;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -14,6 +15,8 @@ import net.minecraft.util.Identifier;
 import java.awt.Color;
 
 public class ModConfig {
+
+    public static boolean isOpen = false;
 
     public static final ConfigClassHandler<ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
 //            .id(new Identifier("durability_visibility_options", "config"))
@@ -126,7 +129,7 @@ public class ModConfig {
     }
 
     public static Screen getConfigScreen(Screen parent) {
-        return YetAnotherConfigLib.createBuilder()
+        Screen yaclScreen =  YetAnotherConfigLib.createBuilder()
                 .title(Text.of("Durability Visibility Options"))
                 .category(ConfigCategory.createBuilder()
                         .name(Text.of("General"))
@@ -485,30 +488,18 @@ public class ModConfig {
                         .build())
                 .build()
                 .generateScreen(parent);
+
+        return yaclScreen;
     }
 
-    /**
-     * Инициализирует конфигурацию.
-     * Вызывайте этот метод при запуске мода.
-     */
     public static void initialize() {
         HANDLER.load();
     }
 
-    /**
-     * Возвращает экземпляр конфигурации.
-     * Используйте этот метод для доступа к настройкам.
-     *
-     * @return Текущая конфигурация
-     */
     public static ModConfig get() {
         return HANDLER.instance();
     }
 
-    /**
-     * Сохраняет конфигурацию.
-     * Можно вызвать в любое время для принудительного сохранения настроек.
-     */
     public static void save() {
         HANDLER.save();
     }

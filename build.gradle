@@ -31,6 +31,9 @@ repositories {
     }
 }
 
+println "Stonecutter version: ${stonecutter.current.version}"
+println "Yarn mappings: ${property('yarn_mappings')}"
+
 dependencies {
     minecraft "com.mojang:minecraft:${stonecutter.current.project}"
     mappings "net.fabricmc:yarn:${property('yarn_mappings')}:v2"
@@ -79,6 +82,8 @@ loom {
         ideConfigGenerated true // Run configurations are not created for subprojects by default
         runDir "../../run" // Use a shared run folder and create separate worlds
     }
+    accessWidenerPath = project.rootProject.file("src/main/resources/aws/${stonecutter.current.project}.accesswidener")
+//    accessWidenerPath = project.rootProject.file("src/main/resources/aws/1.21.4.accesswidener")
 }
 
 java {

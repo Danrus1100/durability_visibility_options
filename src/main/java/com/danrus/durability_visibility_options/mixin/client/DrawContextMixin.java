@@ -4,10 +4,7 @@ import com.danrus.durability_visibility_options.client.DurabilityRender;
 import com.danrus.durability_visibility_options.client.config.ModConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-//? if >1.19.4 {
 import net.minecraft.client.gui.DrawContext;
-//?} else
-/*import net.minecraft.client.gui.DrawableHelper;*/
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -16,7 +13,6 @@ import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -57,7 +53,6 @@ public class DrawContextMixin {
             cancellable = true)
      
     *///?}
-    @Unique
     private void drawItemInSlotMixin(TextRenderer textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
         DrawContext instance = (DrawContext) (Object) this;
         int percents = (int) ((float) (stack.getMaxDamage() - stack.getDamage()) / stack.getMaxDamage() * 100);

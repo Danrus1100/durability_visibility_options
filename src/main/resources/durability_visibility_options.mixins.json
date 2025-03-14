@@ -5,9 +5,15 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "DrawContextMixin",
-    "InGameHudMixin"
+    "InGameHudMixin",
+    "PressableWidgetMixin",
+    "ScreenMixin",
+    "YACLScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "AbstractWidgetMixin"
+  ]
 }
