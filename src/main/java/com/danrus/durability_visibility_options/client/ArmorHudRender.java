@@ -19,15 +19,15 @@ public class ArmorHudRender implements HudRenderCallback {
     public MinecraftClient client = MinecraftClient.getInstance();
 
     //? if <=1.20.6 {
-    @Override
+    /*@Override
     public void onHudRender(DrawContext drawContext, float v) {
-        RenderTickCounter renderTickCounter = new RenderTickCounter(0.0F, 0L /*? if >1.20.2 {*//*, f -> 0.0F*//*?}*/);
+        RenderTickCounter renderTickCounter = new RenderTickCounter(0.0F, 0L /^? if >1.20.2 {^/, f -> 0.0F/^?}^/);
         onHudRender(drawContext, renderTickCounter);
     }
-    //?}
+    *///?}
 
     //? if >1.20.6
-    /*@Override*/
+    @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
         if (!ModConfig.get().showArmorDurabilityHud) {
             return;

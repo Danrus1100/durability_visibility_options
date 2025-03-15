@@ -27,7 +27,7 @@ A large number of settings for the visual appearance of the durability bar!
  - Bar/Percents color settings
  - Bar/Percents position settings
  - Hide Bar/Percents depending on durability
- - Huge Armor HUD customization (~~13 options!~~)
+ - Huge Armor HUD customization (~~15 options!~~)
 
 ![image](assets/modmenu.png)
 
@@ -39,5 +39,6 @@ A large number of settings for the visual appearance of the durability bar!
 ![image](assets/example3.png)
 ![image](assets/example4.png)
 
-## Dependencies
- - [Cloth Config](https://modrinth.com/mod/cloth-config)
+
+## Speсial thanks
+[jackborrie](https://github.com/jackborrie/duraview) - creator of "duraview"

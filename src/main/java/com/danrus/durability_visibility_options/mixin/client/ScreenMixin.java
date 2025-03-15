@@ -15,7 +15,7 @@ public class ScreenMixin {
 
     private void customApplyBlur(Screen i, float v){
         //? if >=1.21.4
-        /*i.applyBlur();*/
+        i.applyBlur();
         //? if <1.21.4 >1.20.4
         /*i.applyBlur(v);*/
         return;
@@ -26,26 +26,26 @@ public class ScreenMixin {
             at = @At(
                     value = "INVOKE",
                     //? if >=1.21.4
-                    /*target = "Lnet/minecraft/client/gui/screen/Screen;applyBlur()V"*/
+                    target = "Lnet/minecraft/client/gui/screen/Screen;applyBlur()V"
                     //? if <1.21.4 >1.20.4
                     /*target = "Lnet/minecraft/client/gui/screen/Screen;applyBlur(F)V"*/
                     //? if <=1.20.4
-                    target = "Lnet/minecraft/client/gui/screen/Screen;renderBackgroundTexture(Lnet/minecraft/client/gui/DrawContext;)V"
+                    /*target = "Lnet/minecraft/client/gui/screen/Screen;renderBackgroundTexture(Lnet/minecraft/client/gui/DrawContext;)V"*/
             )
     )
     //? if >1.20.4 {
-    /*private void applyBlurMixin(Screen instance/^? if <1.21.4 {^/,float v/^?}^/)
-    *///?}
+    private void applyBlurMixin(Screen instance/*? if <1.21.4 {*//*,float v*//*?}*/)
+    //?}
     //? if <=1.20.4
-    private void renderInGameBackgroundMixin(Screen instance, DrawContext graphics)
+    /*private void renderInGameBackgroundMixin(Screen instance, DrawContext graphics)*/
         {
             //? if >=1.21.4
-            /*float v = 0.0f;*/
+            float v = 0.0f;
             if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
                 //? if >1.20.4
-                /*customApplyBlur(instance, v);*/
+                customApplyBlur(instance, v);
                 //? if <=1.20.4
-                instance.renderBackgroundTexture(graphics);
+                /*instance.renderBackgroundTexture(graphics);*/
             }
         }
     }
