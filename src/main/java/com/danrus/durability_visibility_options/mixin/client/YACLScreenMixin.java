@@ -1,5 +1,6 @@
 package com.danrus.durability_visibility_options.mixin.client;
 
+import com.danrus.durability_visibility_options.client.DurabilityVisibilityOptions;
 import com.danrus.durability_visibility_options.client.config.ModConfig;
 import dev.isxander.yacl3.gui.YACLScreen;
 import dev.isxander.yacl3.gui.tab.TabExt;

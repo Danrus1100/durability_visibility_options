@@ -1,5 +1,6 @@
 package com.danrus.durability_visibility_options.client.config;
 
+import com.danrus.durability_visibility_options.client.DurabilityVisibilityOptions;
 import com.google.gson.GsonBuilder;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.*;
@@ -7,10 +8,9 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import dev.isxander.yacl3.platform.YACLPlatform;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 
 import java.awt.Color;
 
@@ -19,7 +19,6 @@ public class ModConfig {
     public static boolean isOpen = false;
 
     public static final ConfigClassHandler<ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
-//            .id(new Identifier("durability_visibility_options", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(YACLPlatform.getConfigDir().resolve("durability_visibility_options.json5"))
                     .appendGsonBuilder(GsonBuilder::setPrettyPrinting)
@@ -502,10 +501,9 @@ public class ModConfig {
                         .build())
                 .build()
                 .generateScreen(parent);
-
+        DurabilityVisibilityOptions.parentScreen = parent;
         return yaclScreen;
     }
-
     public static void initialize() {
         HANDLER.load();
     }
