@@ -8,7 +8,8 @@
   "contact": {
     "homepage": "https://modrinth.com/mod/durability_visibility_options",
     "sources": "https://github.com/Danrus1100/durability_visibility_options",
-    "issues": "https://github.com/Danrus1100/durability_visibility_options/issues"
+    "issues": "https://github.com/Danrus1100/durability_visibility_options/issues",
+    "discord": "https://discord.gg/Fkp9Tqmm6F"
   },
   "license": "MIT",
   "icon": "assets/durability_visibility_options/icon.png",

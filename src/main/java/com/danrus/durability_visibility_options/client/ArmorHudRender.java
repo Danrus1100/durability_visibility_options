@@ -20,15 +20,15 @@ public class ArmorHudRender implements HudRenderCallback {
     public MinecraftClient client = MinecraftClient.getInstance();
 
     //? if <=1.20.6 {
-    /*@Override
+    @Override
     public void onHudRender(DrawContext drawContext, float v) {
-        RenderTickCounter renderTickCounter = new RenderTickCounter(0.0F, 0L /^? if >1.20.2 {^/, f -> 0.0F/^?}^/);
+        RenderTickCounter renderTickCounter = new RenderTickCounter(0.0F, 0L /*? if >1.20.2 {*//*, f -> 0.0F*//*?}*/);
         onHudRender(drawContext, renderTickCounter);
     }
-    *///?}
+    //?}
 
     //? if >1.20.6
-    @Override
+    /*@Override*/
     public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
         if (!ModConfig.get().showArmorDurabilityHud) {
             return;
@@ -100,16 +100,16 @@ public class ArmorHudRender implements HudRenderCallback {
         }
         String durability = getDurabilityText(stack);
         int percentWidth = textRenderer.getWidth(durability);
-        int itemWidth = 16;
+        int itemWidth = 24;
 
         switch (ModConfig.get().armorHudDisplayStyle) {
-            case ICON_PERCENT -> {
+            case PERCENT_ICON -> {
                 drawContext.drawItem(stack, itemWidth, 0);
                 drawContext.drawTextWithShadow(textRenderer, durability, 0 , 4, ModConfig.get().armorDurabilityHudTextColor);
             }
-            case PERCENT_ICON -> {
+            case ICON_PERCENT -> {
                 drawContext.drawTextWithShadow(textRenderer, durability, itemWidth, 4, ModConfig.get().armorDurabilityHudTextColor);
-                drawContext.drawItem(stack, percentWidth-itemWidth, 0);
+                drawContext.drawItem(stack, percentWidth-itemWidth+8, 0);
             }
         }
 
@@ -139,6 +139,11 @@ public class ArmorHudRender implements HudRenderCallback {
             };
         };
 
+        x += switch (ModConfig.get().armorHudDisplayStyle) {
+            case ICON_PERCENT -> -22;
+            case PERCENT_ICON -> -15;
+        };
+
         int y = switch (ModConfig.get().armorHudPositionVertical) {
             case TOP -> calculateVerticalOffset();
             case CENTER -> (height / 2) + calculateVerticalOffset();
@@ -166,7 +171,7 @@ public class ArmorHudRender implements HudRenderCallback {
     }
 
     public static boolean isAirBarVisible(PlayerEntity player) {
-        return player.isSubmergedInWater() && player.getAir() < player.getMaxAir();
+        return player.getAir() < player.getMaxAir();
     }
 
     private int calculateVerticalOffset() {
@@ -174,7 +179,12 @@ public class ArmorHudRender implements HudRenderCallback {
             case TOP, CENTER -> ModConfig.get().armorDurabilityHudOffsetY;
             case BOTTOM -> {
                 assert client.player != null;
-                yield -ModConfig.get().armorDurabilityHudOffsetY - 10 * (getHealthRows(client.player)-1);
+                int addY = switch (ModConfig.get().armorVanillaStatsAdapt) {
+                    case HEARTS -> -(getHealthRows(client.player) * 10);
+                    case AIR -> -(isAirBarVisible(client.player) ? 10 : 0);
+                    case NONE -> 0;
+                };
+                yield -ModConfig.get().armorDurabilityHudOffsetY + addY;
             }
         };
     }

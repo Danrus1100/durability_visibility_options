@@ -46,8 +46,6 @@ public class ModConfig {
     @SerialEntry(comment = "Durability bar color at maximum durability (RGB)")
     public int durabilityBarColor = 0x00FF00;
 
-    @SerialEntry(comment = "Durability bar color at minimum durability (RGB)")
-    public int durabilityBarColor2 = 0xFF0000;
 
     // Durability Percent
     @SerialEntry
@@ -111,6 +109,9 @@ public class ModConfig {
     @SerialEntry
     public ArmorDisplayStyle armorHudDisplayStyle = ArmorDisplayStyle.ICON_PERCENT;
 
+    @SerialEntry
+    public ArmorVanillaStatsAdapt armorVanillaStatsAdapt = ArmorVanillaStatsAdapt.NONE;
+
     // Enums для конфигурации
     public enum ArmorPositionHorizontal {
         LEFT, CENTER, RIGHT
@@ -128,15 +129,19 @@ public class ModConfig {
         ICON_PERCENT, PERCENT_ICON
     }
 
+    public enum ArmorVanillaStatsAdapt {
+        NONE, HEARTS, AIR
+    }
+
     public static Screen getConfigScreen(Screen parent) {
         Screen yaclScreen =  YetAnotherConfigLib.createBuilder()
-                .title(Text.of("Durability Visibility Options"))
+                .title(Text.translatable("durability_visibility_options.config.title"))
                 .category(ConfigCategory.createBuilder()
-                        .name(Text.of("General"))
+                        .name(Text.translatable("durability_visibility_options.tab.general"))
                         .group(OptionGroup.createBuilder()
-                                .name(Text.of("Durability Bar"))
+                                .name(Text.translatable("durability_visibility_options.config.category.bar"))
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.of("Show Durability"))
+                                        .name(Text.translatable("durability_visibility_options.config.show"))
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showDurability,
@@ -148,7 +153,7 @@ public class ModConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.of("Is Vertical"))
+                                        .name(Text.translatable("durability_visibility_options.config.is_vertical"))
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().isVertical,
@@ -160,7 +165,7 @@ public class ModConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Show From Percent"))
+                                        .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
                                         .binding(
                                                 100,
                                                 () -> HANDLER.instance().showDurabilityBarFromPercent,
@@ -174,7 +179,7 @@ public class ModConfig {
                                                 .step(1))
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Horizontal Offset"))
+                                        .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityBarOffsetX,
@@ -186,7 +191,7 @@ public class ModConfig {
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Vertical Offset"))
+                                        .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityBarOffsetY,
@@ -198,9 +203,9 @@ public class ModConfig {
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.of("Bar Color (Max)"))
+                                        .name(Text.translatable("durability_visibility_options.config.color"))
                                         .binding(
-                                                new Color(HANDLER.instance().durabilityBarColor),
+                                                new Color(0x00FF00),
                                                 () -> new Color(HANDLER.instance().durabilityBarColor),
                                                 value -> {
                                                     HANDLER.instance().durabilityBarColor = value.getRGB();
@@ -209,23 +214,11 @@ public class ModConfig {
                                         )
                                         .controller(ColorControllerBuilder::create)
                                         .build())
-                                .option(Option.createBuilder(Color.class)
-                                        .name(Text.of("Bar Color (Min)"))
-                                        .binding(
-                                                new Color(HANDLER.instance().durabilityBarColor2),
-                                                () -> new Color(HANDLER.instance().durabilityBarColor2),
-                                                value -> {
-                                                    HANDLER.instance().durabilityBarColor2 = value.getRGB();
-                                                    HANDLER.save();
-                                                }
-                                        )
-                                        .controller(ColorControllerBuilder::create)
-                                        .build())
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .name(Text.of("Durability Percent"))
+                                .name(Text.translatable("durability_visibility_options.config.category.percents"))
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.of("Show Durability Percent"))
+                                        .name(Text.translatable("durability_visibility_options.config.show"))
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().showDurabilityPercent,
@@ -237,7 +230,7 @@ public class ModConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.of("Show Percent Symbol"))
+                                        .name(Text.translatable("durability_visibility_options.config.show_percent_symbol"))
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showPercentSymbol,
@@ -249,7 +242,7 @@ public class ModConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Horizontal Offset"))
+                                        .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityPercentOffsetX,
@@ -261,7 +254,7 @@ public class ModConfig {
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Vertical Offset"))
+                                        .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityPercentOffsetY,
@@ -273,7 +266,7 @@ public class ModConfig {
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Show From Percent"))
+                                        .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
                                         .binding(
                                                 99,
                                                 () -> HANDLER.instance().showDurabilityPercentsFromPercent,
@@ -287,7 +280,7 @@ public class ModConfig {
                                                 .step(1))
                                         .build())
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.of("Text Color"))
+                                        .name(Text.translatable("durability_visibility_options.config.color"))
                                         .binding(
                                                 new Color(HANDLER.instance().durabilityPercentColor),
                                                 () -> new Color(HANDLER.instance().durabilityPercentColor),
@@ -301,11 +294,11 @@ public class ModConfig {
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
-                        .name(Text.of("Armor HUD"))
+                        .name(Text.translatable("durability_visibility_options.config.category.armor_hud"))
                         .group(OptionGroup.createBuilder()
-                                .name(Text.of("General"))
+                                .name(Text.translatable("durability_visibility_options.tab.general"))
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.of("Show Armor Durability HUD"))
+                                        .name(Text.translatable("durability_visibility_options.config.show"))
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().showArmorDurabilityHud,
@@ -317,7 +310,7 @@ public class ModConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.of("Show Percent Symbol"))
+                                        .name(Text.translatable("durability_visibility_options.config.show_percent_symbol"))
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showArmorDurabilityHudPercentSymbol,
@@ -329,7 +322,7 @@ public class ModConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.of("Show in Creative"))
+                                        .name(Text.translatable("durability_visibility_options.config.show_in_creative"))
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showArmorDurabilityHudInCreative,
@@ -341,7 +334,7 @@ public class ModConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.of("Show Vanilla Armor HUD"))
+                                        .name(Text.translatable("durability_visibility_options.config.show_vanilla_armor_hud"))
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showVanillaArmorHud,
@@ -353,7 +346,7 @@ public class ModConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.of("Text Color"))
+                                        .name(Text.translatable("durability_visibility_options.config.color"))
                                         .binding(
                                                 new Color(HANDLER.instance().armorDurabilityHudTextColor),
                                                 () -> new Color(HANDLER.instance().armorDurabilityHudTextColor),
@@ -365,7 +358,7 @@ public class ModConfig {
                                         .controller(ColorControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Show From Percent"))
+                                        .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
                                         .binding(
                                                 100,
                                                 () -> HANDLER.instance().showArmorDurabilityHudFromPercent,
@@ -380,9 +373,9 @@ public class ModConfig {
                                         .build())
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .name(Text.of("Positioning"))
+                                .name(Text.translatable("durability_visibility_options.config.category.positioning"))
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Horizontal Offset"))
+                                        .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().armorDurabilityHudOffsetX,
@@ -394,7 +387,7 @@ public class ModConfig {
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Vertical Offset"))
+                                        .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().armorDurabilityHudOffsetY,
@@ -406,7 +399,7 @@ public class ModConfig {
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.of("Margin"))
+                                        .name(Text.translatable("durability_visibility_options.config.margin"))
                                         .binding(
                                                 20,
                                                 () -> HANDLER.instance().armorDurabilityHudMirgin,
@@ -418,7 +411,7 @@ public class ModConfig {
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .build())
                                 .option(Option.createBuilder(float.class)
-                                        .name(Text.of("Scale"))
+                                        .name(Text.translatable("durability_visibility_options.config.scale"))
                                         .binding(
                                                 1.0f,
                                                 () -> HANDLER.instance().armorDurabilityHudScale,
@@ -431,9 +424,9 @@ public class ModConfig {
                                         .build())
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .name(Text.of("Layout"))
+                                .name(Text.translatable("durability_visibility_options.config.category.layout"))
                                 .option(Option.createBuilder(ArmorPositionHorizontal.class)
-                                        .name(Text.of("Horizontal Position"))
+                                        .name(Text.translatable("durability_visibility_options.config.armor_hud.position_horizontal"))
                                         .binding(
                                                 ArmorPositionHorizontal.LEFT,
                                                 () -> HANDLER.instance().armorHudPositionHorizontal,
@@ -443,10 +436,11 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(opt -> EnumControllerBuilder.create(opt)
+                                                .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.position_horizontal." + value.toString().toLowerCase()))
                                                 .enumClass(ArmorPositionHorizontal.class))
                                         .build())
                                 .option(Option.createBuilder(ArmorPositionVertical.class)
-                                        .name(Text.of("Vertical Position"))
+                                        .name(Text.translatable("durability_visibility_options.config.armor_hud.position_vertical"))
                                         .binding(
                                                 ArmorPositionVertical.TOP,
                                                 () -> HANDLER.instance().armorHudPositionVertical,
@@ -456,10 +450,11 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(opt -> EnumControllerBuilder.create(opt)
+                                                .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.position_vertical." + value.toString().toLowerCase()))
                                                 .enumClass(ArmorPositionVertical.class))
                                         .build())
                                 .option(Option.createBuilder(ArmorAlignment.class)
-                                        .name(Text.of("Alignment"))
+                                        .name(Text.translatable("durability_visibility_options.config.armor_hud.alignment"))
                                         .binding(
                                                 ArmorAlignment.VERTICAL,
                                                 () -> HANDLER.instance().armorHudAlignment,
@@ -469,10 +464,11 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(opt -> EnumControllerBuilder.create(opt)
+                                                .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.alignment." + value.toString().toLowerCase()))
                                                 .enumClass(ArmorAlignment.class))
                                         .build())
                                 .option(Option.createBuilder(ArmorDisplayStyle.class)
-                                        .name(Text.of("Display Style"))
+                                        .name(Text.translatable("durability_visibility_options.config.armor_hud.display_style"))
                                         .binding(
                                                 ArmorDisplayStyle.ICON_PERCENT,
                                                 () -> HANDLER.instance().armorHudDisplayStyle,
@@ -482,7 +478,25 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(opt -> EnumControllerBuilder.create(opt)
+                                                .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.display_style." + value.toString().toLowerCase()))
                                                 .enumClass(ArmorDisplayStyle.class))
+                                        .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.translatable("durability_visibility_options.config.category.behavior"))
+                                .option(Option.createBuilder(ArmorVanillaStatsAdapt.class)
+                                        .name(Text.translatable("durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt"))
+                                        .binding(
+                                                ArmorVanillaStatsAdapt.NONE,
+                                                () -> HANDLER.instance().armorVanillaStatsAdapt,
+                                                value -> {
+                                                    HANDLER.instance().armorVanillaStatsAdapt = value;
+                                                    HANDLER.save();
+                                                }
+                                        )
+                                        .controller(opt -> EnumControllerBuilder.create(opt)
+                                                .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt." + value.toString().toLowerCase()))
+                                                .enumClass(ArmorVanillaStatsAdapt.class))
                                         .build())
                                 .build())
                         .build())

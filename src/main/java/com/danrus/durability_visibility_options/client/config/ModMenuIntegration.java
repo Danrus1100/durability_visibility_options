@@ -14,7 +14,6 @@ public class ModMenuIntegration implements ModMenuApi {
             ModConfig.isOpen = true;
             return ModConfig.getConfigScreen(parentScreen);
         };
-//        return ArmorHudConfigScreen::new;
     }
 
 }
