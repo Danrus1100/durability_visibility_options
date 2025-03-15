@@ -14,17 +14,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
     //? if >1.20.4 {
-    /*@Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true)
     private static void renderArmor(DrawContext context, PlayerEntity player, int i, int j, int k, int x, CallbackInfo ci) {
         if (!ModConfig.get().showVanillaArmorHud) {
             ci.cancel();
         }
     }
-    *///?}
+    //?}
 
     //? if <=1.20.4 {
 
-    @Redirect(
+    /*@Redirect(
             method = "renderStatusBars",
             slice = @Slice(
                     to = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHealthBar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/entity/player/PlayerEntity;IIIIFIIIZ)V")
@@ -42,5 +42,5 @@ public class InGameHudMixin {
     }
 
 
-    //?}
+    *///?}
 }

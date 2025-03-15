@@ -16,12 +16,11 @@ public class YACLScreenMixin {
     @Inject(method = "close", at = @At("HEAD"))
     private void close(CallbackInfo ci) {
         ModConfig.isOpen = false;
-        System.out.println("YACL closed");
     }
 
     @Redirect(method = "renderBackground", at = @At(value = "INVOKE", target = "Ldev/isxander/yacl3/gui/tab/TabExt;renderBackground(Lnet/minecraft/client/gui/DrawContext;)V"))
     private void renderBackgroundMixin(TabExt instance, DrawContext graphics) {
-        if (!ModConfig.isOpen /*? if >1.20.4 {*//* || MinecraftClient.getInstance().player == null*//*?}*/) {
+        if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
             instance.renderBackground(graphics);
         }
     }

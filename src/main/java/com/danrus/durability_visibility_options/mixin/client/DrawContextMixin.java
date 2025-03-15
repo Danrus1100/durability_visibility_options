@@ -30,7 +30,7 @@ public class DrawContextMixin {
     private MinecraftClient client;
 
     //? if >1.21.1 {
-    /*@Redirect(
+    @Redirect(
 
             method = "drawStackOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
             at = @At(
@@ -44,15 +44,15 @@ public class DrawContextMixin {
         TextRenderer textRenderer = this.client.textRenderer;
         drawItemInSlotMixin(textRenderer, stack, x, y, countOverride, null);
     }
-    *///?}
+    //?}
 
     //? if <=1.21.1 {
-    @Inject(
+    /*@Inject(
             method = "drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isItemBarVisible()Z"),
             cancellable = true)
-     
-    //?}
+
+    *///?}
     private void drawItemInSlotMixin(TextRenderer textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
         DrawContext instance = (DrawContext) (Object) this;
         int percents = (int) ((float) (stack.getMaxDamage() - stack.getDamage()) / stack.getMaxDamage() * 100);
@@ -68,11 +68,11 @@ public class DrawContextMixin {
             this.matrices.pop();
         }
         //? if <=1.21.1 {
-        ClientPlayerEntity clientPlayerEntity = this.client.player;
+        /*ClientPlayerEntity clientPlayerEntity = this.client.player;
         //? if >1.20.6 {
-        /*float tickDelta = this.client.getRenderTickCounter().getTickDelta(true);
-        *///?} else
-        float tickDelta = this.client.getTickDelta();
+        float tickDelta = this.client.getRenderTickCounter().getTickDelta(true);
+        //?} else
+        /^float tickDelta = this.client.getTickDelta();^/
         float f = clientPlayerEntity == null ? 0.0F : clientPlayerEntity.getItemCooldownManager().getCooldownProgress(stack.getItem(), tickDelta);
         if (f > 0.0F) {
             int k = y + MathHelper.floor(16.0F * (1.0F - f));
@@ -82,7 +82,7 @@ public class DrawContextMixin {
 
         this.matrices.pop();
         ci.cancel();
-        
-        //?}
+
+        *///?}
     }
 }
