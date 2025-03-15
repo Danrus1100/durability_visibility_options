@@ -1,18 +1,20 @@
 {
   "schemaVersion": 1,
   "id": "durability_visibility_options",
-  "version": "${version}",
+  "version": "${version}-MC-${minecraft_version}",
   "name": "Durability Visibility Options",
   "description": "A large number of settings for the visual appearance of the durability bar.",
   "authors": ["Danrus110_"],
   "contact": {
     "homepage": "https://modrinth.com/mod/durability_visibility_options",
     "sources": "https://github.com/Danrus1100/durability_visibility_options",
-    "issues": "https://github.com/Danrus1100/durability_visibility_options/issues"
+    "issues": "https://github.com/Danrus1100/durability_visibility_options/issues",
+    "discord": "https://discord.gg/Fkp9Tqmm6F"
   },
   "license": "MIT",
   "icon": "assets/durability_visibility_options/icon.png",
   "environment": "client",
+  "accessWidener": "aws/${minecraft_version}.accesswidener",
   "entrypoints": {
     "client": [
       "com.danrus.durability_visibility_options.client.DurabilityVisibilityOptions"

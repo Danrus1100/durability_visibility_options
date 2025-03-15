@@ -18,6 +18,10 @@ repositories {
     // for more information about repositories.
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
+    maven {
+        name 'Xander Maven'
+        url 'https://maven.isxander.dev/releases'
+    }
 
     if (stonecutter.eval(stonecutter.current.version, ">=1.20.4")) {
         maven {
@@ -27,16 +31,19 @@ repositories {
     }
 }
 
+println "Stonecutter version: ${stonecutter.current.version}"
+println "Yarn mappings: ${property('yarn_mappings')}"
+
 dependencies {
     minecraft "com.mojang:minecraft:${stonecutter.current.project}"
     mappings "net.fabricmc:yarn:${property('yarn_mappings')}:v2"
     modImplementation "net.fabricmc:fabric-loader:${property('loader_version')}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property('fabric_version')}"
 
-
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${property('cloth_config')}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
+    modImplementation "dev.isxander:yet-another-config-lib:${property('yacl_version')}"
+//    modApi("me.shedaniel.cloth:cloth-config-fabric:${property('cloth_config')}") {
+//        exclude(group: "net.fabricmc.fabric-api")
+//    }
     modApi ("com.terraformersmc:modmenu:${property('mod_menu')}")
     implementation 'com.google.code.gson:gson:2.10.1'
 
@@ -75,6 +82,8 @@ loom {
         ideConfigGenerated true // Run configurations are not created for subprojects by default
         runDir "../../run" // Use a shared run folder and create separate worlds
     }
+    accessWidenerPath = project.rootProject.file("src/main/resources/aws/${stonecutter.current.project}.accesswidener")
+//    accessWidenerPath = project.rootProject.file("src/main/resources/aws/1.21.4.accesswidener")
 }
 
 java {

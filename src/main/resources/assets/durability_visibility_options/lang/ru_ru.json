@@ -1,8 +1,12 @@
 {
   "durability_visibility_options.config.title": "Настройки Вида Прочности",
+  "durability_visibility_options.tab.general": "Основные",
   "durability_visibility_options.config.category.bar": "Шкала",
   "durability_visibility_options.config.category.percents": "Проценты",
   "durability_visibility_options.config.category.armor_hud": "HUD Брони",
+  "durability_visibility_options.config.category.positioning": "Позиционирование",
+  "durability_visibility_options.config.category.layout": "Расположение",
+  "durability_visibility_options.config.category.behavior": "Поведение",
 
   "durability_visibility_options.config.show": "Показывать",
   "durability_visibility_options.config.horizontal_offset": "Горизонтальное Смещение",
@@ -21,6 +25,7 @@
   "durability_visibility_options.config.margin": "Отступ",
   "durability_visibility_options.config.scale": "Размер",
   "durability_visibility_options.config.show_in_creative": "Показывать в Творческом Режиме",
+  "durability_visibility_options.config.show_vanilla_armor_hud": "Показывать Ванильный Интерфейс Брони",
 
   "durability_visibility_options.config.armor_hud.position_horizontal": "Горизонтальное Положение",
   "durability_visibility_options.config.armor_hud.position_horizontal.left": "Слева",
@@ -39,5 +44,11 @@
 
   "durability_visibility_options.config.armor_hud.display_style": "Стиль Отображения",
   "durability_visibility_options.config.armor_hud.display_style.icon_percent": "Иконка - Процент",
-  "durability_visibility_options.config.armor_hud.display_style.percent_icon": "Процент - Иконка"
+  "durability_visibility_options.config.armor_hud.display_style.percent_icon": "Процент - Иконка",
+
+
+  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt": "Адаптировать к Элементу Интерфейса",
+  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.none": "Нет",
+  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.hearts": "Сердца",
+  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.air": "Воздух"
 }

@@ -4,9 +4,16 @@
   "package": "com.danrus.durability_visibility_options.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "DrawContextMixin"
+    "DrawContextMixin",
+    "InGameHudMixin",
+    "PressableWidgetMixin",
+    "ScreenMixin",
+    "YACLScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "AbstractWidgetMixin"
+  ]
 }

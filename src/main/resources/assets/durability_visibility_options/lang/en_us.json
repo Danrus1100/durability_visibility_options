@@ -1,8 +1,12 @@
 {
   "durability_visibility_options.config.title": "Durability Visibility Options",
+  "durability_visibility_options.tab.general": "General",
   "durability_visibility_options.config.category.bar": "Bar",
   "durability_visibility_options.config.category.percents": "Percents",
   "durability_visibility_options.config.category.armor_hud": "Armor HUD",
+  "durability_visibility_options.config.category.positioning": "Positioning",
+  "durability_visibility_options.config.category.layout": "Layout",
+  "durability_visibility_options.config.category.behavior": "Behavior",
 
   "durability_visibility_options.config.show": "Show",
   "durability_visibility_options.config.horizontal_offset": "Horizontal Offset",
@@ -21,6 +25,7 @@
   "durability_visibility_options.config.margin": "Margin",
   "durability_visibility_options.config.scale": "Scale",
   "durability_visibility_options.config.show_in_creative": "Show in Creative Mode",
+  "durability_visibility_options.config.show_vanilla_armor_hud": "Show Vanilla Armor HUD",
 
   "durability_visibility_options.config.armor_hud.position_horizontal": "Horizontal Position",
     "durability_visibility_options.config.armor_hud.position_horizontal.left": "Left",
@@ -39,5 +44,12 @@
 
   "durability_visibility_options.config.armor_hud.display_style": "Display Style",
   "durability_visibility_options.config.armor_hud.display_style.icon_percent": "Icon - Percent",
-  "durability_visibility_options.config.armor_hud.display_style.percent_icon": "Percent - Icon"
+  "durability_visibility_options.config.armor_hud.display_style.percent_icon": "Percent - Icon",
+
+  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt": "Adapt to Interface Element",
+    "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.none": "None",
+    "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.hearts": "Hearts",
+    "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.air": "Air"
+
+
 }
