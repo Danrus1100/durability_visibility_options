@@ -25,7 +25,7 @@
   },
   "mixins": [
     {
-      "config": "durability_visibility_options.mixins.json",
+      "config": "durability_visibility_options.mixins.json5",
       "environment": "client"
     }
   ],
