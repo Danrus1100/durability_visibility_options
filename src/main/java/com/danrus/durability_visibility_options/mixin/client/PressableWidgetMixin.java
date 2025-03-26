@@ -1,6 +1,7 @@
 package com.danrus.durability_visibility_options.mixin.client;
 
 import com.danrus.durability_visibility_options.client.config.ModConfig;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.PressableWidget;
