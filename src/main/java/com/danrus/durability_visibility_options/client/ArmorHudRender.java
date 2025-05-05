@@ -110,15 +110,18 @@ public class ArmorHudRender implements HudRenderCallback {
         String durability = getDurabilityText(stack);
         int percentWidth = textRenderer.getWidth(durability);
         int itemWidth = 24;
+        int additionalIconHorizontalOffset = 0;
 
         switch (ModConfig.get().armorHudDisplayStyle) {
             case PERCENT_ICON -> {
-                drawContext.drawItem(stack, itemWidth, 0);
+                if (stack.isOf(Items.ELYTRA)){ additionalIconHorizontalOffset = -4; }
+                drawContext.drawItem(stack, itemWidth + additionalIconHorizontalOffset, 0);
                 drawContext.drawTextWithShadow(textRenderer, durability, 0 , 4, ModConfig.get().armorDurabilityHudTextColor);
             }
             case ICON_PERCENT -> {
+                if (stack.isOf(Items.ELYTRA)){ additionalIconHorizontalOffset = 4; }
                 drawContext.drawTextWithShadow(textRenderer, durability, itemWidth, 4, ModConfig.get().armorDurabilityHudTextColor);
-                drawContext.drawItem(stack, percentWidth-itemWidth+8, 0);
+                drawContext.drawItem(stack, percentWidth - itemWidth + 8 + additionalIconHorizontalOffset, 0);
             }
         }
 
