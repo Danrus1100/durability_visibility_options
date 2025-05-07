@@ -61,11 +61,7 @@ public class DrawContextMixin {
         }
 
         if (ModConfig.get().showDurabilityPercent && percents <= ModConfig.get().showDurabilityPercentsFromPercent && stack.isDamaged()) {
-            this.matrices.push();
-            this.matrices.scale(0.5F, 0.5F, 0.5F);
-            this.matrices.translate(x, y, 500.0F);
             DurabilityRender.renderPercents(instance, percents, x, y);
-            this.matrices.pop();
         }
         //? if <=1.21.1 {
         /*ClientPlayerEntity clientPlayerEntity = this.client.player;

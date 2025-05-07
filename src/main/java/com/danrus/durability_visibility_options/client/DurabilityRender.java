@@ -9,7 +9,7 @@ import net.minecraft.client.render.RenderLayer;
 public class DurabilityRender {
 
     public static void renderBar(DrawContext drawContext, int percents, int itemBarStep, int x, int y) {
-        if (ModConfig.get().showDurabilityBarFromPercent <= percents) {
+        if (ModConfig.get().showDurabilityBarFromPercent <= percents || !ModConfig.get().showDurability) {
             return;
         }
         int i = x + 2;
@@ -34,8 +34,12 @@ public class DurabilityRender {
                 if (ModConfig.get().showPercentSymbol) {
                     durability += "%";
                 }
+                drawContext.getMatrices().push();
+                drawContext.getMatrices().scale(0.5F, 0.5F, 0.5F);
+                drawContext.getMatrices().translate(x, y, 500.0F);
                 TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
                 drawContext.drawCenteredTextWithShadow(textRenderer, durability, x + 17 + ModConfig.get().durabilityPercentOffsetX, y + 23 - ModConfig.get().durabilityPercentOffsetY, ModConfig.get().durabilityPercentColor);
+                drawContext.getMatrices().pop();
             }
         }
     }

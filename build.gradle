@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom' version '1.10.1'
     id 'maven-publish'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
 version = project.mod_version
@@ -64,6 +65,12 @@ dependencies {
     }
 }
 
+remapJar {
+    archiveFileName = "${project.archives_base_name}-${project.version}-mc-${stonecutter.current.project}.jar"
+}
+
+def mcDep = property("mod.mc_dep").toString()
+
 processResources {
     inputs.property "version", project.version
     inputs.property "minecraft_version", stonecutter.current.version
@@ -73,11 +80,13 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": stonecutter.current.version,
-                "loader_version": project.loader_version
+                "loader_version": project.loader_version,
+                "mcdep": mcDep
     }
 }
 
 def targetJavaVersion = 21
+
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly
@@ -87,6 +96,15 @@ tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         it.options.release.set(targetJavaVersion)
     }
+}
+
+def modVersion = project.mod_version
+
+tasks.register("buildAndCollect", Copy) {
+    group = "build"
+    from(tasks.named("remapJar").get().archiveFile)
+    into(rootProject.layout.buildDirectory.file("libs/${modVersion}"))
+    dependsOn("build")
 }
 
 loom {
@@ -130,5 +148,61 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+    }
+}
+
+//publishMods {
+//    file = tasks.remapJar.archiveFile
+//    additionalFiles.from(tasks.remapSourcesJar.archiveFile)
+//    displayName = "Durability Visibilty Options ${project.version} for ${stonecutter.current.project}"
+//    version = project.version
+//    changelog = rootProject.file("CHANGELOG.md").text
+//    type = STABLE
+//    modLoaders.add("fabric")
+//
+//        dryRun = providers.environmentVariable("MODRINTH_API_TOKEN").orNull == null ||
+//            providers.environmentVariable("CURSEFORGE_API_TOKEN").orNull == null
+//
+//    modrinth {
+//        projectId = property("publish.modrinth").toString()
+//        accessToken = providers.environmentVariable("MODRINTH_API_TOKEN")
+//        minecraftVersions.add(stonecutter.current.project)
+//        requires {
+//            slug = "fabric-api modmenu yacl"
+//        }
+//    }
+//
+//    curseforge {
+//        projectId = property("publish.curseforge").toString()
+//        accessToken = providers.environmentVariable("CURSEFORGE_API_TOKEN")
+//        minecraftVersions.add(stonecutter.current.project)
+//    }
+//}
+
+publishMods {
+    file = remapJar.archiveFile
+    additionalFiles.from(remapSourcesJar.archiveFile)
+    version = "${project.version}-MC-${stonecutter.current.project}"
+    displayName = "Durability Visibilty Options ${project.version}-MC-${stonecutter.current.project}"
+    changelog = rootProject.file("CHANGELOG.md").text
+    type = STABLE
+    modLoaders.add("fabric")
+
+    dryRun = providers.environmentVariable("MODRINTH_API_TOKEN").orNull == null ||
+            providers.environmentVariable("CURSEFORGE_API_TOKEN").orNull == null
+
+    modrinth {
+        projectId = property("publish.modrinth").toString()
+        accessToken = providers.environmentVariable("MODRINTH_API_TOKEN")
+        minecraftVersions.add(stonecutter.current.project)
+        requires {
+            slug = "fabric-api modmenu yacl"
+        }
+    }
+
+    curseforge {
+        projectId = property("publish.curseforge").toString()
+        accessToken = providers.environmentVariable("CURSEFORGE_API_TOKEN")
+        minecraftVersions.add(stonecutter.current.project)
     }
 }
