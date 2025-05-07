@@ -73,15 +73,15 @@ public class ArmorHudRender implements HudRenderCallback {
     public static List<ItemStack> getArmorItems() {
         assert MinecraftClient.getInstance().player != null;
         //? if <1.21.5
-        /*List<ItemStack> itemsOriginal = MinecraftClient.getInstance().player.getInventory().armor.reversed();*/
+        List<ItemStack> itemsOriginal = MinecraftClient.getInstance().player.getInventory().armor.reversed();
         //? if >=1.21.5 {
-        List<ItemStack> itemsOriginal = List.of(
+        /*List<ItemStack> itemsOriginal = List.of(
                 MinecraftClient.getInstance().player.getInventory().equipment.get(EquipmentSlot.HEAD),
                 MinecraftClient.getInstance().player.getInventory().equipment.get(EquipmentSlot.CHEST),
                 MinecraftClient.getInstance().player.getInventory().equipment.get(EquipmentSlot.LEGS),
                 MinecraftClient.getInstance().player.getInventory().equipment.get(EquipmentSlot.FEET)
         );
-        //?}
+        *///?}
        List<ItemStack> items = new java.util.ArrayList<>(List.of());
        for (int i = 0; i < 4; i++) {
            if (itemsOriginal.get(i).getItem() != Items.AIR) {
