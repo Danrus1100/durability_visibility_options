@@ -5,6 +5,7 @@ package com.danrus.durability_visibility_options.client.config.demo;
 // u wanna use it in your mod.
 
 import com.danrus.durability_visibility_options.client.DurabilityRender;
+import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import com.danrus.durability_visibility_options.client.config.ModConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -16,6 +17,15 @@ public class DurabilityDemoRenderer implements DemoRenderer {
     private final ItemStack[] demoItems = {new ItemStack(Items.ELYTRA), new ItemStack(Items.NETHERITE_PICKAXE)};
     private ItemStack aciveDemoItem = demoItems[0];
     private float tickCounter = 0;
+    private boolean useSpecificConfig = false;
+    private DurabilityConfig config = DurabilityConfig.fromModConfig();
+
+    public DurabilityDemoRenderer () {}
+
+    public DurabilityDemoRenderer (DurabilityConfig config) {
+        this.config = config;
+        this.useSpecificConfig = true;
+    }
 
     @Override
     public int render(DrawContext context, int x, int y, int width, float deltaTime) {
@@ -43,8 +53,8 @@ public class DurabilityDemoRenderer implements DemoRenderer {
         int itemBarStep = Math.round(13.0F - demoStack.getDamage() * 13.0F / demoStack.getMaxDamage());
 
         // idk why here -7 and -6, i just picked the values by eye
-        DurabilityRender.renderBar(context, percents, itemBarStep, -7, -6);
-        DurabilityRender.renderPercents(context, percents, -7, -6);
+        DurabilityRender.renderBar(context, percents, itemBarStep, -7, -6, config);
+        DurabilityRender.renderPercents(context, percents, -7, -6, config);
 
         context.getMatrices().pop();
 
@@ -54,7 +64,11 @@ public class DurabilityDemoRenderer implements DemoRenderer {
     public void tick() {
         tickCounter += 1;
 
-        if (tickCounter >= 2) {
+        if (!this.useSpecificConfig) {
+            config = DurabilityConfig.fromModConfig();
+        }
+
+        if (tickCounter >= 1) {
             tickCounter = 0;
 
             int damageAmount = Math.round(aciveDemoItem.getMaxDamage() * 0.01f);

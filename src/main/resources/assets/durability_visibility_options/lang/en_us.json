@@ -47,9 +47,16 @@
   "durability_visibility_options.config.armor_hud.display_style.percent_icon": "Percent - Icon",
 
   "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt": "Adapt to Interface Element",
-    "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.none": "None",
-    "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.hearts": "Hearts",
-    "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.air": "Air"
+  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.none": "None",
+  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.hearts": "Hearts",
+  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.air": "Air",
 
+
+  "durability_visibility_options.config.presets": "Presets",
+  "durability_visibility_options.config.presets.durability": "Durability",
+  "durability_visibility_options.config.presets.only_percents": "Only Percents",
+  "durability_visibility_options.config.presets.low_durability_alert": "Low Durability Alert",
+  "durability_visibility_options.config.presets.vertical_bar_plus_percents": "Vertical Bar + Percents",
+  "durability_visibility_options.config.presets.applied": "Preset applied!"
 
 }

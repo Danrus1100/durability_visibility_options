@@ -12,6 +12,7 @@ import dev.isxander.yacl3.gui.image.ImageRenderer;
 import dev.isxander.yacl3.platform.YACLPlatform;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 
 import java.awt.Color;
@@ -36,7 +37,7 @@ public class ModConfig {
     public boolean isVertical = false;
 
     @SerialEntry(comment = "Show durability bar when durability is below this percentage")
-    public int showDurabilityBarFromPercent = 100;
+    public int showDurabilityBarFromPercent = 99;
 
     @SerialEntry
     public int durabilityBarOffsetX = 0;
@@ -46,6 +47,9 @@ public class ModConfig {
 
     @SerialEntry(comment = "Durability bar color at maximum durability (RGB)")
     public int durabilityBarColor = 0x00FF00;
+
+    @SerialEntry(comment = "Durability bar color at minimum durability (RGB)")
+    public int durabilityBarColorMin = 0xFF0000;
 
 
     // Durability Percent
@@ -113,6 +117,7 @@ public class ModConfig {
     @SerialEntry
     public ArmorVanillaStatsAdapt armorVanillaStatsAdapt = ArmorVanillaStatsAdapt.NONE;
 
+
     // Enums для конфигурации
     public enum ArmorPositionHorizontal {
         LEFT, CENTER, RIGHT
@@ -134,6 +139,56 @@ public class ModConfig {
         NONE, HEARTS, AIR
     }
 
+    private static DurabilityDemoRenderer mainRenderer = new DurabilityDemoRenderer();
+
+    private static final DurabilityDemoRenderer onlyPercentRenderer = new DurabilityDemoRenderer(new DurabilityConfig().getWithSpecificParams(
+            false,
+            false,
+            99,
+            0,
+            0,
+            0x00FF00,
+            0xFF0000,
+            true,
+            true,
+            0,
+            0,
+            99,
+            0xFFFFFF
+    ));
+
+    private static final DurabilityDemoRenderer verticalBarPlusPercentsRender = new DurabilityDemoRenderer(new DurabilityConfig().getWithSpecificParams(
+            true,
+            true,
+            99,
+            0,
+            0,
+            0x00FF00,
+            0xFF0000,
+            true,
+            false,
+            9,
+            0,
+            99,
+            0xFFFFFF
+    ));
+
+    private static final DurabilityDemoRenderer lowDurabilityAlertRenderer = new DurabilityDemoRenderer(new DurabilityConfig().getWithSpecificParams(
+            false,
+            false,
+            99,
+            0,
+            0,
+            0xFF0000,
+            0xFF0000,
+            true,
+            false,
+            0,
+            6,
+            25,
+            0xFF0000
+    ));
+
     public static Screen getConfigScreen(Screen parent) {
         Screen yaclScreen =  YetAnotherConfigLib.createBuilder()
                 .title(Text.translatable("durability_visibility_options.config.title"))
@@ -153,7 +208,7 @@ public class ModConfig {
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().showDurability = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
                                         .name(Text.translatable("durability_visibility_options.config.is_vertical"))
@@ -167,7 +222,7 @@ public class ModConfig {
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().isVertical = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
                                         .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
@@ -183,7 +238,7 @@ public class ModConfig {
                                                 .range(0, 99)
                                                 .step(1))
                                         .addListener(((option, event) -> ModConfig.get().showDurabilityBarFromPercent = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
                                         .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
@@ -197,7 +252,7 @@ public class ModConfig {
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().durabilityBarOffsetX = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
                                         .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
@@ -211,10 +266,10 @@ public class ModConfig {
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().durabilityBarOffsetY = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.translatable("durability_visibility_options.config.color"))
+                                        .name(Text.translatable("durability_visibility_options.config.color_max"))
                                         .binding(
                                                 new Color(0x00FF00),
                                                 () -> new Color(HANDLER.instance().durabilityBarColor),
@@ -225,7 +280,21 @@ public class ModConfig {
                                         )
                                         .controller(ColorControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().durabilityBarColor = option.pendingValue().getRGB()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
+                                        .build())
+                                .option(Option.createBuilder(Color.class)
+                                        .name(Text.translatable("durability_visibility_options.config.color_min"))
+                                        .binding(
+                                                new Color(0xFF0000),
+                                                () -> new Color(HANDLER.instance().durabilityBarColorMin),
+                                                value -> {
+                                                    HANDLER.instance().durabilityBarColorMin = value.getRGB();
+                                                    HANDLER.save();
+                                                }
+                                        )
+                                        .controller(ColorControllerBuilder::create)
+                                        .addListener(((option, event) -> ModConfig.get().durabilityBarColorMin = option.pendingValue().getRGB()))
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .build())
                         .group(OptionGroup.createBuilder()
@@ -242,7 +311,7 @@ public class ModConfig {
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().showDurabilityPercent = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
                                         .name(Text.translatable("durability_visibility_options.config.show_percent_symbol"))
@@ -256,7 +325,7 @@ public class ModConfig {
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().showPercentSymbol = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
                                         .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
@@ -270,7 +339,7 @@ public class ModConfig {
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().durabilityPercentOffsetX = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
                                         .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
@@ -284,7 +353,7 @@ public class ModConfig {
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().durabilityPercentOffsetY = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
                                         .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
@@ -300,7 +369,7 @@ public class ModConfig {
                                                 .range(0, 100)
                                                 .step(1))
                                         .addListener(((option, event) -> ModConfig.get().showDurabilityPercentsFromPercent = option.pendingValue()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(Color.class)
                                         .name(Text.translatable("durability_visibility_options.config.color"))
@@ -314,7 +383,7 @@ public class ModConfig {
                                         )
                                         .controller(ColorControllerBuilder::create)
                                         .addListener(((option, event) -> ModConfig.get().durabilityPercentColor = option.pendingValue().getRGB()))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .build())
                         .build())
@@ -333,6 +402,7 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(TickBoxControllerBuilder::create)
+                                        .addListener(((option, event) -> ModConfig.get().showArmorDurabilityHud = option.pendingValue()))
 //                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
@@ -346,6 +416,7 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(TickBoxControllerBuilder::create)
+                                        .addListener(((option, event) -> ModConfig.get().showArmorDurabilityHudPercentSymbol = option.pendingValue()))
 //                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
@@ -359,6 +430,7 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(TickBoxControllerBuilder::create)
+                                        .addListener(((option, event) -> ModConfig.get().showArmorDurabilityHudInCreative = option.pendingValue()))
 //                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
@@ -372,6 +444,7 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(TickBoxControllerBuilder::create)
+                                        .addListener(((option, event) -> ModConfig.get().showVanillaArmorHud = option.pendingValue()))
 //                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
                                         .build())
                                 .option(Option.createBuilder(Color.class)
@@ -385,6 +458,7 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(ColorControllerBuilder::create)
+                                        .addListener(((option, event) -> ModConfig.get().armorDurabilityHudTextColor = option.pendingValue().getRGB()))
 //                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
@@ -400,6 +474,7 @@ public class ModConfig {
                                         .controller(opt -> IntegerSliderControllerBuilder.create(opt)
                                                 .range(0, 100)
                                                 .step(1))
+                                        .addListener(((option, event) -> ModConfig.get().showArmorDurabilityHudFromPercent = option.pendingValue()))
 //                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
                                         .build())
                                 .build())
@@ -416,6 +491,7 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
+                                        .addListener(((option, event) -> ModConfig.get().armorDurabilityHudOffsetX = option.pendingValue()))
 //                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
@@ -429,6 +505,7 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
+                                        .addListener(((option, event) -> ModConfig.get().armorDurabilityHudOffsetY = option.pendingValue()))
 //                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
@@ -442,6 +519,7 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
+                                        .addListener(((option, event) -> ModConfig.get().armorDurabilityHudMirgin = option.pendingValue()))
 //                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
                                         .build())
                                 .option(Option.createBuilder(float.class)
@@ -455,7 +533,7 @@ public class ModConfig {
                                                 }
                                         )
                                         .controller(FloatFieldControllerBuilder::create)
-//                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .addListener(((option, event) -> ModConfig.get().armorDurabilityHudScale = option.pendingValue()))
                                         .build())
                                 .build())
                         .group(OptionGroup.createBuilder()
@@ -473,7 +551,7 @@ public class ModConfig {
                                         .controller(opt -> EnumControllerBuilder.create(opt)
                                                 .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.position_horizontal." + value.toString().toLowerCase()))
                                                 .enumClass(ArmorPositionHorizontal.class))
-//                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .addListener(((option, event) -> ModConfig.get().armorHudPositionHorizontal = option.pendingValue()))
                                         .build())
                                 .option(Option.createBuilder(ArmorPositionVertical.class)
                                         .name(Text.translatable("durability_visibility_options.config.armor_hud.position_vertical"))
@@ -488,7 +566,7 @@ public class ModConfig {
                                         .controller(opt -> EnumControllerBuilder.create(opt)
                                                 .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.position_vertical." + value.toString().toLowerCase()))
                                                 .enumClass(ArmorPositionVertical.class))
-//                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .addListener(((option, event) -> ModConfig.get().armorHudPositionVertical = option.pendingValue()))
                                         .build())
                                 .option(Option.createBuilder(ArmorAlignment.class)
                                         .name(Text.translatable("durability_visibility_options.config.armor_hud.alignment"))
@@ -503,7 +581,7 @@ public class ModConfig {
                                         .controller(opt -> EnumControllerBuilder.create(opt)
                                                 .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.alignment." + value.toString().toLowerCase()))
                                                 .enumClass(ArmorAlignment.class))
-//                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .addListener(((option, event) -> ModConfig.get().armorHudAlignment = option.pendingValue()))
                                         .build())
                                 .option(Option.createBuilder(ArmorDisplayStyle.class)
                                         .name(Text.translatable("durability_visibility_options.config.armor_hud.display_style"))
@@ -518,7 +596,7 @@ public class ModConfig {
                                         .controller(opt -> EnumControllerBuilder.create(opt)
                                                 .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.display_style." + value.toString().toLowerCase()))
                                                 .enumClass(ArmorDisplayStyle.class))
-                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .addListener(((option, event) -> ModConfig.get().armorHudDisplayStyle = option.pendingValue()))
                                         .build())
                                 .build())
                         .group(OptionGroup.createBuilder()
@@ -536,8 +614,83 @@ public class ModConfig {
                                         .controller(opt -> EnumControllerBuilder.create(opt)
                                                 .formatValue(value -> Text.translatable("durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt." + value.toString().toLowerCase()))
                                                 .enumClass(ArmorVanillaStatsAdapt.class))
-//                                        .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer()).build())
+                                        .addListener(((option, event) -> ModConfig.get().armorVanillaStatsAdapt = option.pendingValue()))
                                         .build())
+                                .build())
+                        .build())
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("durability_visibility_options.config.presets"))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.translatable("durability_visibility_options.config.presets.durability"))
+                                .option(ButtonOption.createBuilder()
+                                        .action((button, context) -> {
+                                            ModConfig.get().showDurability = false;
+                                            ModConfig.get().showDurabilityPercent = true;
+                                            ModConfig.get().showDurabilityBarFromPercent = 99;
+                                            ModConfig.get().showDurabilityPercentsFromPercent = 99;
+                                            ModConfig.get().durabilityBarOffsetX = 0;
+                                            ModConfig.get().durabilityBarOffsetY = 0;
+                                            ModConfig.get().durabilityPercentOffsetX = 0;
+                                            ModConfig.get().durabilityPercentOffsetY = 0;
+                                            ModConfig.get().durabilityBarColor = 0x00FF00;
+                                            ModConfig.get().showPercentSymbol = true;
+                                            ModConfig.get().durabilityPercentColor = 0xFFFFFF;
+                                            MinecraftClient.getInstance().getToastManager().add(SystemToast.create(MinecraftClient.getInstance(), SystemToast.Type.PERIODIC_NOTIFICATION, Text.translatable("durability_visibility_options.config.title"), Text.translatable("durability_visibility_options.config.presets.applied")));
+                                            ModConfig.isOpen = false;
+                                            MinecraftClient.getInstance().setScreen(parent);
+                                            HANDLER.save();
+                                        })
+
+                                        .name(Text.translatable("durability_visibility_options.config.presets.only_percents"))
+                                        .description(OptionDescription.createBuilder().customImage(onlyPercentRenderer).build())
+                                        .build()
+                                )
+                                .option(ButtonOption.createBuilder()
+                                        .action((button, context) -> {
+                                            HANDLER.instance().showDurability = false;
+                                            HANDLER.instance().isVertical = true;
+                                            HANDLER.instance().showDurabilityPercent = true;
+                                            HANDLER.instance().showPercentSymbol = false;
+                                            HANDLER.instance().showDurabilityPercentsFromPercent = 25;
+                                            HANDLER.instance().durabilityBarOffsetX = 0;
+                                            HANDLER.instance().durabilityBarOffsetY = 0;
+                                            HANDLER.instance().durabilityPercentOffsetX = 0;
+                                            HANDLER.instance().durabilityPercentOffsetY = 6;
+                                            HANDLER.instance().durabilityBarColor = 0x00FF00;
+                                            HANDLER.instance().durabilityPercentColor = 0xFF0000;
+                                            MinecraftClient.getInstance().getToastManager().add(SystemToast.create(MinecraftClient.getInstance(), SystemToast.Type.PERIODIC_NOTIFICATION, Text.translatable("durability_visibility_options.config.title"), Text.translatable("durability_visibility_options.config.presets.applied")));
+                                            ModConfig.isOpen = false;
+                                            MinecraftClient.getInstance().setScreen(parent);
+                                            HANDLER.save();
+                                        })
+
+                                        .name(Text.translatable("durability_visibility_options.config.presets.low_durability_alert"))
+                                        .description(OptionDescription.createBuilder().customImage(lowDurabilityAlertRenderer).build())
+                                        .build()
+                                )
+                                .option(ButtonOption.createBuilder()
+                                        .action((button, context) -> {
+                                            HANDLER.instance().showDurability = true;
+                                            HANDLER.instance().isVertical = true;
+                                            HANDLER.instance().showDurabilityPercent = true;
+                                            HANDLER.instance().showPercentSymbol = false;
+                                            HANDLER.instance().showDurabilityBarFromPercent = 99;
+                                            HANDLER.instance().durabilityBarOffsetX = 0;
+                                            HANDLER.instance().durabilityBarOffsetY = 0;
+                                            HANDLER.instance().durabilityPercentOffsetX = 9;
+                                            HANDLER.instance().durabilityPercentOffsetY = 0;
+                                            HANDLER.instance().durabilityBarColor = 0x00FF00;
+                                            HANDLER.instance().durabilityPercentColor = 0xFFFFFF;
+                                            MinecraftClient.getInstance().getToastManager().add(SystemToast.create(MinecraftClient.getInstance(), SystemToast.Type.PERIODIC_NOTIFICATION, Text.translatable("durability_visibility_options.config.title"), Text.translatable("durability_visibility_options.config.presets.applied")));
+                                            ModConfig.isOpen = false;
+                                            MinecraftClient.getInstance().setScreen(parent);
+                                            HANDLER.save();
+                                        })
+
+                                        .name(Text.translatable("durability_visibility_options.config.presets.vertical_bar_plus_percents"))
+                                        .description(OptionDescription.createBuilder().customImage(verticalBarPlusPercentsRender).build())
+                                        .build()
+                                )
                                 .build())
                         .build())
                 .build()

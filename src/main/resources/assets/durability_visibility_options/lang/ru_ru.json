@@ -16,7 +16,7 @@
 
   "durability_visibility_options.config.color_min": "Цвет Мин.",
   "durability_visibility_options.config.color_max": "Цвет Макс.",
-  "durability_visibility_options.config.is_vertical": "Сделать Вертикальным",
+  "durability_visibility_options.config.is_vertical": "Сделать Вертикальной",
 
   "durability_visibility_options.config.color": "Цвет",
 
@@ -50,5 +50,12 @@
   "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt": "Адаптировать к Элементу Интерфейса",
   "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.none": "Нет",
   "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.hearts": "Сердца",
-  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.air": "Воздух"
+  "durability_visibility_options.config.armor_hud.armor_vanilla_stats_adapt.air": "Воздух",
+
+  "durability_visibility_options.config.presets": "Пресеты",
+  "durability_visibility_options.config.presets.only_percents": "Только Проценты",
+  "durability_visibility_options.config.presets.low_durability_alert": "Уведомление Низкой Прочности",
+  "durability_visibility_options.config.presets.vertical_bar_plus_percents": "Вертикальная Шкала + Проценты",
+  "durability_visibility_options.config.presets.applied": "Пересет применён!"
+
 }
