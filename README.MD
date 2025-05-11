@@ -20,6 +20,8 @@
 </a>
 </center>
 </p>
+<p><center><a href="https://discord.gg/sBpHZUBebQ"><img alt="discord-singular" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/discord-singular_vector.svg">
+</a></center</p>
 A large number of settings for the visual appearance of the durability bar!
 
 ## Features
