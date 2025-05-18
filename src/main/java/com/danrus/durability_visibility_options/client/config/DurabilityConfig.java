@@ -1,8 +1,11 @@
 package com.danrus.durability_visibility_options.client.config;
 
 public class DurabilityConfig {
+
     public boolean showDurability = true;
     public boolean isVertical = false;
+    public boolean showDurabilityBarUnderItem = false;
+    public boolean showDurabilityBarBackground = true;
     public int showDurabilityBarFromPercent = 99;
     public int durabilityBarOffsetX = 0;
     public int durabilityBarOffsetY = 0;
@@ -14,90 +17,133 @@ public class DurabilityConfig {
     public int durabilityPercentOffsetX = 0;
     public int durabilityPercentOffsetY = 0;
     public int showDurabilityPercentsFromPercent = 99;
+    public float durabilityPercentScale = 0.5f;
     public int durabilityPercentColor = 0xFFFFFF;
+    public int durabilityPercentColorMin = 0xFFFFFF;
+
+    public static final class Builder {
+        private final DurabilityConfig config = new DurabilityConfig();
+
+        public Builder fromModConfig() {
+            ModConfig modConfig = ModConfig.get();
+            return this
+                    .setShowDurability(modConfig.showDurability)
+                    .setVertical(modConfig.isVertical)
+                    .setShowDurabilityBarUnderItem(modConfig.showDurabilityBarUnderItem)
+                    .setShowDurabilityBarBackground(modConfig.showDurabilityBarBackground)
+                    .setShowDurabilityBarFromPercent(modConfig.showDurabilityBarFromPercent)
+                    .setDurabilityBarOffsetX(modConfig.durabilityBarOffsetX)
+                    .setDurabilityBarOffsetY(modConfig.durabilityBarOffsetY)
+                    .setDurabilityBarColor(modConfig.durabilityBarColor)
+                    .setDurabilityBarColorMin(modConfig.durabilityBarColorMin)
+                    .setShowDurabilityPercent(modConfig.showDurabilityPercent)
+                    .setShowPercentSymbol(modConfig.showPercentSymbol)
+                    .setDurabilityPercentOffsetX(modConfig.durabilityPercentOffsetX)
+                    .setDurabilityPercentOffsetY(modConfig.durabilityPercentOffsetY)
+                    .setShowDurabilityPercentsFromPercent(modConfig.showDurabilityPercentsFromPercent)
+                    .setDurabilityPercentScale(modConfig.durabilityPercentScale)
+                    .setDurabilityPercentColor(modConfig.durabilityPercentColor)
+                    .setDurabilityPercentColorMin(modConfig.durabilityPercentColorMin);
+        }
+
+        public Builder setShowDurability(boolean value) {
+            config.showDurability = value;
+            return this;
+        }
+
+        public Builder setVertical(boolean value) {
+            config.isVertical = value;
+            return this;
+        }
+
+        public Builder setShowDurabilityBarUnderItem(boolean value) {
+            config.showDurabilityBarUnderItem = value;
+            return this;
+        }
+
+        public Builder setShowDurabilityBarBackground(boolean value) {
+            config.showDurabilityBarBackground = value;
+            return this;
+        }
+
+        public Builder setShowDurabilityBarFromPercent(int value) {
+            config.showDurabilityBarFromPercent = value;
+            return this;
+        }
+
+        public Builder setDurabilityBarOffsetX(int value) {
+            config.durabilityBarOffsetX = value;
+            return this;
+        }
+
+        public Builder setDurabilityBarOffsetY(int value) {
+            config.durabilityBarOffsetY = value;
+            return this;
+        }
+
+        public Builder setDurabilityBarColor(int value) {
+            config.durabilityBarColor = value;
+            return this;
+        }
+
+        public Builder setDurabilityBarColorMin(int value) {
+            config.durabilityBarColorMin = value;
+            return this;
+        }
+
+        public Builder setShowDurabilityPercent(boolean value) {
+            config.showDurabilityPercent = value;
+            return this;
+        }
+
+        public Builder setShowPercentSymbol(boolean value) {
+            config.showPercentSymbol = value;
+            return this;
+        }
+
+        public Builder setDurabilityPercentOffsetX(int value) {
+            config.durabilityPercentOffsetX = value;
+            return this;
+        }
+
+        public Builder setDurabilityPercentOffsetY(int value) {
+            config.durabilityPercentOffsetY = value;
+            return this;
+        }
+
+        public Builder setShowDurabilityPercentsFromPercent(int value) {
+            config.showDurabilityPercentsFromPercent = value;
+            return this;
+        }
+
+        public Builder setDurabilityPercentScale(float value) {
+            config.durabilityPercentScale = value;
+            return this;
+        }
+
+        public Builder setDurabilityPercentColor(int value) {
+            config.durabilityPercentColor = value;
+            return this;
+        }
+
+        public Builder setDurabilityPercentColorMin(int value) {
+            config.durabilityPercentColorMin = value;
+            return this;
+        }
+
+        public DurabilityConfig build() {
+            return config;
+        }
+    }
 
     public DurabilityConfig() {}
 
-    public DurabilityConfig(DurabilityConfig other) {
-        copyFrom(other);
+    public static Builder builder() {
+        return new Builder();
     }
 
     public static DurabilityConfig fromModConfig() {
-        DurabilityConfig config = new DurabilityConfig();
-        ModConfig modConfig = ModConfig.get();
-
-        config.showDurability = modConfig.showDurability;
-        config.isVertical = modConfig.isVertical;
-        config.showDurabilityBarFromPercent = modConfig.showDurabilityBarFromPercent;
-        config.durabilityBarOffsetX = modConfig.durabilityBarOffsetX;
-        config.durabilityBarOffsetY = modConfig.durabilityBarOffsetY;
-        config.durabilityBarColor = modConfig.durabilityBarColor;
-        config.durabilityBarColorMin = modConfig.durabilityBarColorMin;
-
-        config.showDurabilityPercent = modConfig.showDurabilityPercent;
-        config.showPercentSymbol = modConfig.showPercentSymbol;
-        config.durabilityPercentOffsetX = modConfig.durabilityPercentOffsetX;
-        config.durabilityPercentOffsetY = modConfig.durabilityPercentOffsetY;
-        config.showDurabilityPercentsFromPercent = modConfig.showDurabilityPercentsFromPercent;
-        config.durabilityPercentColor = modConfig.durabilityPercentColor;
-
-        return config;
-    }
-
-    // Метод для копирования значений из другого конфига
-    private void copyFrom(DurabilityConfig other) {
-        this.showDurability = other.showDurability;
-        this.isVertical = other.isVertical;
-        this.showDurabilityBarFromPercent = other.showDurabilityBarFromPercent;
-        this.durabilityBarOffsetX = other.durabilityBarOffsetX;
-        this.durabilityBarOffsetY = other.durabilityBarOffsetY;
-        this.durabilityBarColor = other.durabilityBarColor;
-        this.durabilityBarColorMin = other.durabilityBarColorMin;
-
-        this.showDurabilityPercent = other.showDurabilityPercent;
-        this.showPercentSymbol = other.showPercentSymbol;
-        this.durabilityPercentOffsetX = other.durabilityPercentOffsetX;
-        this.durabilityPercentOffsetY = other.durabilityPercentOffsetY;
-        this.showDurabilityPercentsFromPercent = other.showDurabilityPercentsFromPercent;
-        this.durabilityPercentColor = other.durabilityPercentColor;
-    }
-
-    public DurabilityConfig clone() {
-        return new DurabilityConfig(this);
-    }
-
-    public DurabilityConfig getWithSpecificParams(
-            boolean showDurability,
-            boolean isVertical,
-            int showDurabilityBarFromPercent,
-            int durabilityBarOffsetX,
-            int durabilityBarOffsetY,
-            int durabilityBarColor,
-            int durabilityBarColorMin,
-
-            boolean showDurabilityPercent,
-            boolean showPercentSymbol,
-            int durabilityPercentOffsetX,
-            int durabilityPercentOffsetY,
-            int showDurabilityPercentsFromPercent,
-            int durabilityPercentColor
-    ) {
-        this.showDurability = showDurability;
-        this.isVertical = isVertical;
-        this.showDurabilityBarFromPercent = showDurabilityBarFromPercent;
-        this.durabilityBarOffsetX = durabilityBarOffsetX;
-        this.durabilityBarOffsetY = durabilityBarOffsetY;
-        this.durabilityBarColor = durabilityBarColor;
-        this.durabilityBarColorMin = durabilityBarColorMin;
-
-        this.showDurabilityPercent = showDurabilityPercent;
-        this.showPercentSymbol = showPercentSymbol;
-        this.durabilityPercentOffsetX = durabilityPercentOffsetX;
-        this.durabilityPercentOffsetY = durabilityPercentOffsetY;
-        this.showDurabilityPercentsFromPercent = showDurabilityPercentsFromPercent;
-        this.durabilityPercentColor = durabilityPercentColor;
-
-        return this;
+        return builder().fromModConfig().build();
     }
 
 }

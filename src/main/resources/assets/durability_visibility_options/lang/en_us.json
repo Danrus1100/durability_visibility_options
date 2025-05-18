@@ -9,6 +9,8 @@
   "durability_visibility_options.config.category.behavior": "Behavior",
 
   "durability_visibility_options.config.show": "Show",
+  "durability_visibility_options.config.show_under_item": "Show Under Item",
+  "durability_visibility_options.config.show_bar_background": "Show Bar Background",
   "durability_visibility_options.config.horizontal_offset": "Horizontal Offset",
   "durability_visibility_options.config.vertical_offset": "Vertical Offset",
   "durability_visibility_options.config.show_from_percent": "Show From Percents",
@@ -56,6 +58,9 @@
   "durability_visibility_options.config.presets.durability": "Durability",
   "durability_visibility_options.config.presets.only_percents": "Only Percents",
   "durability_visibility_options.config.presets.low_durability_alert": "Low Durability Alert",
+  "durability_visibility_options.config.presets.uwu": "UwU",
+  "durability_visibility_options.config.presets.duraview": "dura-view (from mod by inlitum)",
+
   "durability_visibility_options.config.presets.vertical_bar_plus_percents": "Vertical Bar + Percents",
   "durability_visibility_options.config.presets.applied": "Preset applied!"
 
