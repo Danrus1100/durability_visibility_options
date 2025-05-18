@@ -1,6 +1,7 @@
 package com.danrus.durability_visibility_options.client;
 
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
+import com.danrus.durability_visibility_options.client.utils.DrawUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -51,15 +52,13 @@ public class DurabilityRender {
         if (config.isVertical) {
             i += config.durabilityBarOffsetX - 2;
             j -= config.durabilityBarOffsetY + 11;
-            drawContext.fill(RenderLayer.getGui(), i, j, i + 2, j + 13, 200, -16777216);
-//            drawContext.fill(RenderLayer.getGui(),i+1, j+13, i, j + 13 - itemBarStep, 200, config.durabilityBarColor | 0xFF000000);
-            drawContext.fill(RenderLayer.getGui(), i + 1, j + 13, i, j + 13 - itemBarStep, 200, interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, percents));
+            if (config.showDurabilityBarBackground) {DrawUtils.fill(drawContext, config, i, j, 2, 13, -16777216);}
+            DrawUtils.fill(drawContext, config, i, j+13, 1, -itemBarStep, interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, percents));
         } else {
             i += config.durabilityBarOffsetX;
             j -= config.durabilityBarOffsetY;
-            drawContext.fill(RenderLayer.getGui(), i, j, i + 13, j + 2, 200, -16777216);
-//            drawContext.fill(RenderLayer.getGui(), i, j, i + itemBarStep, j + 1, 200, config.durabilityBarColor | 0xFF000000);
-            drawContext.fill(RenderLayer.getGui(), i + 13, j + 1, i + 13 - itemBarStep, j, 200, interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, percents));
+            if (config.showDurabilityBarBackground) {DrawUtils.fill(drawContext, config, i, j, 13, 2, -16777216);}
+            DrawUtils.fill(drawContext, config, i+13 , j, -itemBarStep, 1, interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, percents));
         }
     }
 
@@ -75,10 +74,20 @@ public class DurabilityRender {
                     durability += "%";
                 }
                 drawContext.getMatrices().push();
-                drawContext.getMatrices().scale(0.5F, 0.5F, 0.5F);
+                drawContext.getMatrices().scale(config.durabilityPercentScale, config.durabilityPercentScale, 1);
                 drawContext.getMatrices().translate(x, y, 500.0F);
                 TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-                drawContext.drawCenteredTextWithShadow(textRenderer, durability, x + 17 + config.durabilityPercentOffsetX, y + 23 - config.durabilityPercentOffsetY, config.durabilityPercentColor);
+                drawContext.drawCenteredTextWithShadow(
+                        textRenderer,
+                        durability,
+                        x + 17 + config.durabilityPercentOffsetX,
+                        y + 23 - config.durabilityPercentOffsetY,
+                        interpolateColorHSV(
+                                config.durabilityPercentColorMin,
+                                config.durabilityPercentColor,
+                                percents
+                        )
+                );
                 drawContext.getMatrices().pop();
             }
         }

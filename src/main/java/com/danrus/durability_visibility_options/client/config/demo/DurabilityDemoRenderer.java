@@ -13,23 +13,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
 public class DurabilityDemoRenderer implements DemoRenderer {
-
-    private final ItemStack[] demoItems = {new ItemStack(Items.ELYTRA), new ItemStack(Items.NETHERITE_PICKAXE)};
-    private ItemStack aciveDemoItem = demoItems[0];
-    private float tickCounter = 0;
+    private final DemoItems demoItems = DemoItems.getInstance();
     private boolean useSpecificConfig = false;
     private DurabilityConfig config = DurabilityConfig.fromModConfig();
 
-    public DurabilityDemoRenderer () {}
+    public DurabilityDemoRenderer() {}
 
-    public DurabilityDemoRenderer (DurabilityConfig config) {
+    public DurabilityDemoRenderer(DurabilityConfig config) {
         this.config = config;
         this.useSpecificConfig = true;
     }
 
     @Override
     public int render(DrawContext context, int x, int y, int width, float deltaTime) {
-        ItemStack demoStack = aciveDemoItem;
+        ItemStack demoStack = demoItems.getActiveItem();
 
         int itemX = (int) (x + MinecraftClient.getInstance().getWindow().getScaledWidth() / 7.5);
         int itemY = y + 45;
@@ -37,9 +34,9 @@ public class DurabilityDemoRenderer implements DemoRenderer {
 
         context.getMatrices().push();
 
-        context.getMatrices().translate(itemX + 8, itemY + 8, 0.0F); // Move to item center
+        context.getMatrices().translate(itemX + 8, itemY + 8, 0.0F);
         context.getMatrices().scale(scale, scale, 1.0F);
-        context.drawItem(demoStack, -8, -8); // Center the item
+        context.drawItem(demoStack, -8, -8);
 
         context.getMatrices().pop();
 
@@ -49,10 +46,9 @@ public class DurabilityDemoRenderer implements DemoRenderer {
         context.getMatrices().scale(scale, scale, 1.0F);
 
         int percents = (int)((1 - demoStack.getDamage() / (float)demoStack.getMaxDamage()) * 100);
-        if (aciveDemoItem.getItem() == Items.NETHERITE_PICKAXE) { percents += 1; }
+        if (demoStack.getItem() == Items.NETHERITE_PICKAXE) { percents += 1; }
         int itemBarStep = Math.round(13.0F - demoStack.getDamage() * 13.0F / demoStack.getMaxDamage());
 
-        // idk why here -7 and -6, i just picked the values by eye
         DurabilityRender.renderBar(context, percents, itemBarStep, -7, -6, config);
         DurabilityRender.renderPercents(context, percents, -7, -6, config);
 
@@ -62,33 +58,9 @@ public class DurabilityDemoRenderer implements DemoRenderer {
     }
 
     public void tick() {
-        tickCounter += 1;
-
         if (!this.useSpecificConfig) {
             config = DurabilityConfig.fromModConfig();
         }
-
-        if (tickCounter >= 1) {
-            tickCounter = 0;
-
-            int damageAmount = Math.round(aciveDemoItem.getMaxDamage() * 0.01f);
-            int newDamage = aciveDemoItem.getDamage() + damageAmount;
-
-            if (newDamage >= aciveDemoItem.getMaxDamage()) {
-                if (aciveDemoItem == demoItems[0]) {
-                    aciveDemoItem = demoItems[1];
-                } else {
-                    aciveDemoItem = demoItems[0];
-                }
-
-                for (ItemStack item : demoItems) {
-                    if (item != aciveDemoItem) {
-                        item.setDamage(0);
-                    }
-                }
-            } else {
-                aciveDemoItem.setDamage(newDamage);
-            }
-        }
+        demoItems.tick();
     }
 }

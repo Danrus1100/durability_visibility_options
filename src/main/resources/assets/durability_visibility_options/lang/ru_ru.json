@@ -9,6 +9,8 @@
   "durability_visibility_options.config.category.behavior": "Поведение",
 
   "durability_visibility_options.config.show": "Показывать",
+  "durability_visibility_options.config.show_under_item": "Показывать Под Предметом",
+  "durability_visibility_options.config.show_bar_background": "Отображать Фон Шкалы",
   "durability_visibility_options.config.horizontal_offset": "Горизонтальное Смещение",
   "durability_visibility_options.config.vertical_offset": "Вертикальное Смещение",
   "durability_visibility_options.config.show_from_percent": "Показывать От Процента",
@@ -55,6 +57,9 @@
   "durability_visibility_options.config.presets": "Пресеты",
   "durability_visibility_options.config.presets.only_percents": "Только Проценты",
   "durability_visibility_options.config.presets.low_durability_alert": "Уведомление Низкой Прочности",
+  "durability_visibility_options.config.presets.uwu": "UwU",
+  "durability_visibility_options.config.presets.duraview": "dura-view (из мода от inlitum)",
+
   "durability_visibility_options.config.presets.vertical_bar_plus_percents": "Вертикальная Шкала + Проценты",
   "durability_visibility_options.config.presets.applied": "Пересет применён!"
 

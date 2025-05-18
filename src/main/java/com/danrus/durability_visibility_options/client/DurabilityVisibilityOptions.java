@@ -13,7 +13,7 @@ public class DurabilityVisibilityOptions implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ModConfig.initialize();
-        HudRenderCallback.EVENT.register(new ArmorHudRender());
+//        HudRenderCallback.EVENT.register(new ArmorHudRender());
 
     }
 }

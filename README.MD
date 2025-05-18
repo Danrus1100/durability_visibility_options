@@ -29,18 +29,13 @@
  - Bar/Percents color settings
  - Bar/Percents position settings
  - Hide Bar/Percents depending on durability
- - Huge Armor HUD customization (~~15 options!~~)
+ - And much more! (I release updates very often!)
 
 ![image](assets/modmenu.png)
 
 ## Durability Examples
 ![image](assets/example1.png)
 ![image](assets/example2.png)
-
-## Armor HUD Examples
-![image](assets/example3.png)
-![image](assets/example4.png)
-
 
 ## Speсial thanks
 [jackborrie](https://github.com/jackborrie/duraview) - creator of "duraview"
