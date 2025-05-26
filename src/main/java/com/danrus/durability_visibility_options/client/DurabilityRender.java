@@ -49,16 +49,26 @@ public class DurabilityRender {
         }
         int i = x + 2;
         int j = y + 13;
+
         if (config.isVertical) {
             i += config.durabilityBarOffsetX - 2;
             j -= config.durabilityBarOffsetY + 11;
             if (config.showDurabilityBarBackground) {DrawUtils.fill(drawContext, config, i, j, 2, 13, -16777216);}
-            DrawUtils.fill(drawContext, config, i, j+13, 1, -itemBarStep, interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, percents));
+            if (config.doRgbBar){
+                DrawUtils.drawGradientVerticalBar(drawContext, i+3, j, 1, 13, itemBarStep);
+            } else {
+                DrawUtils.fill(drawContext, config, i, j + 13, 1, -itemBarStep, interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, percents));
+            }
+
         } else {
             i += config.durabilityBarOffsetX;
             j -= config.durabilityBarOffsetY;
             if (config.showDurabilityBarBackground) {DrawUtils.fill(drawContext, config, i, j, 13, 2, -16777216);}
-            DrawUtils.fill(drawContext, config, i+13 , j, -itemBarStep, 1, interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, percents));
+            if (config.doRgbBar){
+                DrawUtils.drawGradientHorizontalBar(drawContext, i, j, 13, 1, itemBarStep);
+            } else {
+                DrawUtils.fill(drawContext, config, i+13 , j, -itemBarStep, 1, interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, percents));
+            }
         }
     }
 
@@ -72,22 +82,29 @@ public class DurabilityRender {
                 String durability = String.valueOf(percents);
                 if (config.showPercentSymbol) {
                     durability += "%";
+
                 }
                 drawContext.getMatrices().push();
-                drawContext.getMatrices().scale(config.durabilityPercentScale, config.durabilityPercentScale, 1);
-                drawContext.getMatrices().translate(x, y, 500.0F);
-                TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+
+                float targetX = x + 9 + config.durabilityPercentOffsetX;
+                float targetY = y + 11 - config.durabilityPercentOffsetY;
+                drawContext.getMatrices().translate(targetX, targetY, 200.0F);
+
+                float scale = config.durabilityPercentScale;
+                drawContext.getMatrices().scale(scale, scale, 1);
+
                 drawContext.drawCenteredTextWithShadow(
-                        textRenderer,
+                        MinecraftClient.getInstance().textRenderer,
                         durability,
-                        x + 17 + config.durabilityPercentOffsetX,
-                        y + 23 - config.durabilityPercentOffsetY,
+                        0,
+                        0,
                         interpolateColorHSV(
                                 config.durabilityPercentColorMin,
                                 config.durabilityPercentColor,
                                 percents
                         )
                 );
+
                 drawContext.getMatrices().pop();
             }
         }

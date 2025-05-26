@@ -12,7 +12,7 @@ public class ModMenuIntegration implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parentScreen -> {
-            ModConfig.isOpen = true;
+//            ModConfig.isOpen = true;
             return ModConfig.getConfigScreen(parentScreen);
         };
     }

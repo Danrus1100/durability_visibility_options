@@ -44,13 +44,13 @@ public class PressableWidgetMixin {
     //? if <=1.20.1
     /*private void drawContextMixin(DrawContext instance, Identifier texture, int x, int y, int width, int height, int outerSliceWidth, int outerSliceHeight, int centerSliceWidth, int centerSliceHeight, int u, int v)*/
     {
-        if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
-            //? if >=1.21.2
-            customDrawGuiTexture(instance, identifier, i1, i2, i3, i4, i5);
-            //? if <1.21.2 >1.20.1
-            /*customDrawGuiTexture(instance, identifier, i1, i2, i3, i4, 0);*/
-            //? if <=1.20.1
-            /*instance.drawNineSlicedTexture(texture, x, y, width, height, outerSliceWidth, outerSliceHeight, centerSliceWidth, centerSliceHeight, u, v);*/
-        }
+//        if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
+//            //? if >=1.21.2
+//            customDrawGuiTexture(instance, identifier, i1, i2, i3, i4, i5);
+//            //? if <1.21.2 >1.20.1
+//            /*customDrawGuiTexture(instance, identifier, i1, i2, i3, i4, 0);*/
+//            //? if <=1.20.1
+//            /*instance.drawNineSlicedTexture(texture, x, y, width, height, outerSliceWidth, outerSliceHeight, centerSliceWidth, centerSliceHeight, u, v);*/
+//        }
     }
 }

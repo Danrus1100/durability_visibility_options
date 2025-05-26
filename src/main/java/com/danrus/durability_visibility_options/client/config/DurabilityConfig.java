@@ -21,6 +21,8 @@ public class DurabilityConfig {
     public int durabilityPercentColor = 0xFFFFFF;
     public int durabilityPercentColorMin = 0xFFFFFF;
 
+    public boolean doRgbBar = false;
+
     public static final class Builder {
         private final DurabilityConfig config = new DurabilityConfig();
 
@@ -43,7 +45,8 @@ public class DurabilityConfig {
                     .setShowDurabilityPercentsFromPercent(modConfig.showDurabilityPercentsFromPercent)
                     .setDurabilityPercentScale(modConfig.durabilityPercentScale)
                     .setDurabilityPercentColor(modConfig.durabilityPercentColor)
-                    .setDurabilityPercentColorMin(modConfig.durabilityPercentColorMin);
+                    .setDurabilityPercentColorMin(modConfig.durabilityPercentColorMin)
+                    .setDoRgbBar(modConfig.doRgbBar);
         }
 
         public Builder setShowDurability(boolean value) {
@@ -128,6 +131,11 @@ public class DurabilityConfig {
 
         public Builder setDurabilityPercentColorMin(int value) {
             config.durabilityPercentColorMin = value;
+            return this;
+        }
+
+        public Builder setDoRgbBar(boolean value) {
+            config.doRgbBar = value;
             return this;
         }
 
