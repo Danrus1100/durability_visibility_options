@@ -169,10 +169,7 @@ public class ModConfig {
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showDurability,
-                                                value -> {
-                                                    HANDLER.instance().showDurability = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurability = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -186,10 +183,7 @@ public class ModConfig {
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().isVertical,
-                                                value -> {
-                                                    HANDLER.instance().isVertical = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().isVertical = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -203,10 +197,7 @@ public class ModConfig {
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().showDurabilityBarUnderItem,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityBarUnderItem = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityBarUnderItem = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -220,10 +211,7 @@ public class ModConfig {
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showDurabilityBarBackground,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityBarBackground = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityBarBackground = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -237,10 +225,7 @@ public class ModConfig {
                                         .binding(
                                                 99,
                                                 () -> HANDLER.instance().showDurabilityBarFromPercent,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityBarFromPercent = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityBarFromPercent = value
                                         )
                                         .controller(opt -> IntegerSliderControllerBuilder.create(opt)
                                                 .range(0, 99)
@@ -256,10 +241,7 @@ public class ModConfig {
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityBarOffsetX,
-                                                value -> {
-                                                    HANDLER.instance().durabilityBarOffsetX = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityBarOffsetX = value
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -273,10 +255,7 @@ public class ModConfig {
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityBarOffsetY,
-                                                value -> {
-                                                    HANDLER.instance().durabilityBarOffsetY = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityBarOffsetY = value
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -290,10 +269,7 @@ public class ModConfig {
                                         .binding(
                                                 new Color(0x00FF00),
                                                 () -> new Color(HANDLER.instance().durabilityBarColor),
-                                                value -> {
-                                                    HANDLER.instance().durabilityBarColor = value.getRGB();
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityBarColor = value.getRGB()
                                         )
                                         .controller(ColorControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -307,10 +283,7 @@ public class ModConfig {
                                         .binding(
                                                 new Color(0xFF0000),
                                                 () -> new Color(HANDLER.instance().durabilityBarColorMin),
-                                                value -> {
-                                                    HANDLER.instance().durabilityBarColorMin = value.getRGB();
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityBarColorMin = value.getRGB()
                                         )
                                         .controller(ColorControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -327,10 +300,7 @@ public class ModConfig {
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().showDurabilityPercent,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityPercent = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityPercent = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -344,10 +314,7 @@ public class ModConfig {
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showPercentSymbol,
-                                                value -> {
-                                                    HANDLER.instance().showPercentSymbol = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showPercentSymbol = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -361,10 +328,7 @@ public class ModConfig {
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityPercentOffsetX,
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentOffsetX = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentOffsetX = value
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -378,10 +342,7 @@ public class ModConfig {
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityPercentOffsetY,
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentOffsetY = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentOffsetY = value
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -395,10 +356,7 @@ public class ModConfig {
                                         .binding(
                                                 99,
                                                 () -> HANDLER.instance().showDurabilityPercentsFromPercent,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityPercentsFromPercent = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityPercentsFromPercent = value
                                         )
                                         .controller(opt -> IntegerSliderControllerBuilder.create(opt)
                                                 .range(0, 100)
@@ -415,10 +373,7 @@ public class ModConfig {
                                         .binding(
                                                 0.5f,
                                                 () -> HANDLER.instance().durabilityPercentScale,
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentScale = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentScale = value
                                         )
                                         .controller(FloatFieldControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -433,10 +388,7 @@ public class ModConfig {
                                         .binding(
                                                 new Color(0xFFFFFF),
                                                 () -> new Color(HANDLER.instance().durabilityPercentColor),
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentColor = value.getRGB();
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentColor = value.getRGB()
                                         )
                                         .controller(ColorControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -450,10 +402,7 @@ public class ModConfig {
                                         .binding(
                                                 new Color(0xFFFFFF),
                                                 () -> new Color(HANDLER.instance().durabilityPercentColorMin),
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentColorMin = value.getRGB();
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentColorMin = value.getRGB()
                                         )
                                         .controller(ColorControllerBuilder::create)
                                         .addListener(((option, event) -> {
@@ -470,10 +419,7 @@ public class ModConfig {
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().doRgbBar,
-                                                value -> {
-                                                    HANDLER.instance().doRgbBar = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().doRgbBar = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
                                         .addListener(((option, event) -> {
