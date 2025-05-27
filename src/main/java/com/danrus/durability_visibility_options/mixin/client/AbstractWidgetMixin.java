@@ -20,8 +20,8 @@ public class AbstractWidgetMixin {
             net.minecraft.client.gui.DrawContext instance,
             int x, int y, int width, int height, boolean enabled, boolean hovered
     ) {
-        if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
-            YACLRenderHelper.renderButtonTexture(instance, x, y, width, height, enabled, hovered);
-        }
+//        if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
+//            YACLRenderHelper.renderButtonTexture(instance, x, y, width, height, enabled, hovered);
+//        }
     }
 }

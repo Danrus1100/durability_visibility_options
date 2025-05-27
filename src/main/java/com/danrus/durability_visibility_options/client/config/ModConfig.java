@@ -19,7 +19,7 @@ import java.awt.Color;
 
 public class ModConfig {
 
-    public static boolean isOpen = false;
+//    public static boolean isOpen = false;
 
     public static final ConfigClassHandler<ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
@@ -82,6 +82,9 @@ public class ModConfig {
 
     @SerialEntry
     public int durabilityPercentColorMin = 0xFFFFFF;
+
+    @SerialEntry
+    public boolean doRgbBar = false;
 
 
     // Armor HUD
@@ -166,13 +169,13 @@ public class ModConfig {
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showDurability,
-                                                value -> {
-                                                    HANDLER.instance().showDurability = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurability = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().showDurability = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().showDurability = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
@@ -180,13 +183,13 @@ public class ModConfig {
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().isVertical,
-                                                value -> {
-                                                    HANDLER.instance().isVertical = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().isVertical = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().isVertical = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().isVertical = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
@@ -194,13 +197,13 @@ public class ModConfig {
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().showDurabilityBarUnderItem,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityBarUnderItem = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityBarUnderItem = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().showDurabilityBarUnderItem = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().showDurabilityBarUnderItem = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
@@ -208,13 +211,13 @@ public class ModConfig {
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showDurabilityBarBackground,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityBarBackground = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityBarBackground = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().showDurabilityBarBackground = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().showDurabilityBarBackground = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
@@ -222,15 +225,15 @@ public class ModConfig {
                                         .binding(
                                                 99,
                                                 () -> HANDLER.instance().showDurabilityBarFromPercent,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityBarFromPercent = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityBarFromPercent = value
                                         )
                                         .controller(opt -> IntegerSliderControllerBuilder.create(opt)
                                                 .range(0, 99)
                                                 .step(1))
-                                        .addListener(((option, event) -> ModConfig.get().showDurabilityBarFromPercent = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().showDurabilityBarFromPercent = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
@@ -238,13 +241,13 @@ public class ModConfig {
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityBarOffsetX,
-                                                value -> {
-                                                    HANDLER.instance().durabilityBarOffsetX = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityBarOffsetX = value
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().durabilityBarOffsetX = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityBarOffsetX = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
@@ -252,13 +255,13 @@ public class ModConfig {
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityBarOffsetY,
-                                                value -> {
-                                                    HANDLER.instance().durabilityBarOffsetY = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityBarOffsetY = value
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().durabilityBarOffsetY = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityBarOffsetY = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(Color.class)
@@ -266,13 +269,13 @@ public class ModConfig {
                                         .binding(
                                                 new Color(0x00FF00),
                                                 () -> new Color(HANDLER.instance().durabilityBarColor),
-                                                value -> {
-                                                    HANDLER.instance().durabilityBarColor = value.getRGB();
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityBarColor = value.getRGB()
                                         )
                                         .controller(ColorControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().durabilityBarColor = option.pendingValue().getRGB()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityBarColor = option.pendingValue().getRGB();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(Color.class)
@@ -280,13 +283,13 @@ public class ModConfig {
                                         .binding(
                                                 new Color(0xFF0000),
                                                 () -> new Color(HANDLER.instance().durabilityBarColorMin),
-                                                value -> {
-                                                    HANDLER.instance().durabilityBarColorMin = value.getRGB();
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityBarColorMin = value.getRGB()
                                         )
                                         .controller(ColorControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().durabilityBarColorMin = option.pendingValue().getRGB()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityBarColorMin = option.pendingValue().getRGB();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .build())
@@ -297,13 +300,13 @@ public class ModConfig {
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().showDurabilityPercent,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityPercent = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityPercent = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().showDurabilityPercent = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().showDurabilityPercent = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
@@ -311,13 +314,13 @@ public class ModConfig {
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showPercentSymbol,
-                                                value -> {
-                                                    HANDLER.instance().showPercentSymbol = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showPercentSymbol = value
                                         )
                                         .controller(TickBoxControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().showPercentSymbol = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().showPercentSymbol = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
@@ -325,13 +328,13 @@ public class ModConfig {
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityPercentOffsetX,
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentOffsetX = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentOffsetX = value
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().durabilityPercentOffsetX = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityPercentOffsetX = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
@@ -339,13 +342,13 @@ public class ModConfig {
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityPercentOffsetY,
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentOffsetY = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentOffsetY = value
                                         )
                                         .controller(IntegerFieldControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().durabilityPercentOffsetY = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityPercentOffsetY = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
@@ -353,15 +356,15 @@ public class ModConfig {
                                         .binding(
                                                 99,
                                                 () -> HANDLER.instance().showDurabilityPercentsFromPercent,
-                                                value -> {
-                                                    HANDLER.instance().showDurabilityPercentsFromPercent = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().showDurabilityPercentsFromPercent = value
                                         )
                                         .controller(opt -> IntegerSliderControllerBuilder.create(opt)
                                                 .range(0, 100)
                                                 .step(1))
-                                        .addListener(((option, event) -> ModConfig.get().showDurabilityPercentsFromPercent = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().showDurabilityPercentsFromPercent = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
 
@@ -370,13 +373,13 @@ public class ModConfig {
                                         .binding(
                                                 0.5f,
                                                 () -> HANDLER.instance().durabilityPercentScale,
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentScale = value;
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentScale = value
                                         )
                                         .controller(FloatFieldControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().durabilityPercentScale = option.pendingValue()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityPercentScale = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
 
@@ -385,13 +388,13 @@ public class ModConfig {
                                         .binding(
                                                 new Color(0xFFFFFF),
                                                 () -> new Color(HANDLER.instance().durabilityPercentColor),
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentColor = value.getRGB();
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentColor = value.getRGB()
                                         )
                                         .controller(ColorControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().durabilityPercentColor = option.pendingValue().getRGB()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityPercentColor = option.pendingValue().getRGB();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(Color.class)
@@ -399,13 +402,30 @@ public class ModConfig {
                                         .binding(
                                                 new Color(0xFFFFFF),
                                                 () -> new Color(HANDLER.instance().durabilityPercentColorMin),
-                                                value -> {
-                                                    HANDLER.instance().durabilityPercentColorMin = value.getRGB();
-                                                    HANDLER.save();
-                                                }
+                                                value -> HANDLER.instance().durabilityPercentColorMin = value.getRGB()
                                         )
                                         .controller(ColorControllerBuilder::create)
-                                        .addListener(((option, event) -> ModConfig.get().durabilityPercentColorMin = option.pendingValue().getRGB()))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityPercentColorMin = option.pendingValue().getRGB();
+                                            HANDLER.save();
+                                        }))
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
+                                        .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.translatable("durability_visibility_options.config.category.secret"))
+                                .option(Option.createBuilder(Boolean.class)
+                                        .name(Text.translatable("durability_visibility_options.config.rgb_bar"))
+                                        .binding(
+                                                false,
+                                                () -> HANDLER.instance().doRgbBar,
+                                                value -> HANDLER.instance().doRgbBar = value
+                                        )
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().doRgbBar = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .build())
@@ -684,25 +704,25 @@ public class ModConfig {
     }
 
     public void applyFrom(DurabilityConfig config, Screen parent) {
-        this.showDurability = config.showDurability;
-        this.isVertical = config.isVertical;
-        this.showDurabilityBarUnderItem = config.showDurabilityBarUnderItem;
-        this.showDurabilityBarBackground = config.showDurabilityBarBackground;
-        this.showDurabilityBarFromPercent = config.showDurabilityBarFromPercent;
-        this.durabilityBarOffsetX = config.durabilityBarOffsetX;
-        this.durabilityBarOffsetY = config.durabilityBarOffsetY;
-        this.durabilityBarColor = config.durabilityBarColor;
-        this.durabilityBarColorMin = config.durabilityBarColorMin;
+        ModConfig.get().showDurability = config.showDurability;
+        ModConfig.get().isVertical = config.isVertical;
+        ModConfig.get().showDurabilityBarUnderItem = config.showDurabilityBarUnderItem;
+        ModConfig.get().showDurabilityBarBackground = config.showDurabilityBarBackground;
+        ModConfig.get().showDurabilityBarFromPercent = config.showDurabilityBarFromPercent;
+        ModConfig.get().durabilityBarOffsetX = config.durabilityBarOffsetX;
+        ModConfig.get().durabilityBarOffsetY = config.durabilityBarOffsetY;
+        ModConfig.get().durabilityBarColor = config.durabilityBarColor;
+        ModConfig.get().durabilityBarColorMin = config.durabilityBarColorMin;
 
-        this.showDurabilityPercent = config.showDurabilityPercent;
-        this.showPercentSymbol = config.showPercentSymbol;
-        this.durabilityPercentOffsetX = config.durabilityPercentOffsetX;
-        this.durabilityPercentOffsetY = config.durabilityPercentOffsetY;
-        this.showDurabilityPercentsFromPercent = config.showDurabilityPercentsFromPercent;
-        this.durabilityPercentColor = config.durabilityPercentColor;
-        this.durabilityPercentColorMin = config.durabilityPercentColorMin;
-        save();
-        ModConfig.isOpen = false;
+        ModConfig.get().showDurabilityPercent = config.showDurabilityPercent;
+        ModConfig.get().showPercentSymbol = config.showPercentSymbol;
+        ModConfig.get().durabilityPercentOffsetX = config.durabilityPercentOffsetX;
+        ModConfig.get().durabilityPercentOffsetY = config.durabilityPercentOffsetY;
+        ModConfig.get().showDurabilityPercentsFromPercent = config.showDurabilityPercentsFromPercent;
+        ModConfig.get().durabilityPercentColor = config.durabilityPercentColor;
+        ModConfig.get().durabilityPercentColorMin = config.durabilityPercentColorMin;
+        HANDLER.save();
+//        ModConfig.isOpen = false;
         MinecraftClient.getInstance().setScreen(parent);
         MinecraftClient.getInstance().getToastManager().add(SystemToast.create(MinecraftClient.getInstance(), SystemToast.Type.PERIODIC_NOTIFICATION, Text.translatable("durability_visibility_options.config.title"), Text.translatable("durability_visibility_options.config.presets.applied")));
     }

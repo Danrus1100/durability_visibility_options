@@ -41,11 +41,11 @@ public class ScreenMixin {
         {
             //? if >=1.21.2
             float v = 0.0f;
-            if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
-                //? if >1.20.4
-                customApplyBlur(instance, v);
-                //? if <=1.20.4
-                /*instance.renderBackgroundTexture(graphics);*/
-            }
+//            if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
+//                //? if >1.20.4
+//                customApplyBlur(instance, v);
+//                //? if <=1.20.4
+//                /*instance.renderBackgroundTexture(graphics);*/
+//            }
         }
     }

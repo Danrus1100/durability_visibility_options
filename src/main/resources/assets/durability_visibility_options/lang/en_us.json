@@ -7,6 +7,7 @@
   "durability_visibility_options.config.category.positioning": "Positioning",
   "durability_visibility_options.config.category.layout": "Layout",
   "durability_visibility_options.config.category.behavior": "Behavior",
+  "durability_visibility_options.config.category.secret": "Secret Settings",
 
   "durability_visibility_options.config.show": "Show",
   "durability_visibility_options.config.show_under_item": "Show Under Item",
@@ -19,6 +20,7 @@
   "durability_visibility_options.config.color_min": "Color Min.",
   "durability_visibility_options.config.color_max": "Color Max.",
   "durability_visibility_options.config.is_vertical": "Make Vertical",
+  "durability_visibility_options.config.rgb_bar": "RGB Mode",
 
   "durability_visibility_options.config.color": "Color",
 

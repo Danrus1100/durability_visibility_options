@@ -16,13 +16,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class YACLScreenMixin {
     @Inject(method = "close", at = @At("HEAD"))
     private void close(CallbackInfo ci) {
-        ModConfig.isOpen = false;
+//        ModConfig.isOpen = false;
     }
 
     @Redirect(method = "renderBackground", at = @At(value = "INVOKE", target = "Ldev/isxander/yacl3/gui/tab/TabExt;renderBackground(Lnet/minecraft/client/gui/DrawContext;)V"))
     private void renderBackgroundMixin(TabExt instance, DrawContext graphics) {
-        if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
-            instance.renderBackground(graphics);
-        }
+//        if (!ModConfig.isOpen || MinecraftClient.getInstance().player == null) {
+//            instance.renderBackground(graphics);
+//        }
     }
 }

@@ -6,7 +6,6 @@ package com.danrus.durability_visibility_options.client.config.demo;
 
 import com.danrus.durability_visibility_options.client.DurabilityRender;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
-import com.danrus.durability_visibility_options.client.config.ModConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemStack;

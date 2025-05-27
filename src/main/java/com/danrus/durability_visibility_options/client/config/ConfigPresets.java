@@ -14,7 +14,7 @@ public class ConfigPresets {
     public static final DurabilityConfig verticalBarPlusPercentsConfig = DurabilityConfig.builder()
             .setVertical(true)
             .setShowDurabilityPercent(true)
-            .setDurabilityPercentOffsetX(9)
+            .setDurabilityPercentOffsetX(4)
             .build();
 
     public static final DurabilityDemoRenderer verticalBarPlusPercentsRender = new DurabilityDemoRenderer(verticalBarPlusPercentsConfig);
@@ -24,7 +24,7 @@ public class ConfigPresets {
             .setShowDurability(false)
             .setShowDurabilityPercent(true)
             .setShowDurabilityPercentsFromPercent(25)
-            .setDurabilityPercentOffsetY(6)
+            .setDurabilityPercentOffsetY(4)
             .setDurabilityPercentColor(0xFF0000)
             .setDurabilityPercentColorMin(0xFF0000)
             .build();
@@ -41,7 +41,7 @@ public class ConfigPresets {
     public static final DurabilityConfig duraviewConfig = DurabilityConfig.builder()
             .setShowDurability(false)
             .setShowDurabilityPercent(true)
-            .setDurabilityPercentOffsetX(5)
+            .setDurabilityPercentOffsetX(3)
             .setDurabilityPercentColor(0x00FF00)
             .setDurabilityPercentColorMin(0xFF0000)
             .build();
