@@ -113,7 +113,7 @@ loom {
         ideConfigGenerated true // Run configurations are not created for subprojects by default
         runDir "../../run" // Use a shared run folder and create separate worlds
     }
-    accessWidenerPath = project.rootProject.file("src/main/resources/aws/${stonecutter.current.project}.accesswidener")
+//    accessWidenerPath = project.rootProject.file("src/main/resources/aws/${stonecutter.current.project}.accesswidener")
 //    accessWidenerPath = project.rootProject.file("src/main/resources/aws/1.21.4.accesswidener")
 }
 

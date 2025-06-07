@@ -29,7 +29,7 @@ public class DemoItems {
             tickCounter = 0;
 
             int damageAmount = Math.round(activeItem.getMaxDamage() * 0.01f);
-            int newDamage = activeItem.getDamage() + damageAmount;
+            int newDamage = activeItem.getDamage() + 1;
 
             if (newDamage >= activeItem.getMaxDamage()) {
                 if (activeItem == items[0]) {
@@ -40,7 +40,7 @@ public class DemoItems {
 
                 for (ItemStack item : items) {
                     if (item != activeItem) {
-                        item.setDamage(0);
+                        item.setDamage(damageAmount);
                     }
                 }
             } else {

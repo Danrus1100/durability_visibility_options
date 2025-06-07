@@ -2,6 +2,8 @@ package com.danrus.durability_visibility_options.client.config;
 
 public class DurabilityConfig {
 
+    public String key;
+
     public boolean showDurability = true;
     public boolean isVertical = false;
     public boolean showDurabilityBarUnderItem = false;
@@ -47,6 +49,11 @@ public class DurabilityConfig {
                     .setDurabilityPercentColor(modConfig.durabilityPercentColor)
                     .setDurabilityPercentColorMin(modConfig.durabilityPercentColorMin)
                     .setDoRgbBar(modConfig.doRgbBar);
+        }
+
+        public Builder setKey(String key) {
+            config.key = key;
+            return this;
         }
 
         public Builder setShowDurability(boolean value) {

@@ -14,7 +14,6 @@
   "license": "MIT",
   "icon": "assets/durability_visibility_options/icon.png",
   "environment": "client",
-  "accessWidener": "aws/${minecraft_version}.accesswidener",
   "entrypoints": {
     "client": [
       "com.danrus.durability_visibility_options.client.DurabilityVisibilityOptions"

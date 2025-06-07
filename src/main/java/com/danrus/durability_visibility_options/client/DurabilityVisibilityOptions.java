@@ -8,12 +8,9 @@ import net.minecraft.client.gui.screen.Screen;
 
 public class DurabilityVisibilityOptions implements ClientModInitializer {
 
-    public static Screen parentScreen;
-
     @Override
     public void onInitializeClient() {
         ModConfig.initialize();
-//        HudRenderCallback.EVENT.register(new ArmorHudRender());
 
     }
 }
