@@ -45,4 +45,12 @@ public class ConfigPresets {
                     .setDurabilityPercentColorMin(0xFF0000)
                     .build()
     );
+
+    public DurabilityConfig loadCustom(String filename) {
+        return new DurabilityConfig(); //TODO: Implement
+    }
+
+    public void saveCustom(DurabilityConfig config){
+        return; //TODO: Implement
+    }
 }

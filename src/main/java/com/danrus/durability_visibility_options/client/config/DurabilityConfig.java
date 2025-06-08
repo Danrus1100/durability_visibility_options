@@ -3,6 +3,7 @@ package com.danrus.durability_visibility_options.client.config;
 public class DurabilityConfig {
 
     public String key;
+    public String name;
 
     public boolean showDurability = true;
     public boolean isVertical = false;
@@ -53,6 +54,11 @@ public class DurabilityConfig {
 
         public Builder setKey(String key) {
             config.key = key;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            config.name = name;
             return this;
         }
 

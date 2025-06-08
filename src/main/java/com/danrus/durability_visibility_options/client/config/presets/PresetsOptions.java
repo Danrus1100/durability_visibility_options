@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PresetsOptions {
-    public static List<? extends Option<?>> generate(List<DurabilityConfig> presets, Screen parent) {
+    public static List<? extends Option<?>> generateDefaults(List<DurabilityConfig> presets, Screen parent) {
         return presets.stream()
                 .map(
                         config -> ButtonOption.createBuilder()
