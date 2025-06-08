@@ -14,8 +14,12 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
+import net.minecraft.util.Util;
 
 import java.awt.Color;
+import java.util.Locale;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ModConfig {
     public static final ConfigClassHandler<ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
@@ -83,7 +87,10 @@ public class ModConfig {
     @SerialEntry
     public boolean doRgbBar = false;
 
-    private static DurabilityDemoRenderer mainRenderer = new DurabilityDemoRenderer();
+    @SerialEntry
+    public String presetsName = "";
+
+    public static DurabilityDemoRenderer mainRenderer = new DurabilityDemoRenderer();
 
     public static Screen getConfigScreen(Screen parent) {
         Screen yaclScreen =  YetAnotherConfigLib.createBuilder()
@@ -361,18 +368,7 @@ public class ModConfig {
                         .build())
                 .category(ConfigCategory.createBuilder()
                         .name(Text.translatable("durability_visibility_options.config.presets"))
-//                        .group(OptionGroup.createBuilder()
-//                                .name(Text.translatable("durability_visibility_options.config.presets.create"))
-//                                .option(ButtonOption.createBuilder()
-//                                        .action()
-//                                        .name(Text.translatable("durability_visibility_options.config.presets.create"))
-//                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
-//                                        .build())
-//                                .build())
-                        .group(OptionGroup.createBuilder()
-                                .name(Text.translatable("durability_visibility_options.config.presets.durability"))
-                                .options(PresetsOptions.generateDefaults(ConfigPresets.DEFAULT_CONFIGS, parent))
-                                .build())
+                        .groups(PresetsOptions.generatePresetsGroups(parent))
                         .build())
                 .build()
                 .generateScreen(parent);
@@ -401,7 +397,11 @@ public class ModConfig {
 
         HANDLER.save();
         MinecraftClient.getInstance().setScreen(parent);
-        MinecraftClient.getInstance().getToastManager().add(SystemToast.create(MinecraftClient.getInstance(), SystemToast.Type.PERIODIC_NOTIFICATION, Text.translatable("durability_visibility_options.config.title"), Text.translatable("durability_visibility_options.config.presets.applied")));
+        sendToast(SystemToast.Type.PERIODIC_NOTIFICATION, "durability_visibility_options.config.presets.applied");
+    }
+
+    public static void sendToast(SystemToast.Type type, String description) {
+        MinecraftClient.getInstance().getToastManager().add(SystemToast.create(MinecraftClient.getInstance(), type, Text.translatable("durability_visibility_options.config.title"), Text.translatable(description)));
     }
 
     public static void applyConfig(DurabilityConfig config, Screen parent) {

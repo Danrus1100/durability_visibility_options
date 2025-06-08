@@ -57,13 +57,20 @@
 
 
   "durability_visibility_options.config.presets": "Presets",
-  "durability_visibility_options.config.presets.durability": "Durability",
+  "durability_visibility_options.config.presets.durability": "Default",
+  "durability_visibility_options.config.presets.custom": "Custom",
+  "durability_visibility_options.config.presets.create": "Create",
+  "durability_visibility_options.config.presets.name": "Set a Name",
+  "durability_visibility_options.config.presets.open_folder": "Folder With Custom Presets",
+  "durability_visibility_options.config.presets.open_folder.open": "OPEN",
+
   "durability_visibility_options.config.presets.only_percents": "Only Percents",
   "durability_visibility_options.config.presets.low_durability_alert": "Low Durability Alert",
   "durability_visibility_options.config.presets.uwu": "UwU",
   "durability_visibility_options.config.presets.duraview": "dura-view (from mod by inlitum)",
   "durability_visibility_options.config.presets.vertical_bar_plus_percents": "Vertical Bar + Percents",
 
-  "durability_visibility_options.config.presets.applied": "Preset applied!"
-
+  "durability_visibility_options.config.presets.applied": "Preset applied!",
+  "durability_visibility_options.config.presets.needs_name": "Enter name first to save the config!",
+  "durability_visibility_options.config.presets.custom_added": "Config Saved!"
 }
