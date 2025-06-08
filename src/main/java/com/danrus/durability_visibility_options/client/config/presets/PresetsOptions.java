@@ -74,7 +74,7 @@ public class PresetsOptions {
                                 .description(OptionDescription.createBuilder().customImage(ModConfig.mainRenderer).build())
                                 .build())
                         .option(ButtonOption.createBuilder()
-                                .action((button, context) -> Util.getOperatingSystem().open(ConfigPresets.PRESETS_DIR))
+                                .action((button, context) -> Util.getOperatingSystem().open(ConfigPresets.PRESETS_DIR.toFile()))
                                 .name(Text.translatable("durability_visibility_options.config.presets.open_folder"))
                                 .text(Text.translatable("durability_visibility_options.config.presets.open_folder.open"))
                                 .build())

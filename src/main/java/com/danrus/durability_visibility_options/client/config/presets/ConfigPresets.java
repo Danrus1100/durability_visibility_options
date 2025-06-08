@@ -159,21 +159,6 @@ public class ConfigPresets {
     public static void openPresetsFolderInExplorer() {
         Path presetsDir = getPresetsDirectory();
 
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
-            try {
-                Files.createDirectories(presetsDir);
-                Desktop.getDesktop().open(presetsDir.toFile());
-                System.out.println("Opened presets folder in explorer: " + presetsDir);
-            } catch (IOException e) {
-                System.err.println("Failed to open presets folder in explorer: " + presetsDir + " - " + e.getMessage());
-                e.printStackTrace();
-            } catch (SecurityException e) {
-                System.err.println("Security exception: Not allowed to open presets folder. " + e.getMessage());
-                e.printStackTrace();
-            }
-        } else {
-            System.err.println("Desktop API not supported or OPEN action not supported. Cannot open presets folder directly.");
-            System.out.println("Presets folder path: " + presetsDir.toAbsolutePath());
-        }
+        
     }
 }
