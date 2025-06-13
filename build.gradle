@@ -86,7 +86,7 @@ processResources {
     }
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = stonecutter.eval(stonecutter.current.project, ">=1.20.6") ? 21 : 17
 
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
@@ -113,18 +113,16 @@ loom {
         ideConfigGenerated true // Run configurations are not created for subprojects by default
         runDir "../../run" // Use a shared run folder and create separate worlds
     }
-    accessWidenerPath = project.rootProject.file("src/main/resources/aws/${stonecutter.current.project}.accesswidener")
+//    accessWidenerPath = project.rootProject.file("src/main/resources/aws/${stonecutter.current.project}.accesswidener")
 //    accessWidenerPath = project.rootProject.file("src/main/resources/aws/1.21.4.accesswidener")
 }
 
 java {
     withSourcesJar()
-    def java = stonecutter.eval(stonecutter.current.version, ">=1.20.5") ? JavaVersion.VERSION_21
-            : stonecutter.eval(stonecutter.current.version, ">=1.17") ? JavaVersion.VERSION_17
-            : JavaVersion.VERSION_1_8
-
-    targetCompatibility = java
-    sourceCompatibility = java
+    def javaVersion = stonecutter.eval(stonecutter.current.project, ">=1.20.6") ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17
+    println "JavaVersion: " + javaVersion.toString()
+    targetCompatibility = javaVersion
+    sourceCompatibility = javaVersion
 }
 
 

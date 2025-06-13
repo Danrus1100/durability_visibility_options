@@ -5,7 +5,16 @@ import net.minecraft.item.Items;
 
 public class DemoItems {
     private static DemoItems instance;
-    private final ItemStack[] items = {new ItemStack(Items.ELYTRA), new ItemStack(Items.NETHERITE_PICKAXE)};
+    private final ItemStack[] items = {
+            new ItemStack(Items.ELYTRA),
+            new ItemStack(Items.NETHERITE_PICKAXE),
+            new ItemStack(Items.DIAMOND_HOE),
+            new ItemStack(Items.BOW),
+            new ItemStack(Items.TRIDENT),
+            new ItemStack(Items.BRUSH),
+            new ItemStack(Items.WOODEN_SWORD),
+            new ItemStack(Items.FLINT_AND_STEEL)
+    };
     private ItemStack activeItem = items[0];
     private float tickCounter = 0;
 
@@ -32,11 +41,16 @@ public class DemoItems {
             int newDamage = activeItem.getDamage() + damageAmount;
 
             if (newDamage >= activeItem.getMaxDamage()) {
-                if (activeItem == items[0]) {
-                    activeItem = items[1];
-                } else {
-                    activeItem = items[0];
+                int currentIndex = -1;
+                for (int i = 0; i < items.length; i++) {
+                    if (items[i] == activeItem) {
+                        currentIndex = i;
+                        break;
+                    }
                 }
+
+                int nextIndex = (currentIndex + 1) % items.length;
+                activeItem = items[nextIndex];
 
                 for (ItemStack item : items) {
                     if (item != activeItem) {

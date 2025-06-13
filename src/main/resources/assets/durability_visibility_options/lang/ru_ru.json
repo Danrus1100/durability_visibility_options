@@ -61,8 +61,17 @@
   "durability_visibility_options.config.presets.low_durability_alert": "Уведомление Низкой Прочности",
   "durability_visibility_options.config.presets.uwu": "UwU",
   "durability_visibility_options.config.presets.duraview": "dura-view (из мода от inlitum)",
-
   "durability_visibility_options.config.presets.vertical_bar_plus_percents": "Вертикальная Шкала + Проценты",
-  "durability_visibility_options.config.presets.applied": "Пересет применён!"
+
+  "durability_visibility_options.config.presets.durability": "По Умолчанию",
+  "durability_visibility_options.config.presets.custom": "Пользовательские",
+  "durability_visibility_options.config.presets.create": "Создать",
+  "durability_visibility_options.config.presets.name": "Выставить Имя",
+  "durability_visibility_options.config.presets.open_folder": "Папка с Пользовательскими Пресетами",
+  "durability_visibility_options.config.presets.open_folder.open": "Открыть",
+
+  "durability_visibility_options.config.presets.applied": "Пересет применён!",
+  "durability_visibility_options.config.presets.needs_name": "Сначала введите имя чтобы сохранить!",
+  "durability_visibility_options.config.presets.custom_added": "Конфиг Сохранён!"
 
 }
