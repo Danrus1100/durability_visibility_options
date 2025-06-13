@@ -12,7 +12,7 @@
     "discord": "https://discord.gg/Fkp9Tqmm6F"
   },
   "license": "MIT",
-  "icon": "assets/durability_visibility_options/icon.png",
+  "icon": "assets/durability_visibility_options/dvo_icon_new.png",
   "environment": "client",
   "entrypoints": {
     "client": [
