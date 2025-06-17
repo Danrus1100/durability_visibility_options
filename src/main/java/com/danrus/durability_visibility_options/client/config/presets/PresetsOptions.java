@@ -2,7 +2,7 @@ package com.danrus.durability_visibility_options.client.config.presets;
 
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import com.danrus.durability_visibility_options.client.config.ModConfig;
-import com.danrus.durability_visibility_options.client.config.demo.DurabilityDemoRenderer;
+import com.danrus.durability_visibility_options.client.config.demo.DemoRendererImpl;
 import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
@@ -26,7 +26,7 @@ public class PresetsOptions {
                         config -> ButtonOption.createBuilder()
                                 .action((button, context) -> ModConfig.applyConfig(config, parent))
                                 .name(Text.translatable("durability_visibility_options.config.presets." + config.key))
-                                .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer(config)).build())
+                                .description(OptionDescription.createBuilder().customImage(new DemoRendererImpl(config)).build())
                                 .build()
                 )
                 .collect(Collectors.toList());
@@ -38,7 +38,7 @@ public class PresetsOptions {
                         config -> ButtonOption.createBuilder()
                                 .action((button, context) -> ModConfig.applyConfig(config, parent))
                                 .name(Text.literal(config.name))
-                                .description(OptionDescription.createBuilder().customImage(new DurabilityDemoRenderer(config)).build())
+                                .description(OptionDescription.createBuilder().customImage(new DemoRendererImpl(config)).build())
                                 .build()
                 )
                 .collect(Collectors.toList());

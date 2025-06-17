@@ -59,6 +59,28 @@ public class ConfigPresets {
                     .setDurabilityPercentOffsetX(3)
                     .setDurabilityPercentColor(0x00FF00)
                     .setDurabilityPercentColorMin(0xFF0000)
+                    .build(),
+
+            DurabilityConfig.builder()
+                    .setKey("ultra_accuracy")
+                    .setDurabilityBarOffsetY(12)
+
+                    .setShowDurabilityPercent(true)
+                    .setPercentAccuracy(2)
+                    .setDurabilityPercentOffsetX(3)
+                    .setDurabilityPercentOffsetY(-2)
+                    .setDurabilityPercentScale(0.3F)
+                    .setDurabilityPercentColor(0x0000FF)
+                    .setDurabilityPercentColorMin(0x0000FF)
+
+                    .setShowDurabilityAmount(true)
+                    .setDurabilityAmountOffsetX(-6)
+                    .setDurabilityAmountOffsetY(-2)
+                    .setDurabilityAmountScale(0.3F)
+                    .setDurabilityAmountColor(0xFF00FF)
+                    .setDurabilityAmountColorMin(0xFF00FF)
+
+                    .setDoRgbBar(true)
                     .build()
     );
 

@@ -1,7 +1,11 @@
 package com.danrus.durability_visibility_options.client.config.demo;
 
+import com.danrus.durability_visibility_options.client.DurabilityData;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+
+import java.util.Random;
 
 public class DemoItems {
     private static DemoItems instance;
@@ -29,6 +33,10 @@ public class DemoItems {
 
     public ItemStack getActiveItem() {
         return activeItem;
+    }
+
+    public DurabilityData getData() {
+        return new DurabilityData(activeItem);
     }
 
     public void tick() {
