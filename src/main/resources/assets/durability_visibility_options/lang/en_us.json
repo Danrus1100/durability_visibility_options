@@ -3,6 +3,7 @@
   "durability_visibility_options.tab.general": "General",
   "durability_visibility_options.config.category.bar": "Bar",
   "durability_visibility_options.config.category.percents": "Percents",
+  "durability_visibility_options.config.category.amount": "Amount",
   "durability_visibility_options.config.category.armor_hud": "Armor HUD",
   "durability_visibility_options.config.category.positioning": "Positioning",
   "durability_visibility_options.config.category.layout": "Layout",
@@ -16,6 +17,7 @@
   "durability_visibility_options.config.vertical_offset": "Vertical Offset",
   "durability_visibility_options.config.show_from_percent": "Show From Percents",
   "durability_visibility_options.config.show_percent_symbol": "Show \"%\"",
+  "durability_visibility_options.config.percent_accuracy": "Percents Accuracy",
 
   "durability_visibility_options.config.color_min": "Color Min.",
   "durability_visibility_options.config.color_max": "Color Max.",
@@ -69,6 +71,7 @@
   "durability_visibility_options.config.presets.uwu": "UwU",
   "durability_visibility_options.config.presets.duraview": "dura-view (from mod by inlitum)",
   "durability_visibility_options.config.presets.vertical_bar_plus_percents": "Vertical Bar + Percents",
+  "durability_visibility_options.config.presets.ultra_accuracy": "uLtRa AcCuRaCy (⌐■_■)",
 
   "durability_visibility_options.config.presets.applied": "Preset applied!",
   "durability_visibility_options.config.presets.needs_name": "Enter name first to save the config!",

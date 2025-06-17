@@ -4,6 +4,7 @@
   "durability_visibility_options.config.category.bar": "Шкала",
   "durability_visibility_options.config.category.percents": "Проценты",
   "durability_visibility_options.config.category.armor_hud": "HUD Брони",
+  "durability_visibility_options.config.category.amount": "Количество",
   "durability_visibility_options.config.category.positioning": "Позиционирование",
   "durability_visibility_options.config.category.layout": "Расположение",
   "durability_visibility_options.config.category.behavior": "Поведение",
@@ -16,6 +17,8 @@
   "durability_visibility_options.config.vertical_offset": "Вертикальное Смещение",
   "durability_visibility_options.config.show_from_percent": "Показывать От Процента",
   "durability_visibility_options.config.show_percent_symbol": "Показывать \"%\"",
+  "durability_visibility_options.config.percent_accuracy": "Точность Процентов",
+  "durability_visibility_options.config.presets.ultra_accuracy": "уЛьТрА тОчНоСтЬ (⌐■_■)",
 
   "durability_visibility_options.config.color_min": "Цвет Мин.",
   "durability_visibility_options.config.color_max": "Цвет Макс.",

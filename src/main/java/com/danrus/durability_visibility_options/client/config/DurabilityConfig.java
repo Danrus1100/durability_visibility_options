@@ -10,6 +10,7 @@ public class DurabilityConfig {
     public boolean showDurabilityBarUnderItem = false;
     public boolean showDurabilityBarBackground = true;
     public int showDurabilityBarFromPercent = 99;
+    public float durabilityBarScale = 1.0F;
     public int durabilityBarOffsetX = 0;
     public int durabilityBarOffsetY = 0;
     public int durabilityBarColor = 0x00FF00;
@@ -17,12 +18,22 @@ public class DurabilityConfig {
 
     public boolean showDurabilityPercent = false;
     public boolean showPercentSymbol = true;
+    public int percentAccuracy = 0;
     public int durabilityPercentOffsetX = 0;
     public int durabilityPercentOffsetY = 0;
     public int showDurabilityPercentsFromPercent = 99;
     public float durabilityPercentScale = 0.5f;
     public int durabilityPercentColor = 0xFFFFFF;
     public int durabilityPercentColorMin = 0xFFFFFF;
+
+    public boolean showDurabilityAmount = false;
+    public int durabilityAmountOffsetX = 0;
+    public int durabilityAmountOffsetY = 0;
+    public int showDurabilityAmountsFromPercent = 99;
+    public float durabilityAmountScale = 0.5f;
+    public int durabilityAmountColor = 0xFFFFFF;
+    public int durabilityAmountColorMin = 0xFFFFFF;
+
 
     public boolean doRgbBar = false;
 
@@ -37,18 +48,27 @@ public class DurabilityConfig {
                     .setShowDurabilityBarUnderItem(modConfig.showDurabilityBarUnderItem)
                     .setShowDurabilityBarBackground(modConfig.showDurabilityBarBackground)
                     .setShowDurabilityBarFromPercent(modConfig.showDurabilityBarFromPercent)
+                    .setDurabilityBarScale(modConfig.durabilityBarScale)
                     .setDurabilityBarOffsetX(modConfig.durabilityBarOffsetX)
                     .setDurabilityBarOffsetY(modConfig.durabilityBarOffsetY)
                     .setDurabilityBarColor(modConfig.durabilityBarColor)
                     .setDurabilityBarColorMin(modConfig.durabilityBarColorMin)
                     .setShowDurabilityPercent(modConfig.showDurabilityPercent)
                     .setShowPercentSymbol(modConfig.showPercentSymbol)
+                    .setPercentAccuracy(modConfig.percentAccuracy)
                     .setDurabilityPercentOffsetX(modConfig.durabilityPercentOffsetX)
                     .setDurabilityPercentOffsetY(modConfig.durabilityPercentOffsetY)
                     .setShowDurabilityPercentsFromPercent(modConfig.showDurabilityPercentsFromPercent)
                     .setDurabilityPercentScale(modConfig.durabilityPercentScale)
                     .setDurabilityPercentColor(modConfig.durabilityPercentColor)
                     .setDurabilityPercentColorMin(modConfig.durabilityPercentColorMin)
+                    .setShowDurabilityAmount(modConfig.showDurabilityAmount)
+                    .setDurabilityAmountOffsetX(modConfig.durabilityAmountOffsetX)
+                    .setDurabilityAmountOffsetY(modConfig.durabilityAmountOffsetY)
+                    .setShowDurabilityAmountsFromPercent(modConfig.showDurabilityAmountsFromPercent)
+                    .setDurabilityAmountScale(modConfig.durabilityAmountScale)
+                    .setDurabilityAmountColor(modConfig.durabilityAmountColor)
+                    .setDurabilityAmountColorMin(modConfig.durabilityAmountColorMin)
                     .setDoRgbBar(modConfig.doRgbBar);
         }
 
@@ -87,6 +107,11 @@ public class DurabilityConfig {
             return this;
         }
 
+        public Builder setDurabilityBarScale(float value){
+            config.durabilityBarScale = value;
+            return this;
+        }
+
         public Builder setDurabilityBarOffsetX(int value) {
             config.durabilityBarOffsetX = value;
             return this;
@@ -117,6 +142,11 @@ public class DurabilityConfig {
             return this;
         }
 
+        public Builder setPercentAccuracy(int value) {
+            config.percentAccuracy = value;
+            return this;
+        }
+
         public Builder setDurabilityPercentOffsetX(int value) {
             config.durabilityPercentOffsetX = value;
             return this;
@@ -144,6 +174,41 @@ public class DurabilityConfig {
 
         public Builder setDurabilityPercentColorMin(int value) {
             config.durabilityPercentColorMin = value;
+            return this;
+        }
+
+        public Builder setShowDurabilityAmount(boolean value) {
+            config.showDurabilityAmount = value;
+            return this;
+        }
+
+        public Builder setDurabilityAmountOffsetX(int value) {
+            config.durabilityAmountOffsetX = value;
+            return this;
+        }
+
+        public Builder setDurabilityAmountOffsetY(int value) {
+            config.durabilityAmountOffsetY = value;
+            return this;
+        }
+
+        public Builder setShowDurabilityAmountsFromPercent(int value) {
+            config.showDurabilityAmountsFromPercent = value;
+            return this;
+        }
+
+        public Builder setDurabilityAmountScale(float value) {
+            config.durabilityAmountScale = value;
+            return this;
+        }
+
+        public Builder setDurabilityAmountColor(int value) {
+            config.durabilityAmountColor = value;
+            return this;
+        }
+
+        public Builder setDurabilityAmountColorMin(int value) {
+            config.durabilityAmountColorMin = value;
             return this;
         }
 
