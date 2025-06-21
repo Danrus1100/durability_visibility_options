@@ -1,1 +1,1 @@
- - Items preview in mod config
+ - 1.21.5- Fix

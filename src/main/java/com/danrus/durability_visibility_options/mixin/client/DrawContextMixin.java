@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //? if <1.21.6 {
 import net.minecraft.client.render.RenderLayer;
-//?}hot
+//?}
 
 @Mixin(DrawContext.class)
 public abstract class DrawContextMixin {
