@@ -5,30 +5,32 @@ public class DurabilityConfig {
     public String key;
     public String name;
 
+    public float zLayer = 200.0F;
+
     public boolean showDurability = true;
     public boolean isVertical = false;
     public boolean showDurabilityBarUnderItem = false;
     public boolean showDurabilityBarBackground = true;
     public int showDurabilityBarFromPercent = 99;
     public float durabilityBarScale = 1.0F;
-    public int durabilityBarOffsetX = 0;
-    public int durabilityBarOffsetY = 0;
+    public float durabilityBarOffsetX = 0;
+    public float durabilityBarOffsetY = 0;
     public int durabilityBarColor = 0x00FF00;
     public int durabilityBarColorMin = 0xFF0000;
 
     public boolean showDurabilityPercent = false;
     public boolean showPercentSymbol = true;
     public int percentAccuracy = 0;
-    public int durabilityPercentOffsetX = 0;
-    public int durabilityPercentOffsetY = 0;
+    public float durabilityPercentOffsetX = 0;
+    public float durabilityPercentOffsetY = 0;
     public int showDurabilityPercentsFromPercent = 99;
     public float durabilityPercentScale = 0.5f;
     public int durabilityPercentColor = 0xFFFFFF;
     public int durabilityPercentColorMin = 0xFFFFFF;
 
     public boolean showDurabilityAmount = false;
-    public int durabilityAmountOffsetX = 0;
-    public int durabilityAmountOffsetY = 0;
+    public float durabilityAmountOffsetX = 0;
+    public float durabilityAmountOffsetY = 0;
     public int showDurabilityAmountsFromPercent = 99;
     public float durabilityAmountScale = 0.5f;
     public int durabilityAmountColor = 0xFFFFFF;
@@ -82,6 +84,11 @@ public class DurabilityConfig {
             return this;
         }
 
+        public Builder setZLayer(float zLayer) {
+            config.zLayer = zLayer;
+            return this;
+        }
+
         public Builder setShowDurability(boolean value) {
             config.showDurability = value;
             return this;
@@ -112,12 +119,12 @@ public class DurabilityConfig {
             return this;
         }
 
-        public Builder setDurabilityBarOffsetX(int value) {
+        public Builder setDurabilityBarOffsetX(float value) {
             config.durabilityBarOffsetX = value;
             return this;
         }
 
-        public Builder setDurabilityBarOffsetY(int value) {
+        public Builder setDurabilityBarOffsetY(float value) {
             config.durabilityBarOffsetY = value;
             return this;
         }
@@ -147,12 +154,12 @@ public class DurabilityConfig {
             return this;
         }
 
-        public Builder setDurabilityPercentOffsetX(int value) {
+        public Builder setDurabilityPercentOffsetX(float value) {
             config.durabilityPercentOffsetX = value;
             return this;
         }
 
-        public Builder setDurabilityPercentOffsetY(int value) {
+        public Builder setDurabilityPercentOffsetY(float value) {
             config.durabilityPercentOffsetY = value;
             return this;
         }
@@ -182,12 +189,12 @@ public class DurabilityConfig {
             return this;
         }
 
-        public Builder setDurabilityAmountOffsetX(int value) {
+        public Builder setDurabilityAmountOffsetX(float value) {
             config.durabilityAmountOffsetX = value;
             return this;
         }
 
-        public Builder setDurabilityAmountOffsetY(int value) {
+        public Builder setDurabilityAmountOffsetY(float value) {
             config.durabilityAmountOffsetY = value;
             return this;
         }

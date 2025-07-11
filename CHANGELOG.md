@@ -1,1 +1,2 @@
- - 1.21.5- Fix
+ - Now Vertial and Horizontal offsets are float
+ - Tooltips fix https://github.com/Danrus1100/durability_visibility_options/issues/14

@@ -158,14 +158,12 @@ publishing {
 publishMods {
     def modrinthToken = providers.gradleProperty("MODRINTH_API_TOKEN").orNull
     def curseforgeToken = providers.gradleProperty("CURSEFORGE_API_TOKEN").orNull
+
     def discordWebHook = providers.gradleProperty("DISCORD_WEBHOOK").orNull
     def dryDiscordWebHook = providers.gradleProperty("DISCORD_WEBHOOK_DRY").orNull
 
     def start_ver = property("mod.mc_start")
     def end_ver = property("mod.mc_end")
-
-    MODRINTH_API_TOKEN = modrinthToken
-    CURSEFORGE_API_TOKEN = curseforgeToken
 
     file = remapJar.archiveFile
     additionalFiles.from(remapSourcesJar.archiveFile)

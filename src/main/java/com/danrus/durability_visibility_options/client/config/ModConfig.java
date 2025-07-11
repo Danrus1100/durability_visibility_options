@@ -25,6 +25,9 @@ public class ModConfig {
                     .build())
             .build();
 
+    @SerialEntry
+    public float zLayer = 200.0F;
+
     // Durability Bar
     @SerialEntry(comment = "Enable durability bar display")
     public boolean showDurability = true;
@@ -45,10 +48,10 @@ public class ModConfig {
     public float durabilityBarScale = 1.0F;
 
     @SerialEntry
-    public int durabilityBarOffsetX = 0;
+    public float durabilityBarOffsetX = 0;
 
     @SerialEntry
-    public int durabilityBarOffsetY = 0;
+    public float durabilityBarOffsetY = 0;
 
     @SerialEntry(comment = "Durability bar color at maximum durability (RGB)")
     public int durabilityBarColor = 0x00FF00;
@@ -68,10 +71,10 @@ public class ModConfig {
     public int percentAccuracy = 0;
 
     @SerialEntry
-    public int durabilityPercentOffsetX = 0;
+    public float durabilityPercentOffsetX = 0;
 
     @SerialEntry
-    public int durabilityPercentOffsetY = 0;
+    public float durabilityPercentOffsetY = 0;
 
     @SerialEntry
     public int showDurabilityPercentsFromPercent = 99;
@@ -91,10 +94,10 @@ public class ModConfig {
     public boolean showDurabilityAmount = false;
 
     @SerialEntry
-    public int durabilityAmountOffsetX = 0;
+    public float durabilityAmountOffsetX = 0;
 
     @SerialEntry
-    public int durabilityAmountOffsetY = 0;
+    public float durabilityAmountOffsetY = 0;
 
     @SerialEntry
     public int showDurabilityAmountsFromPercent = 99;
@@ -152,20 +155,6 @@ public class ModConfig {
                                         }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
-//                                .option(Option.createBuilder(boolean.class)
-//                                        .name(Text.translatable("durability_visibility_options.config.show_under_item"))
-//                                        .binding(
-//                                                false,
-//                                                () -> HANDLER.instance().showDurabilityBarUnderItem,
-//                                                value -> HANDLER.instance().showDurabilityBarUnderItem = value
-//                                        )
-//                                        .controller(TickBoxControllerBuilder::create)
-//                                        .addListener(((option, event) -> {
-//                                            ModConfig.get().showDurabilityBarUnderItem = option.pendingValue();
-//                                            HANDLER.save();
-//                                        }))
-//                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
-//                                        .build())
                                 .option(Option.createBuilder(boolean.class)
                                         .name(Text.translatable("durability_visibility_options.config.show_bar_background"))
                                         .binding(
@@ -210,28 +199,28 @@ public class ModConfig {
                                         }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
-                                .option(Option.createBuilder(int.class)
+                                .option(Option.createBuilder(float.class)
                                         .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
                                         .binding(
-                                                0,
+                                                0F,
                                                 () -> HANDLER.instance().durabilityBarOffsetX,
                                                 value -> HANDLER.instance().durabilityBarOffsetX = value
                                         )
-                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .controller(FloatFieldControllerBuilder::create)
                                         .addListener(((option, event) -> {
                                             ModConfig.get().durabilityBarOffsetX = option.pendingValue();
                                             HANDLER.save();
                                         }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
-                                .option(Option.createBuilder(int.class)
+                                .option(Option.createBuilder(float.class)
                                         .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
                                         .binding(
-                                                0,
+                                                0F,
                                                 () -> HANDLER.instance().durabilityBarOffsetY,
                                                 value -> HANDLER.instance().durabilityBarOffsetY = value
                                         )
-                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .controller(FloatFieldControllerBuilder::create)
                                         .addListener(((option, event) -> {
                                             ModConfig.get().durabilityBarOffsetY = option.pendingValue();
                                             HANDLER.save();
@@ -314,28 +303,28 @@ public class ModConfig {
                                         }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
-                                .option(Option.createBuilder(int.class)
+                                .option(Option.createBuilder(float.class)
                                         .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
                                         .binding(
-                                                0,
+                                                0F,
                                                 () -> HANDLER.instance().durabilityPercentOffsetX,
                                                 value -> HANDLER.instance().durabilityPercentOffsetX = value
                                         )
-                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .controller(FloatFieldControllerBuilder::create)
                                         .addListener(((option, event) -> {
                                             ModConfig.get().durabilityPercentOffsetX = option.pendingValue();
                                             HANDLER.save();
                                         }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
-                                .option(Option.createBuilder(int.class)
+                                .option(Option.createBuilder(float.class)
                                         .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
                                         .binding(
-                                                0,
+                                                0F,
                                                 () -> HANDLER.instance().durabilityPercentOffsetY,
                                                 value -> HANDLER.instance().durabilityPercentOffsetY = value
                                         )
-                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .controller(FloatFieldControllerBuilder::create)
                                         .addListener(((option, event) -> {
                                             ModConfig.get().durabilityPercentOffsetY = option.pendingValue();
                                             HANDLER.save();
@@ -421,14 +410,14 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
 
-                                .option(Option.createBuilder(int.class)
+                                .option(Option.createBuilder(float.class)
                                         .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
                                         .binding(
-                                                0,
+                                                0F,
                                                 () -> HANDLER.instance().durabilityAmountOffsetX,
                                                 value -> HANDLER.instance().durabilityAmountOffsetX = value
                                         )
-                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .controller(FloatFieldControllerBuilder::create)
                                         .addListener((option, event) -> {
                                             ModConfig.get().durabilityAmountOffsetX = option.pendingValue();
                                             HANDLER.save();
@@ -436,14 +425,14 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
 
-                                .option(Option.createBuilder(int.class)
+                                .option(Option.createBuilder(float.class)
                                         .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
                                         .binding(
-                                                0,
+                                                0F,
                                                 () -> HANDLER.instance().durabilityAmountOffsetY,
                                                 value -> HANDLER.instance().durabilityAmountOffsetY = value
                                         )
-                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .controller(FloatFieldControllerBuilder::create)
                                         .addListener((option, event) -> {
                                             ModConfig.get().durabilityAmountOffsetY = option.pendingValue();
                                             HANDLER.save();
@@ -529,6 +518,22 @@ public class ModConfig {
                                         }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
+                                .option(
+                                        Option.createBuilder(float.class)
+                                                .name(Text.translatable("durability_visibility_options.config.z_layer"))
+                                                .binding(
+                                                        1f,
+                                                        () -> HANDLER.instance().zLayer,
+                                                        value -> HANDLER.instance().zLayer = value
+                                                )
+                                                .controller(FloatFieldControllerBuilder::create)
+                                                .addListener(((option, event) -> {
+                                                    ModConfig.get().zLayer = option.pendingValue();
+                                                    HANDLER.save();
+                                                }))
+                                                .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
+                                                .build()
+                                )
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
@@ -541,6 +546,8 @@ public class ModConfig {
     }
 
     public void applyFrom(DurabilityConfig config, Screen parent) {
+        ModConfig.get().zLayer = config.zLayer;
+
         ModConfig.get().showDurability = config.showDurability;
         ModConfig.get().isVertical = config.isVertical;
         ModConfig.get().showDurabilityBarUnderItem = config.showDurabilityBarUnderItem;

@@ -17,12 +17,12 @@ public class DurabilityRender {
         renderBar(drawContext, data, x, y, DurabilityConfig.fromModConfig());
     }
 
-    public static void renderBar(DrawContext drawContext, DurabilityData data, int x, int y, DurabilityConfig config) {
+    public static void renderBar(DrawContext drawContext, DurabilityData data, float x, float y, DurabilityConfig config) {
         if (config.showDurabilityBarFromPercent <= data.getPercentsInt()) {
             return;
         }
-        int targetX = x + 2;
-        int targetY = y + 13;
+        float targetX = x + 2;
+        float targetY = y + 13;
 
         if (config.isVertical) {
             targetX += config.durabilityBarOffsetX - 2;

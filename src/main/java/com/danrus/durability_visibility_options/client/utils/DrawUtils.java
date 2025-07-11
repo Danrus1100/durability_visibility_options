@@ -2,6 +2,7 @@ package com.danrus.durability_visibility_options.client.utils;
 
 import com.danrus.durability_visibility_options.client.DurabilityData;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
+import com.danrus.durability_visibility_options.client.config.ModConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
@@ -89,11 +90,11 @@ public class DrawUtils {
         }
     }
 
-    public static void drawGradientBar(DrawContext context, int startX, int startY, int itemBarStep){
-        drawGradientBar(context, DurabilityConfig.builder().fromModConfig().build(), startX, startY, itemBarStep) ;
+    public static void drawGradientBar(DrawContext context, int itemBarStep){
+        drawGradientBar(context, DurabilityConfig.builder().fromModConfig().build(), itemBarStep) ;
     }
 
-    public static void drawGradientBar(DrawContext context, DurabilityConfig config, int startX, int startY, int itemBarStep) {
+    public static void drawGradientBar(DrawContext context, DurabilityConfig config, int itemBarStep) {
         if (config.isVertical) {
             if (config.showDurabilityBarBackground) {fill(context, 0, 0, 2, 13, -16777216);}
             drawGradientVerticalBar(context, itemBarStep);
@@ -103,9 +104,9 @@ public class DrawUtils {
         }
     }
 
-    public static void drawBar(DrawContext context, DurabilityConfig config, DurabilityData data, int startX, int startY){
+    public static void drawBar(DrawContext context, DurabilityConfig config, DurabilityData data, float startX, float startY){
         if (config.doRgbBar){
-            drawGradientBar(context, config, startX, startY, data.barStep);
+            drawGradientBar(context, config, data.barStep);
             return;
         }
 
@@ -118,7 +119,7 @@ public class DrawUtils {
         }
     }
 
-    public static void drawTextInfo(DrawContext drawContext, DurabilityConfig config, int color, String text, int x, int y, float scale) {
+    public static void drawTextInfo(DrawContext drawContext, DurabilityConfig config, int color, String text, float x, float y, float scale) {
         DrawUtils.pushMatrix(drawContext);
 
         float targetX = x + 9;
@@ -170,7 +171,7 @@ public class DrawUtils {
         //? if >1.21.5 {
         /*context.getMatrices().translate(x, y);
          *///?} else {
-        context.getMatrices().translate(x, y, 200.0F);
+        context.getMatrices().translate(x, y, ModConfig.get().zLayer);
         //?}
     }
 
@@ -190,7 +191,7 @@ public class DrawUtils {
         //? if >1.21.5 {
         /*context.fill(x, y, x+width, y+height, color);
          *///?} else {
-        context.fill(RenderLayer.getGui(), x, y, x + width, y + height, 200, color);
+        context.fill(RenderLayer.getGui(), x, y, x + width, y + height, 0, color);
         //?}
 
     }
