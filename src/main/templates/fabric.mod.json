@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_author}"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/durability_visibility_options",
+    "sources": "https://github.com/Danrus1100/durability_visibility_options",
+    "issues": "https://github.com/Danrus1100/durability_visibility_options/issues",
+    "discord": "https://discord.gg/Fkp9Tqmm6F"
+  },
+  "license": "MIT",
+  "icon": "assets/dvo/dvo_icon_new.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.danrus.dvo.DurabilityVisibilityOptions"
+    ],
+    "modmenu": [
+      "com.danrus.dvo.config.ModMenuIntegration"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.17",
+    "minecraft": "${mcdep}"
+  }
+}
