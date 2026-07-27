@@ -13,9 +13,8 @@ public class DurabilityData {
         this.barStep = stack.getItemBarStep();
         this.durability = stack.getMaxDamage() - stack.getDamage();
         this.maxDurability = stack.getMaxDamage();
-        this.percents = 100F - ((float)(maxDurability - durability) / maxDurability) * 100;
+        this.percents = 100F * (float)durability / maxDurability;
     }
-
 
     public String getPercentString(DurabilityConfig config) {
         String result = String.format("%." + config.percentAccuracy + "f", this.percents);
