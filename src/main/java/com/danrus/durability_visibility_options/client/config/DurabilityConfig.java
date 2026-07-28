@@ -1,6 +1,31 @@
 package com.danrus.durability_visibility_options.client.config;
 
+import dev.isxander.yacl3.api.NameableEnum;
+import net.minecraft.text.Text;
+
 public class DurabilityConfig {
+    public static enum DisplayStyle implements NameableEnum {
+        ALWAYS,
+        IF_DAMAGED,
+        FROM_PERCENT;
+
+        static DisplayStyle getDefault() {
+            return FROM_PERCENT;
+        }
+
+        static DisplayStyle valueOfOrDefault(String value) {
+            try {
+                return DisplayStyle.valueOf(value);
+            } catch (IllegalArgumentException ignored) {
+                return DisplayStyle.getDefault();
+            }
+        }
+
+        @Override
+        public Text getDisplayName() {
+            return Text.translatable("durability_visibility_options.config.display_style." + name().toLowerCase());
+        }
+    };
 
     public String key;
     public String name;
@@ -9,6 +34,7 @@ public class DurabilityConfig {
     public boolean isVertical = false;
     public boolean showDurabilityBarUnderItem = false;
     public boolean showDurabilityBarBackground = true;
+    public DisplayStyle durabilityBarDisplayStyle = DisplayStyle.getDefault();
     public int showDurabilityBarFromPercent = 99;
     public float durabilityBarScale = 1.0F;
     public int durabilityBarOffsetX = 0;
@@ -21,6 +47,7 @@ public class DurabilityConfig {
     public int percentAccuracy = 0;
     public int durabilityPercentOffsetX = 0;
     public int durabilityPercentOffsetY = 0;
+    public DisplayStyle durabilityPercentDisplayStyle = DisplayStyle.getDefault();
     public int showDurabilityPercentsFromPercent = 99;
     public float durabilityPercentScale = 0.5f;
     public int durabilityPercentColor = 0xFFFFFF;
@@ -29,6 +56,7 @@ public class DurabilityConfig {
     public boolean showDurabilityAmount = false;
     public int durabilityAmountOffsetX = 0;
     public int durabilityAmountOffsetY = 0;
+    public DisplayStyle durabilityAmountDisplayStyle = DisplayStyle.getDefault();
     public int showDurabilityAmountsFromPercent = 99;
     public float durabilityAmountScale = 0.5f;
     public int durabilityAmountColor = 0xFFFFFF;
@@ -48,23 +76,28 @@ public class DurabilityConfig {
                     .setShowDurabilityBarUnderItem(modConfig.showDurabilityBarUnderItem)
                     .setShowDurabilityBarBackground(modConfig.showDurabilityBarBackground)
                     .setShowDurabilityBarFromPercent(modConfig.showDurabilityBarFromPercent)
+                    .setDurabilityBarDisplayStyle(modConfig.durabilityBarDisplayStyle)
                     .setDurabilityBarScale(modConfig.durabilityBarScale)
                     .setDurabilityBarOffsetX(modConfig.durabilityBarOffsetX)
                     .setDurabilityBarOffsetY(modConfig.durabilityBarOffsetY)
                     .setDurabilityBarColor(modConfig.durabilityBarColor)
                     .setDurabilityBarColorMin(modConfig.durabilityBarColorMin)
+
                     .setShowDurabilityPercent(modConfig.showDurabilityPercent)
                     .setShowPercentSymbol(modConfig.showPercentSymbol)
                     .setPercentAccuracy(modConfig.percentAccuracy)
                     .setDurabilityPercentOffsetX(modConfig.durabilityPercentOffsetX)
                     .setDurabilityPercentOffsetY(modConfig.durabilityPercentOffsetY)
+                    .setDurabilityPercentDisplayStyle(modConfig.durabilityPercentDisplayStyle)
                     .setShowDurabilityPercentsFromPercent(modConfig.showDurabilityPercentsFromPercent)
                     .setDurabilityPercentScale(modConfig.durabilityPercentScale)
                     .setDurabilityPercentColor(modConfig.durabilityPercentColor)
                     .setDurabilityPercentColorMin(modConfig.durabilityPercentColorMin)
+
                     .setShowDurabilityAmount(modConfig.showDurabilityAmount)
                     .setDurabilityAmountOffsetX(modConfig.durabilityAmountOffsetX)
                     .setDurabilityAmountOffsetY(modConfig.durabilityAmountOffsetY)
+                    .setDurabilityAmountDisplayStyle(modConfig.durabilityAmountDisplayStyle)
                     .setShowDurabilityAmountsFromPercent(modConfig.showDurabilityAmountsFromPercent)
                     .setDurabilityAmountScale(modConfig.durabilityAmountScale)
                     .setDurabilityAmountColor(modConfig.durabilityAmountColor)
@@ -99,6 +132,11 @@ public class DurabilityConfig {
 
         public Builder setShowDurabilityBarBackground(boolean value) {
             config.showDurabilityBarBackground = value;
+            return this;
+        }
+
+        public Builder setDurabilityBarDisplayStyle(DisplayStyle value) {
+            config.durabilityBarDisplayStyle = value;
             return this;
         }
 
@@ -157,6 +195,11 @@ public class DurabilityConfig {
             return this;
         }
 
+        public Builder setDurabilityPercentDisplayStyle(DisplayStyle value) {
+            config.durabilityPercentDisplayStyle = value;
+            return this;
+        }
+
         public Builder setShowDurabilityPercentsFromPercent(int value) {
             config.showDurabilityPercentsFromPercent = value;
             return this;
@@ -189,6 +232,11 @@ public class DurabilityConfig {
 
         public Builder setDurabilityAmountOffsetY(int value) {
             config.durabilityAmountOffsetY = value;
+            return this;
+        }
+
+        public Builder setDurabilityAmountDisplayStyle(DisplayStyle value) {
+            config.durabilityAmountDisplayStyle = value;
             return this;
         }
 

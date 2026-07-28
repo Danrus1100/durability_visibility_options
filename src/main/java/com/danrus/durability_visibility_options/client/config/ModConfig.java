@@ -1,5 +1,6 @@
 package com.danrus.durability_visibility_options.client.config;
 
+import com.danrus.durability_visibility_options.client.config.DurabilityConfig.DisplayStyle;
 import com.danrus.durability_visibility_options.client.config.demo.DemoRendererImpl;
 import com.danrus.durability_visibility_options.client.config.presets.PresetsOptions;
 import com.google.gson.GsonBuilder;
@@ -38,6 +39,9 @@ public class ModConfig {
     @SerialEntry
     public boolean showDurabilityBarBackground = true;
 
+    @SerialEntry
+    public DisplayStyle durabilityBarDisplayStyle = DisplayStyle.getDefault();
+
     @SerialEntry(comment = "Show durability bar when durability is below this percentage")
     public int showDurabilityBarFromPercent = 99;
 
@@ -73,6 +77,10 @@ public class ModConfig {
     @SerialEntry
     public int durabilityPercentOffsetY = 0;
 
+
+    @SerialEntry
+    public DisplayStyle durabilityPercentDisplayStyle = DisplayStyle.getDefault();
+
     @SerialEntry
     public int showDurabilityPercentsFromPercent = 99;
 
@@ -95,6 +103,9 @@ public class ModConfig {
 
     @SerialEntry
     public int durabilityAmountOffsetY = 0;
+
+    @SerialEntry
+    public DisplayStyle durabilityAmountDisplayStyle = DisplayStyle.getDefault();
 
     @SerialEntry
     public int showDurabilityAmountsFromPercent = 99;
@@ -180,6 +191,21 @@ public class ModConfig {
                                         }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
+                                .option(Option.createBuilder(DisplayStyle.class)
+                                        .name(Text.translatable("durability_visibility_options.config.display_style"))
+                                        .binding(
+                                                DisplayStyle.getDefault(),
+                                                () -> HANDLER.instance().durabilityBarDisplayStyle,
+                                                value -> HANDLER.instance().durabilityBarDisplayStyle = value
+                                        )
+                                        .controller(opt -> EnumControllerBuilder.create(opt)
+                                                .enumClass(DisplayStyle.class))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityBarDisplayStyle = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
+                                        .build())
                                 .option(Option.createBuilder(int.class)
                                         .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
                                         .binding(
@@ -188,7 +214,7 @@ public class ModConfig {
                                                 value -> HANDLER.instance().showDurabilityBarFromPercent = value
                                         )
                                         .controller(opt -> IntegerSliderControllerBuilder.create(opt)
-                                                .range(0, 99)
+                                                .range(0, 100)
                                                 .step(1))
                                         .addListener(((option, event) -> {
                                             ModConfig.get().showDurabilityBarFromPercent = option.pendingValue();
@@ -342,6 +368,21 @@ public class ModConfig {
                                         }))
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
+                                .option(Option.createBuilder(DisplayStyle.class)
+                                        .name(Text.translatable("durability_visibility_options.config.display_style"))
+                                        .binding(
+                                                DisplayStyle.getDefault(),
+                                                () -> HANDLER.instance().durabilityPercentDisplayStyle,
+                                                value -> HANDLER.instance().durabilityPercentDisplayStyle = value
+                                        )
+                                        .controller(opt -> EnumControllerBuilder.create(opt)
+                                                .enumClass(DisplayStyle.class))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityPercentDisplayStyle = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
+                                        .build())
                                 .option(Option.createBuilder(int.class)
                                         .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
                                         .binding(
@@ -450,7 +491,21 @@ public class ModConfig {
                                         })
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
-
+                                .option(Option.createBuilder(DisplayStyle.class)
+                                        .name(Text.translatable("durability_visibility_options.config.display_style"))
+                                        .binding(
+                                                DisplayStyle.getDefault(),
+                                                () -> HANDLER.instance().durabilityAmountDisplayStyle,
+                                                value -> HANDLER.instance().durabilityAmountDisplayStyle = value
+                                        )
+                                        .controller(opt -> EnumControllerBuilder.create(opt)
+                                                .enumClass(DisplayStyle.class))
+                                        .addListener(((option, event) -> {
+                                            ModConfig.get().durabilityAmountDisplayStyle = option.pendingValue();
+                                            HANDLER.save();
+                                        }))
+                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
+                                        .build())
                                 .option(Option.createBuilder(int.class)
                                         .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
                                         .binding(
@@ -546,6 +601,7 @@ public class ModConfig {
         ModConfig.get().showDurabilityBarUnderItem = config.showDurabilityBarUnderItem;
         ModConfig.get().showDurabilityBarBackground = config.showDurabilityBarBackground;
         ModConfig.get().showDurabilityBarFromPercent = config.showDurabilityBarFromPercent;
+        ModConfig.get().durabilityBarDisplayStyle = config.durabilityBarDisplayStyle;
         ModConfig.get().durabilityBarScale = config.durabilityBarScale;
         ModConfig.get().durabilityBarOffsetX = config.durabilityBarOffsetX;
         ModConfig.get().durabilityBarOffsetY = config.durabilityBarOffsetY;
@@ -557,6 +613,7 @@ public class ModConfig {
         ModConfig.get().durabilityPercentScale = config.durabilityPercentScale;
         ModConfig.get().durabilityPercentOffsetX = config.durabilityPercentOffsetX;
         ModConfig.get().durabilityPercentOffsetY = config.durabilityPercentOffsetY;
+        ModConfig.get().durabilityPercentDisplayStyle = config.durabilityPercentDisplayStyle;
         ModConfig.get().showDurabilityPercentsFromPercent = config.showDurabilityPercentsFromPercent;
         ModConfig.get().durabilityPercentColor = config.durabilityPercentColor;
         ModConfig.get().durabilityPercentColorMin = config.durabilityPercentColorMin;
@@ -564,6 +621,7 @@ public class ModConfig {
         ModConfig.get().showDurabilityAmount = config.showDurabilityAmount;
         ModConfig.get().durabilityAmountOffsetX = config.durabilityAmountOffsetX;
         ModConfig.get().durabilityAmountOffsetY = config.durabilityAmountOffsetY;
+        ModConfig.get().durabilityAmountDisplayStyle = config.durabilityAmountDisplayStyle;
         ModConfig.get().showDurabilityAmountsFromPercent = config.showDurabilityAmountsFromPercent;
         ModConfig.get().durabilityAmountScale = config.durabilityAmountScale;
         ModConfig.get().durabilityAmountColor = config.durabilityAmountColor;
