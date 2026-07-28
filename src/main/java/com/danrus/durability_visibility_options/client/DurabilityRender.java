@@ -1,6 +1,7 @@
 package com.danrus.durability_visibility_options.client;
 
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
+import com.danrus.durability_visibility_options.client.config.DurabilityConfig.DisplayStyle;
 import com.danrus.durability_visibility_options.client.utils.DrawUtils;
 
 import net.minecraft.client.gui.DrawContext;
@@ -18,7 +19,7 @@ public class DurabilityRender {
     }
 
     public static void renderBar(DrawContext drawContext, DurabilityData data, int x, int y, DurabilityConfig config) {
-        if (config.showDurabilityBarFromPercent < data.getPercentsInt()) {
+        if (!shouldDraw(config.durabilityBarDisplayStyle, data, config.showDurabilityBarFromPercent)) {
             return;
         }
 
@@ -52,7 +53,7 @@ public class DurabilityRender {
     }
 
     public static void renderPercents(DrawContext drawContext, DurabilityData data, int x, int y, DurabilityConfig config) {
-        if (config.showDurabilityBarFromPercent < data.getPercentsInt()) {
+        if (!shouldDraw(config.durabilityPercentDisplayStyle, data, config.showDurabilityPercentsFromPercent)) {
             return;
         }
 
@@ -61,11 +62,24 @@ public class DurabilityRender {
     }
 
     public static void renderAmount(DrawContext drawContext, DurabilityData data, int x, int y, DurabilityConfig config) {
-        if (config.showDurabilityBarFromPercent < data.getPercentsInt()) {
+        if (!shouldDraw(config.durabilityAmountDisplayStyle, data, config.showDurabilityAmountsFromPercent)) {
             return;
         }
 
         int color = DrawUtils.interpolateColorHSV(config.durabilityAmountColorMin, config.durabilityAmountColor, data.getPercentsInt());
         DrawUtils.drawTextInfo(drawContext, config, color, String.valueOf(data.durability), x + config.durabilityAmountOffsetX, y - config.durabilityAmountOffsetY, config.durabilityAmountScale);
+    }
+
+    private static boolean shouldDraw(
+        DisplayStyle style,
+        DurabilityData data,
+        int percentThreshold
+    ) {
+        return switch (style) {
+            case ALWAYS -> true;
+            case IF_DAMAGED -> data.isDamaged;
+            case FROM_PERCENT -> data.getPercentsInt() <= percentThreshold;
+            default -> throw new IllegalStateException(String.format("Unknown display style '%s'", style.name()));
+        };
     }
 }

@@ -7,12 +7,14 @@ public class DurabilityData {
     public int barStep;
     public int maxDurability;
     public int durability;
+    public boolean isDamaged;
     private float percents;
 
     public DurabilityData(ItemStack stack) {
         this.barStep = stack.getItemBarStep();
         this.durability = stack.getMaxDamage() - stack.getDamage();
         this.maxDurability = stack.getMaxDamage();
+        this.isDamaged = stack.isDamaged();
         this.percents = 100F * (float)durability / maxDurability;
     }
 

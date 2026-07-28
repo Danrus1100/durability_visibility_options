@@ -52,17 +52,20 @@ public abstract class DrawContextMixin {
     //?}
     private void drawItemInSlotMixin(TextRenderer textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
         DrawContext thisObject = (DrawContext) (Object) this;
-        if (stack.isDamaged() && ModConfig.get().showDurability) {
-            DurabilityRender.renderBar(thisObject, stack, x, y);
+        if (stack.isDamageable()) {
+            if (ModConfig.get().showDurability) {
+                DurabilityRender.renderBar(thisObject, stack, x, y);
+            }
+
+            if (ModConfig.get().showDurabilityPercent) {
+                DurabilityRender.renderPercents(thisObject, stack, x, y);
+            }
+
+            if (ModConfig.get().showDurabilityAmount) {
+                DurabilityRender.renderAmount(thisObject, new DurabilityData(stack), x, y, DurabilityConfig.fromModConfig());
+            }
         }
 
-        if (stack.isDamaged() &&  ModConfig.get().showDurabilityPercent ) {
-            DurabilityRender.renderPercents(thisObject, stack, x, y);
-        }
-
-        if (stack.isDamaged() && ModConfig.get().showDurabilityAmount) {
-            DurabilityRender.renderAmount(thisObject, new DurabilityData(stack), x, y, DurabilityConfig.fromModConfig());
-        }
         //? if <=1.21.1 {
         ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
         //? if >1.20.6 {
