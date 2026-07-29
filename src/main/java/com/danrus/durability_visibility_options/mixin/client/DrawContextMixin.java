@@ -24,7 +24,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(DrawContext.class)
 public abstract class DrawContextMixin {
 
-    @Shadow public abstract void drawText(TextRenderer par1, Text par2, int par3, int par4, int par5, boolean par6);
+    //? if >=1.21.6 {
+    /*@Shadow public abstract void drawText(TextRenderer par1, Text par2, int par3, int par4, int par5, boolean par6);
+    *///?} else {
+    @Shadow public abstract int drawText(TextRenderer par1, Text par2, int par3, int par4, int par5, boolean par6);
+    //?}
 
     //? if >1.21.1 {
     /*@Redirect(
