@@ -75,10 +75,10 @@ public class DrawUtils {
                 context.fillGradient(
 
                         0,
-                        13 - (k + 1),
+                        25 - (k + 1),
 
                         1,
-                        13 - k,
+                        25 - k,
                         //? if <1.21.6
                         0,
                         rgb,
@@ -95,7 +95,7 @@ public class DrawUtils {
 
     public static void drawGradientBar(DrawContext context, DurabilityConfig config, int startX, int startY, int itemBarStep) {
         if (config.isVertical) {
-            if (config.showDurabilityBarBackground) {fill(context, 0, 0, 2, 13, -16777216);}
+            if (config.showDurabilityBarBackground) {fill(context, 0, 12, 2, 13, -16777216);}
             drawGradientVerticalBar(context, itemBarStep);
         } else {
             if (config.showDurabilityBarBackground) {fill(context, 0, 0, 13, 2, -16777216);}
@@ -110,11 +110,11 @@ public class DrawUtils {
         }
 
         if (config.isVertical){
-            if (config.showDurabilityBarBackground) {fill(context, 0, 0, 2, 13, -16777216);}
-            fill(context, 0, 13, 1, -data.barStep, DrawUtils.interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, data.getPercentsInt()));
+            if (config.showDurabilityBarBackground) {fill(context, 0, 12, 2, 13, -16777216);}
+            fill(context, 0, 25, 1, -data.barStep, DrawUtils.interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, data.getPercentsInt()));
         } else {
             if (config.showDurabilityBarBackground) {fill(context, 0, 0, 13, 2, -16777216);}
-            fill(context, 0 , 0, data.barStep, 1, DrawUtils.interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, data.getPercentsInt()));
+            fill(context, 0, 0, data.barStep, 1, DrawUtils.interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, data.getPercentsInt()));
         }
     }
 
