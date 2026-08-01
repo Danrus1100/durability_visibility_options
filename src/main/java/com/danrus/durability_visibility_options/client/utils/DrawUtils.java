@@ -190,7 +190,7 @@ public class DrawUtils {
         //? if >1.21.5 {
         /*context.fill(x, y, x+width, y+height, color);
          *///?} else {
-        context.fill(RenderLayer.getGui(), x, y, x + width, y + height, 200, color);
+        context.fill(RenderLayer.getGui(), x, y, x + width, y + height, 0, color);
         //?}
 
     }
