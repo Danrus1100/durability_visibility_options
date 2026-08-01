@@ -1,7 +1,7 @@
 package com.danrus.durability_visibility_options.client.config;
 
 import dev.isxander.yacl3.api.NameableEnum;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public class DurabilityConfig {
     public static enum DisplayStyle implements NameableEnum {
@@ -22,8 +22,8 @@ public class DurabilityConfig {
         }
 
         @Override
-        public Text getDisplayName() {
-            return Text.translatable("durability_visibility_options.config.display_style." + name().toLowerCase());
+        public Component getDisplayName() {
+            return Component.translatable("durability_visibility_options.config.display_style." + name().toLowerCase());
         }
     };
 

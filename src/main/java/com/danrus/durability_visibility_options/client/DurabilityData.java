@@ -1,7 +1,7 @@
 package com.danrus.durability_visibility_options.client;
 
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class DurabilityData {
     public int barStep;
@@ -11,8 +11,8 @@ public class DurabilityData {
     private float percents;
 
     public DurabilityData(ItemStack stack) {
-        this.barStep = stack.getItemBarStep();
-        this.durability = stack.getMaxDamage() - stack.getDamage();
+        this.barStep = stack.getBarWidth();
+        this.durability = stack.getMaxDamage() - stack.getDamageValue();
         this.maxDurability = stack.getMaxDamage();
         this.isDamaged = stack.isDamaged();
         this.percents = 100F * (float)durability / maxDurability;

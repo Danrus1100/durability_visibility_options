@@ -4,15 +4,14 @@ import com.danrus.durability_visibility_options.client.DurabilityData;
 import com.danrus.durability_visibility_options.client.DurabilityRender;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import com.danrus.durability_visibility_options.client.config.ModConfig;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.player.LocalPlayer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,42 +20,47 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(DrawContext.class)
+//? if >=1.21.11 {
+/*import net.minecraft.client.renderer.rendertype.RenderType;
+*///?} else
+import net.minecraft.client.renderer.RenderType;
+
+@Mixin(GuiGraphics.class)
 public abstract class DrawContextMixin {
 
     //? if >=1.21.6 {
-    /*@Shadow public abstract void drawText(TextRenderer par1, Text par2, int par3, int par4, int par5, boolean par6);
+    /*@Shadow public abstract void drawString(Font par1, Component par2, int par3, int par4, int par5, boolean par6);
     *///?} else {
-    @Shadow public abstract int drawText(TextRenderer par1, Text par2, int par3, int par4, int par5, boolean par6);
+    @Shadow public abstract int drawString(Font par1, Component par2, int par3, int par4, int par5, boolean par6);
     //?}
 
     //? if >1.21.1 {
     /*@Redirect(
 
-            method = "drawStackOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
+            method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/DrawContext;drawItemBar(Lnet/minecraft/item/ItemStack;II)V"
+                    target = "Lnet/minecraft/client/gui/GuiGraphics;renderItemBar(Lnet/minecraft/world/item/ItemStack;II)V"
             )
 
     )
-    private void drawStackOverlayMixin(DrawContext instance, ItemStack stack, int x, int y) {
+    private void drawStackOverlayMixin(GuiGraphics instance, ItemStack stack, int x, int y) {
         String countOverride = stack.getCount() == 1 ? null : String.valueOf(stack.getCount());
-        TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+        Font textRenderer = Minecraft.getInstance().font;
         drawItemInSlotMixin(textRenderer, stack, x, y, countOverride, null);
     }
     *///?}
 
     //? if <=1.21.1 {
     @Inject(
-            method = "drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isItemBarVisible()Z"),
+            method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isBarVisible()Z"),
             cancellable = true)
 
     //?}
-    private void drawItemInSlotMixin(TextRenderer textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
-        DrawContext thisObject = (DrawContext) (Object) this;
-        if (stack.isDamageable()) {
+    private void drawItemInSlotMixin(Font textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
+        GuiGraphics thisObject = (GuiGraphics) (Object) this;
+        if (stack.isDamageableItem()) {
             if (ModConfig.get().showDurability) {
                 DurabilityRender.renderBar(thisObject, stack, x, y);
             }
@@ -71,19 +75,19 @@ public abstract class DrawContextMixin {
         }
 
         //? if <=1.21.1 {
-        ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
+        LocalPlayer clientPlayerEntity = Minecraft.getInstance().player;
         //? if >1.20.6 {
-        float tickDelta = MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(true);
+        float tickDelta = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true);
         //?} else
-        /*float tickDelta = MinecraftClient.getInstance().getTickDelta();*/
-        float f = clientPlayerEntity == null ? 0.0F : clientPlayerEntity.getItemCooldownManager().getCooldownProgress(stack.getItem(), tickDelta);
+        /*float tickDelta = Minecraft.getInstance().getFrameTime();*/
+        float f = clientPlayerEntity == null ? 0.0F : clientPlayerEntity.getCooldowns().getCooldownPercent(stack.getItem(), tickDelta);
         if (f > 0.0F) {
-            int k = y + MathHelper.floor(16.0F * (1.0F - f));
-            int l = k + MathHelper.ceil(16.0F * f);
-            thisObject.fill(RenderLayer.getGuiOverlay(), x, k, x + 16, l, Integer.MAX_VALUE);
+            int k = y + Mth.floor(16.0F * (1.0F - f));
+            int l = k + Mth.ceil(16.0F * f);
+            thisObject.fill(RenderType.guiOverlay(), x, k, x + 16, l, Integer.MAX_VALUE);
         }
 
-        thisObject.getMatrices().pop();
+        thisObject.pose().popPose();
         ci.cancel();
 
         //?}

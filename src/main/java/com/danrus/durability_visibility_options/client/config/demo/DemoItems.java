@@ -1,9 +1,9 @@
 package com.danrus.durability_visibility_options.client.config.demo;
 
 import com.danrus.durability_visibility_options.client.DurabilityData;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.Random;
 
@@ -46,7 +46,7 @@ public class DemoItems {
             tickCounter = 0;
 
             int damageAmount = Math.round(activeItem.getMaxDamage() * 0.01f);
-            int newDamage = activeItem.getDamage() + damageAmount;
+            int newDamage = activeItem.getDamageValue() + damageAmount;
 
             if (newDamage >= activeItem.getMaxDamage()) {
                 int currentIndex = -1;
@@ -62,11 +62,11 @@ public class DemoItems {
 
                 for (ItemStack item : items) {
                     if (item != activeItem) {
-                        item.setDamage(0);
+                        item.setDamageValue(0);
                     }
                 }
             } else {
-                activeItem.setDamage(newDamage);
+                activeItem.setDamageValue(newDamage);
             }
         }
     }

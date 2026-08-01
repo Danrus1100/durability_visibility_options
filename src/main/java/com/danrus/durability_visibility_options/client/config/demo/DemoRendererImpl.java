@@ -7,8 +7,8 @@ package com.danrus.durability_visibility_options.client.config.demo;
 import com.danrus.durability_visibility_options.client.DurabilityRender;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import com.danrus.durability_visibility_options.client.utils.DrawUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class DemoRendererImpl implements DemoRenderer {
     private final DemoItems demoItems = DemoItems.getInstance();
@@ -23,9 +23,9 @@ public class DemoRendererImpl implements DemoRenderer {
     }
 
     @Override
-    public int render(DrawContext context, int x, int y, int width, float deltaTime) {
+    public int render(GuiGraphics context, int x, int y, int width, float deltaTime) {
 
-        int itemX = (int) (x + MinecraftClient.getInstance().getWindow().getScaledWidth() / 7.5);
+        int itemX = (int) (x + Minecraft.getInstance().getWindow().getGuiScaledWidth() / 7.5);
         int itemY = y + 45;
         float scale = 6F;
 
@@ -34,7 +34,7 @@ public class DemoRendererImpl implements DemoRenderer {
         DrawUtils.translateMatrix(context, itemX + 8, itemY + 8);
         DrawUtils.scaleMatrix(context, scale, scale);
 
-        context.drawItem(demoItems.getActiveItem(), -8, -8);
+        context.renderItem(demoItems.getActiveItem(), -8, -8);
 
         DrawUtils.popMatrix(context);
 

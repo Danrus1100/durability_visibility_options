@@ -10,12 +10,18 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import dev.isxander.yacl3.platform.YACLPlatform;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.toast.SystemToast;
-import net.minecraft.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.network.chat.Component;
 
 import java.awt.Color;
+
+//? if >1.21.1 {
+/*import net.minecraft.client.gui.components.toasts.ToastManager;
+*///?} else
+import net.minecraft.client.gui.components.toasts.ToastComponent;
+
 
 public class ModConfig {
     public static final ConfigClassHandler<ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
@@ -130,13 +136,13 @@ public class ModConfig {
 
     public static Screen getConfigScreen(Screen parent) {
         Screen yaclScreen =  YetAnotherConfigLib.createBuilder()
-                .title(Text.translatable("durability_visibility_options.config.title"))
+                .title(Component.translatable("durability_visibility_options.config.title"))
                 .category(ConfigCategory.createBuilder()
-                        .name(Text.translatable("durability_visibility_options.tab.general"))
+                        .name(Component.translatable("durability_visibility_options.tab.general"))
                         .group(OptionGroup.createBuilder()
-                                .name(Text.translatable("durability_visibility_options.config.category.bar"))
+                                .name(Component.translatable("durability_visibility_options.config.category.bar"))
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.translatable("durability_visibility_options.config.show"))
+                                        .name(Component.translatable("durability_visibility_options.config.show"))
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showDurability,
@@ -150,7 +156,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.translatable("durability_visibility_options.config.is_vertical"))
+                                        .name(Component.translatable("durability_visibility_options.config.is_vertical"))
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().isVertical,
@@ -164,7 +170,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
 //                                .option(Option.createBuilder(boolean.class)
-//                                        .name(Text.translatable("durability_visibility_options.config.show_under_item"))
+//                                        .name(Component.translatable("durability_visibility_options.config.show_under_item"))
 //                                        .binding(
 //                                                false,
 //                                                () -> HANDLER.instance().showDurabilityBarUnderItem,
@@ -178,7 +184,7 @@ public class ModConfig {
 //                                        .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
 //                                        .build())
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.translatable("durability_visibility_options.config.show_bar_background"))
+                                        .name(Component.translatable("durability_visibility_options.config.show_bar_background"))
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showDurabilityBarBackground,
@@ -192,7 +198,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(DisplayStyle.class)
-                                        .name(Text.translatable("durability_visibility_options.config.display_style"))
+                                        .name(Component.translatable("durability_visibility_options.config.display_style"))
                                         .binding(
                                                 DisplayStyle.getDefault(),
                                                 () -> HANDLER.instance().durabilityBarDisplayStyle,
@@ -207,7 +213,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
+                                        .name(Component.translatable("durability_visibility_options.config.show_from_percent"))
                                         .binding(
                                                 99,
                                                 () -> HANDLER.instance().showDurabilityBarFromPercent,
@@ -223,7 +229,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(float.class)
-                                        .name(Text.translatable("durability_visibility_options.config.scale"))
+                                        .name(Component.translatable("durability_visibility_options.config.scale"))
                                         .binding(
                                                 1f,
                                                 () -> HANDLER.instance().durabilityBarScale,
@@ -237,7 +243,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
+                                        .name(Component.translatable("durability_visibility_options.config.horizontal_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityBarOffsetX,
@@ -251,7 +257,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
+                                        .name(Component.translatable("durability_visibility_options.config.vertical_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityBarOffsetY,
@@ -265,7 +271,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.translatable("durability_visibility_options.config.color_max"))
+                                        .name(Component.translatable("durability_visibility_options.config.color_max"))
                                         .binding(
                                                 new Color(0x00FF00),
                                                 () -> new Color(HANDLER.instance().durabilityBarColor),
@@ -279,7 +285,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.translatable("durability_visibility_options.config.color_min"))
+                                        .name(Component.translatable("durability_visibility_options.config.color_min"))
                                         .binding(
                                                 new Color(0xFF0000),
                                                 () -> new Color(HANDLER.instance().durabilityBarColorMin),
@@ -294,9 +300,9 @@ public class ModConfig {
                                         .build())
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .name(Text.translatable("durability_visibility_options.config.category.percents"))
+                                .name(Component.translatable("durability_visibility_options.config.category.percents"))
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.translatable("durability_visibility_options.config.show"))
+                                        .name(Component.translatable("durability_visibility_options.config.show"))
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().showDurabilityPercent,
@@ -310,7 +316,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.translatable("durability_visibility_options.config.show_percent_symbol"))
+                                        .name(Component.translatable("durability_visibility_options.config.show_percent_symbol"))
                                         .binding(
                                                 true,
                                                 () -> HANDLER.instance().showPercentSymbol,
@@ -324,7 +330,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.percent_accuracy"))
+                                        .name(Component.translatable("durability_visibility_options.config.percent_accuracy"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().percentAccuracy,
@@ -341,7 +347,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
+                                        .name(Component.translatable("durability_visibility_options.config.horizontal_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityPercentOffsetX,
@@ -355,7 +361,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
+                                        .name(Component.translatable("durability_visibility_options.config.vertical_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityPercentOffsetY,
@@ -369,7 +375,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(DisplayStyle.class)
-                                        .name(Text.translatable("durability_visibility_options.config.display_style"))
+                                        .name(Component.translatable("durability_visibility_options.config.display_style"))
                                         .binding(
                                                 DisplayStyle.getDefault(),
                                                 () -> HANDLER.instance().durabilityPercentDisplayStyle,
@@ -384,7 +390,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
+                                        .name(Component.translatable("durability_visibility_options.config.show_from_percent"))
                                         .binding(
                                                 99,
                                                 () -> HANDLER.instance().showDurabilityPercentsFromPercent,
@@ -401,7 +407,7 @@ public class ModConfig {
                                         .build())
 
                                 .option(Option.createBuilder(float.class)
-                                        .name(Text.translatable("durability_visibility_options.config.scale"))
+                                        .name(Component.translatable("durability_visibility_options.config.scale"))
                                         .binding(
                                                 0.5f,
                                                 () -> HANDLER.instance().durabilityPercentScale,
@@ -416,7 +422,7 @@ public class ModConfig {
                                         .build())
 
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.translatable("durability_visibility_options.config.color_max"))
+                                        .name(Component.translatable("durability_visibility_options.config.color_max"))
                                         .binding(
                                                 new Color(0xFFFFFF),
                                                 () -> new Color(HANDLER.instance().durabilityPercentColor),
@@ -430,7 +436,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.translatable("durability_visibility_options.config.color_min"))
+                                        .name(Component.translatable("durability_visibility_options.config.color_min"))
                                         .binding(
                                                 new Color(0xFFFFFF),
                                                 () -> new Color(HANDLER.instance().durabilityPercentColorMin),
@@ -445,10 +451,10 @@ public class ModConfig {
                                         .build())
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .name(Text.translatable("durability_visibility_options.config.category.amount"))
+                                .name(Component.translatable("durability_visibility_options.config.category.amount"))
 
                                 .option(Option.createBuilder(boolean.class)
-                                        .name(Text.translatable("durability_visibility_options.config.show"))
+                                        .name(Component.translatable("durability_visibility_options.config.show"))
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().showDurabilityAmount,
@@ -463,7 +469,7 @@ public class ModConfig {
                                         .build())
 
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.horizontal_offset"))
+                                        .name(Component.translatable("durability_visibility_options.config.horizontal_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityAmountOffsetX,
@@ -478,7 +484,7 @@ public class ModConfig {
                                         .build())
 
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.vertical_offset"))
+                                        .name(Component.translatable("durability_visibility_options.config.vertical_offset"))
                                         .binding(
                                                 0,
                                                 () -> HANDLER.instance().durabilityAmountOffsetY,
@@ -492,7 +498,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(DisplayStyle.class)
-                                        .name(Text.translatable("durability_visibility_options.config.display_style"))
+                                        .name(Component.translatable("durability_visibility_options.config.display_style"))
                                         .binding(
                                                 DisplayStyle.getDefault(),
                                                 () -> HANDLER.instance().durabilityAmountDisplayStyle,
@@ -507,7 +513,7 @@ public class ModConfig {
                                         .description(OptionDescription.createBuilder().customImage(mainRenderer).build())
                                         .build())
                                 .option(Option.createBuilder(int.class)
-                                        .name(Text.translatable("durability_visibility_options.config.show_from_percent"))
+                                        .name(Component.translatable("durability_visibility_options.config.show_from_percent"))
                                         .binding(
                                                 99,
                                                 () -> HANDLER.instance().showDurabilityAmountsFromPercent,
@@ -522,7 +528,7 @@ public class ModConfig {
                                         .build())
 
                                 .option(Option.createBuilder(float.class)
-                                        .name(Text.translatable("durability_visibility_options.config.scale"))
+                                        .name(Component.translatable("durability_visibility_options.config.scale"))
                                         .binding(
                                                 0.5f,
                                                 () -> HANDLER.instance().durabilityAmountScale,
@@ -537,7 +543,7 @@ public class ModConfig {
                                         .build())
 
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.translatable("durability_visibility_options.config.color_max"))
+                                        .name(Component.translatable("durability_visibility_options.config.color_max"))
                                         .binding(
                                                 new Color(0xFFFFFF),
                                                 () -> new Color(HANDLER.instance().durabilityAmountColor),
@@ -552,7 +558,7 @@ public class ModConfig {
                                         .build())
 
                                 .option(Option.createBuilder(Color.class)
-                                        .name(Text.translatable("durability_visibility_options.config.color_min"))
+                                        .name(Component.translatable("durability_visibility_options.config.color_min"))
                                         .binding(
                                                 new Color(0xFFFFFF),
                                                 () -> new Color(HANDLER.instance().durabilityAmountColorMin),
@@ -568,10 +574,10 @@ public class ModConfig {
 
                                 .build())
                         .group(OptionGroup.createBuilder()
-                                .name(Text.translatable("durability_visibility_options.config.category.secret"))
+                                .name(Component.translatable("durability_visibility_options.config.category.secret"))
                                 .collapsed(true)
                                 .option(Option.createBuilder(Boolean.class)
-                                        .name(Text.translatable("durability_visibility_options.config.rgb_bar"))
+                                        .name(Component.translatable("durability_visibility_options.config.rgb_bar"))
                                         .binding(
                                                 false,
                                                 () -> HANDLER.instance().doRgbBar,
@@ -587,7 +593,7 @@ public class ModConfig {
                                 .build())
                         .build())
                 .category(ConfigCategory.createBuilder()
-                        .name(Text.translatable("durability_visibility_options.config.presets"))
+                        .name(Component.translatable("durability_visibility_options.config.presets"))
                         .groups(PresetsOptions.generatePresetsGroups(parent))
                         .build())
                 .build()
@@ -630,12 +636,31 @@ public class ModConfig {
         ModConfig.get().doRgbBar = config.doRgbBar;
 
         HANDLER.save();
-        MinecraftClient.getInstance().setScreen(parent);
-        sendToast(SystemToast.Type.PERIODIC_NOTIFICATION, "durability_visibility_options.config.presets.applied");
+        Minecraft.getInstance().setScreen(parent);
+        sendToast(
+            //? if >1.20.2 {
+            SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
+            //?} else
+            /*SystemToast.SystemToastIds.PERIODIC_NOTIFICATION,*/
+
+            "durability_visibility_options.config.presets.applied"
+        );
     }
 
-    public static void sendToast(SystemToast.Type type, String description) {
-        MinecraftClient.getInstance().getToastManager().add(SystemToast.create(MinecraftClient.getInstance(), type, Text.translatable("durability_visibility_options.config.title"), Text.translatable(description)));
+    public static void sendToast(
+        //? if >1.20.2 {
+        SystemToast.SystemToastId type,
+        //?} else
+        /*SystemToast.SystemToastIds type,*/
+
+        String description
+    ) {
+        //? if >1.21.1 {
+        /*ToastManager manager = Minecraft.getInstance().getToastManager();
+        *///?} else
+        ToastComponent manager = Minecraft.getInstance().getToasts();
+
+        manager.addToast(SystemToast.multiline(Minecraft.getInstance(), type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description)));
     }
 
     public static void applyConfig(DurabilityConfig config, Screen parent) {
