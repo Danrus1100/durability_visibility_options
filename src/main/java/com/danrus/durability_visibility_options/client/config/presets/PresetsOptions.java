@@ -17,9 +17,9 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 //? if >=1.21.11 {
-/*import net.minecraft.util.Util;
-*///?} else
-import net.minecraft.Util;
+import net.minecraft.util.Util;
+//?} else
+/*import net.minecraft.Util;*/
 
 import static com.danrus.durability_visibility_options.client.config.ModConfig.HANDLER;
 

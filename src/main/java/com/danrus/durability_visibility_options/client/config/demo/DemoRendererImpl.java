@@ -12,9 +12,9 @@ import com.danrus.durability_visibility_options.client.utils.DrawUtils;
 import net.minecraft.client.Minecraft;
 
 //? if >=26.1 {
-/*import net.minecraft.client.gui.GuiGraphicsExtractor;
-*///?} else
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+//?} else
+/*import net.minecraft.client.gui.GuiGraphics;*/
 
 public class DemoRendererImpl implements DemoRenderer {
     private final DemoItems demoItems = DemoItems.getInstance();
@@ -32,9 +32,9 @@ public class DemoRendererImpl implements DemoRenderer {
     @Override
     public int render(
         //? if >=26.1 {
-        /*GuiGraphicsExtractor context,
-        *///?} else
-        GuiGraphics context,
+        GuiGraphicsExtractor context,
+        //?} else
+        /*GuiGraphics context,*/
 
         int x,
         int y,
@@ -52,14 +52,14 @@ public class DemoRendererImpl implements DemoRenderer {
         DrawUtils.scaleMatrix(context, scale, scale);
 
         //? if >=26.1 {
-        /*context.item(
-        *///?} else
-        context.renderItem(
+        context.item(
+        //?} else
+        /*context.renderItem(*/
 
             //? if >=26.1 {
-            /*Objects.requireNonNull(demoItems.getActiveItem()),
-            *///?} else
-            demoItems.getActiveItem(),
+            Objects.requireNonNull(demoItems.getActiveItem()),
+            //?} else
+            /*demoItems.getActiveItem(),*/
             -8,
             -8
         );

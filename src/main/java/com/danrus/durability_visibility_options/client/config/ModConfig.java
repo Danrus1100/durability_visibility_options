@@ -21,9 +21,9 @@ import java.awt.Color;
 import org.jspecify.annotations.NonNull;
 
 //? if >1.21.1 {
-/*import net.minecraft.client.gui.components.toasts.ToastManager;
-*///?} else
-import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.gui.components.toasts.ToastManager;
+//?} else
+/*import net.minecraft.client.gui.components.toasts.ToastComponent;*/
 
 
 public class ModConfig {
@@ -659,9 +659,9 @@ public class ModConfig {
         String description
     ) {
         //? if >1.21.1 {
-        /*ToastManager manager = Minecraft.getInstance().getToastManager();
-        *///?} else
-        ToastComponent manager = Minecraft.getInstance().getToasts();
+        ToastManager manager = Minecraft.getInstance().getToastManager();
+        //?} else
+        /*ToastComponent manager = Minecraft.getInstance().getToasts();*/
 
         manager.addToast(SystemToast.multiline(Minecraft.getInstance(), type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description)));
     }
