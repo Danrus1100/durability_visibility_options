@@ -3,12 +3,19 @@ package com.danrus.durability_visibility_options.client.utils;
 import com.danrus.durability_visibility_options.client.DurabilityData;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 
 import com.mojang.math.Axis;
 
 import java.awt.*;
+
+//? if >=26.1
+import org.jspecify.annotations.NonNull;
+
+//? if >=26.1 {
+/*import net.minecraft.client.gui.GuiGraphicsExtractor;
+*///?} else
+import net.minecraft.client.gui.GuiGraphics;
 
 //? if >=1.21.11 {
 /*import net.minecraft.client.renderer.rendertype.RenderType;
@@ -45,7 +52,13 @@ public class DrawUtils {
         return Color.HSBtoRGB(h, s, v);
     }
 
-    public static void drawGradientHorizontalBar(GuiGraphics context, int itemBarStep) {
+    public static void drawGradientHorizontalBar(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+        int itemBarStep
+    ) {
         int past_color = Color.HSBtoRGB(1, 1f, 1f) | 0xFF000000;
         pushMatrix(context);
         rotateMatrix(context, 90);
@@ -73,7 +86,13 @@ public class DrawUtils {
         popMatrix(context);
     }
 
-    public static void drawGradientVerticalBar(GuiGraphics context, int itemBarStep) {
+    public static void drawGradientVerticalBar(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+        int itemBarStep
+    ) {
         int past_color = Color.HSBtoRGB(1, 1f, 1f) | 0xFF000000;
         for (int k = 0; k < 13; k++) {
             float hue = (float) k / 13f;
@@ -96,11 +115,30 @@ public class DrawUtils {
         }
     }
 
-    public static void drawGradientBar(GuiGraphics context, int startX, int startY, int itemBarStep){
+    public static void drawGradientBar(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+
+        int startX,
+        int startY,
+        int itemBarStep
+    ) {
         drawGradientBar(context, DurabilityConfig.builder().fromModConfig().build(), startX, startY, itemBarStep) ;
     }
 
-    public static void drawGradientBar(GuiGraphics context, DurabilityConfig config, int startX, int startY, int itemBarStep) {
+    public static void drawGradientBar(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+
+        DurabilityConfig config,
+        int startX,
+        int startY,
+        int itemBarStep
+    ) {
         if (config.isVertical) {
             if (config.showDurabilityBarBackground) {fill(context, 0, 12, 2, 13, -16777216);}
             drawGradientVerticalBar(context, itemBarStep);
@@ -110,7 +148,17 @@ public class DrawUtils {
         }
     }
 
-    public static void drawBar(GuiGraphics context, DurabilityConfig config, DurabilityData data, int startX, int startY){
+    public static void drawBar(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+
+        DurabilityConfig config,
+        DurabilityData data,
+        int startX,
+        int startY
+    ) {
         if (config.doRgbBar){
             drawGradientBar(context, config, startX, startY, data.barStep);
             return;
@@ -125,7 +173,21 @@ public class DrawUtils {
         }
     }
 
-    public static void drawTextInfo(GuiGraphics drawContext, DurabilityConfig config, int color, String text, int x, int y, float scale) {
+    public static void drawTextInfo(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor drawContext,
+        *///?} else
+        GuiGraphics drawContext,
+
+        DurabilityConfig config,
+        int color,
+        //? if >=26.1
+        /*@NonNull*/
+        String text,
+        int x,
+        int y,
+        float scale
+    ) {
         DrawUtils.pushMatrix(drawContext);
 
         float targetX = x + 9;
@@ -134,6 +196,9 @@ public class DrawUtils {
         DrawUtils.translateMatrix(drawContext, targetX, targetY);
         DrawUtils.scaleMatrix(drawContext, scale, scale);
 
+        //? if >=26.1 {
+        /*drawContext.centeredText(
+        *///?} else
         drawContext.drawCenteredString(
                 Minecraft.getInstance().font,
                 text,
@@ -145,7 +210,12 @@ public class DrawUtils {
         DrawUtils.popMatrix(drawContext);
     }
 
-    public static void pushMatrix(GuiGraphics context) {
+    public static void pushMatrix(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context
+        *///?} else
+        GuiGraphics context
+    ) {
         //? if >1.21.5 {
         /*context.pose().pushMatrix();
          *///?} else {
@@ -153,7 +223,12 @@ public class DrawUtils {
         //?}
     }
 
-    public static void popMatrix(GuiGraphics context) {
+    public static void popMatrix(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context
+        *///?} else
+        GuiGraphics context
+    ) {
         //? if >1.21.5 {
         /*context.pose().popMatrix();
          *///?} else {
@@ -161,44 +236,90 @@ public class DrawUtils {
          //?}
     }
 
-    public static void rotateMatrix(GuiGraphics context, float deg) {
+    public static void rotateMatrix(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+        float deg
+    ) {
         //? if >1.21.5 {
         /*context.pose().rotate((float) Math.toRadians(deg));
-         *///?} else {
+        *///?} else {
         context.pose().mulPose(Axis.ZP.rotationDegrees(deg));
         //?}
     }
 
-    public static void translateMatrix(GuiGraphics context, int x, int y) {
+    public static void translateMatrix(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+
+        int x,
+        int y
+    ) {
         translateMatrix(context, (float) x, (float) y);
     }
 
-    public static void translateMatrix(GuiGraphics context, float x, float y) {
+    public static void translateMatrix(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+
+        float x,
+        float y
+    ) {
         //? if >1.21.5 {
         /*context.pose().translate(x, y);
-         *///?} else {
+        *///?} else {
         context.pose().translate(x, y, 200.0F);
         //?}
     }
 
-    public static void scaleMatrix(GuiGraphics context, int x, int y) {
+    public static void scaleMatrix(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+
+        int x,
+        int y
+    ) {
         scaleMatrix(context, (float) x, (float) y);
     }
 
-    public static void scaleMatrix(GuiGraphics context, float x, float y) {
+    public static void scaleMatrix(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+        float x,
+        float y
+    ) {
         //? if >1.21.5 {
         /*context.pose().scale(x, y);
-         *///?} else {
+        *///?} else {
         context.pose().scale(x, y, 1.0F);
         //?}
     }
 
-    public static void fill(GuiGraphics context, int x, int y, int width, int height, int color) {
+    public static void fill(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+        int x,
+        int y,
+        int width,
+        int height,
+        int color
+    ) {
         //? if >1.21.5 {
         /*context.fill(x, y, x+width, y+height, color);
-         *///?} else {
+        *///?} else {
         context.fill(RenderType.gui(), x, y, x + width, y + height, 0, color);
         //?}
-
     }
 }

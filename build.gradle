@@ -1,7 +1,16 @@
 plugins {
-    id 'fabric-loom' version '1.17.9'
+    id 'net.fabricmc.fabric-loom-remap' version '1.17.9' apply false
+    id 'net.fabricmc.fabric-loom' version '1.17.9' apply false
     id 'maven-publish'
     id "me.modmuss50.mod-publish-plugin" version "0.8.4"
+}
+
+if (stonecutter.current.version < "26.1") {
+    println 'using net.fabricmc.fabric-loom-remap'
+    apply plugin: 'net.fabricmc.fabric-loom-remap'
+} else {
+    println 'using net.fabricmc.fabric-loom'
+    apply plugin: 'net.fabricmc.fabric-loom'
 }
 
 version = project.mod_version
@@ -42,22 +51,41 @@ repositories {
     }
 }
 
-println "Stonecutter version: ${stonecutter.current.version}"
-println "Yarn mappings: ${property('yarn_mappings')}"
+println "Dependency versions:"
+println "  - Minecraft: ${stonecutter.current.version}"
+println "  - Stonecutter target: ${stonecutter.current.version} (project ${stonecutter.current.project})"
+println "  - Fabric Loader: ${property('loader_version')}"
+println "  - Fabric API: ${property('fabric_version')}"
+println "  - YACL: ${property('yacl_version')}"
+println "  - Mod Menu: ${property('mod_menu')}"
 
 dependencies {
-    minecraft "com.mojang:minecraft:${stonecutter.current.project}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${property('loader_version')}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${property('fabric_version')}"
+    minecraft "com.mojang:minecraft:${stonecutter.current.version}"
+    if (stonecutter.current.version < "26.1") {
+        mappings loom.officialMojangMappings()
+    }
 
-    modImplementation "dev.isxander:yet-another-config-lib:${property('yacl_version')}"
-//    modApi("me.shedaniel.cloth:cloth-config-fabric:${property('cloth_config')}") {
-//        exclude(group: "net.fabricmc.fabric-api")
-//    }
-    modApi ("com.terraformersmc:modmenu:${property('mod_menu')}")
+    def fabricLoaderString = "net.fabricmc:fabric-loader:${property('loader_version')}"
+    def fabricApiString = "net.fabricmc.fabric-api:fabric-api:${property('fabric_version')}"
+    def yaclString = "dev.isxander:yet-another-config-lib:${property('yacl_version')}"
+    def modMenuString = "com.terraformersmc:modmenu:${property('mod_menu')}"
+
+    if (stonecutter.current.version < "26.1") {
+        modImplementation fabricLoaderString
+        modImplementation fabricApiString
+
+        modImplementation yaclString
+        modApi(modMenuString)
+    } else {
+        implementation fabricLoaderString
+        implementation fabricApiString
+
+        implementation yaclString
+        api(modMenuString)
+    }
     implementation 'com.google.code.gson:gson:2.10.1'
 
+    // todo: versioning for this
     if (stonecutter.current.version == "1.20.4") {
         modImplementation "eu.pb4:placeholder-api:2.4.0-pre.1+1.20.4"
     }
@@ -65,13 +93,22 @@ dependencies {
     if (stonecutter.current.version == "1.21.5") {
         modImplementation "eu.pb4:placeholder-api:2.6.1+1.21.5"
     }
+
     if (stonecutter.current.version == "1.21.6") {
         modImplementation "eu.pb4:placeholder-api:2.7.0+1.21.6"
     }
 }
 
-remapJar {
-    archiveFileName = "${project.archives_base_name}-${project.version}-mc-${stonecutter.current.project}.jar"
+def jarArchiveFileName = "${project.archives_base_name}-${project.version}-mc-${stonecutter.current.project}.jar"
+
+if (stonecutter.current.version < "26.1") {
+    remapJar {
+        archiveFileName = jarArchiveFileName
+    }
+} else {
+    jar {
+        archiveFileName = jarArchiveFileName
+    }
 }
 
 def mcDep = property("mod.mc_dep").toString()
@@ -91,7 +128,12 @@ processResources {
     }
 }
 
-def targetJavaVersion = stonecutter.eval(stonecutter.current.project, ">=1.20.6") ? 21 : 17
+def targetJavaVersion = 25
+if (stonecutter.current.version < "1.20.6") {
+    targetJavaVersion = 17
+} else if (stonecutter.current.version < "26.1") {
+    targetJavaVersion = 21
+}
 
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
@@ -108,7 +150,7 @@ def modVersion = project.mod_version
 
 tasks.register("buildAndCollect", Copy) {
     group = "build"
-    from(tasks.named("remapJar").get().archiveFile)
+    from(jarArchiveFileName)
     into(rootProject.layout.buildDirectory.file("libs/${modVersion}"))
     dependsOn("build")
 }
@@ -124,7 +166,14 @@ loom {
 
 java {
     withSourcesJar()
-    def javaVersion = stonecutter.eval(stonecutter.current.project, ">=1.20.6") ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17
+
+    def javaVersion = JavaVersion.VERSION_25
+    if (stonecutter.current.version < "1.20.6") {
+        javaVersion = JavaVersion.VERSION_17
+    } else if (stonecutter.current.version < "26.1") {
+        javaVersion = JavaVersion.VERSION_21
+    }
+
     println "JavaVersion: " + javaVersion.toString()
     targetCompatibility = javaVersion
     sourceCompatibility = javaVersion
@@ -184,8 +233,10 @@ publishing {
 //}
 
 publishMods {
-    file = remapJar.archiveFile
-    additionalFiles.from(remapSourcesJar.archiveFile)
+    file = jarArchiveFileName
+    if (stonecutter.current.version < "26.1") {
+        additionalFiles.from(remapSourcesJar.archiveFile)
+    }
     version = "${project.version}-MC-${stonecutter.current.project}"
     displayName = "Durability Visibilty Options ${project.version}-MC-${stonecutter.current.project}"
     changelog = rootProject.file("CHANGELOG.md").text

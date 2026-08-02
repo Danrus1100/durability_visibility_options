@@ -17,6 +17,9 @@ import net.minecraft.network.chat.Component;
 
 import java.awt.Color;
 
+//? if >=26.1
+import org.jspecify.annotations.NonNull;
+
 //? if >1.21.1 {
 /*import net.minecraft.client.gui.components.toasts.ToastManager;
 *///?} else
@@ -24,7 +27,7 @@ import net.minecraft.client.gui.components.toasts.ToastComponent;
 
 
 public class ModConfig {
-    public static final ConfigClassHandler<ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
+    public static final ConfigClassHandler</*? if >=26.1 >>*/@NonNull ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(YACLPlatform.getConfigDir().resolve("durability_visibility_options.json5"))
                     .appendGsonBuilder(GsonBuilder::setPrettyPrinting)

@@ -1,5 +1,7 @@
 package com.danrus.durability_visibility_options.client.config.demo;
 
+import java.util.Objects;
+
 // DISCLAIMER:
 // I cant write a good code, so try to make this better if
 // u wanna use it in your mod.
@@ -8,6 +10,10 @@ import com.danrus.durability_visibility_options.client.DurabilityRender;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import com.danrus.durability_visibility_options.client.utils.DrawUtils;
 import net.minecraft.client.Minecraft;
+
+//? if >=26.1 {
+/*import net.minecraft.client.gui.GuiGraphicsExtractor;
+*///?} else
 import net.minecraft.client.gui.GuiGraphics;
 
 public class DemoRendererImpl implements DemoRenderer {
@@ -20,10 +26,21 @@ public class DemoRendererImpl implements DemoRenderer {
     public DemoRendererImpl(DurabilityConfig config) {
         this.config = config;
         this.useSpecificConfig = true;
+        demoItems.initializeItemList();
     }
 
     @Override
-    public int render(GuiGraphics context, int x, int y, int width, float deltaTime) {
+    public int render(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor context,
+        *///?} else
+        GuiGraphics context,
+
+        int x,
+        int y,
+        int width,
+        float deltaTime
+    ) {
 
         int itemX = (int) (x + Minecraft.getInstance().getWindow().getGuiScaledWidth() / 7.5);
         int itemY = y + 45;
@@ -34,7 +51,18 @@ public class DemoRendererImpl implements DemoRenderer {
         DrawUtils.translateMatrix(context, itemX + 8, itemY + 8);
         DrawUtils.scaleMatrix(context, scale, scale);
 
-        context.renderItem(demoItems.getActiveItem(), -8, -8);
+        //? if >=26.1 {
+        /*context.item(
+        *///?} else
+        context.renderItem(
+
+            //? if >=26.1 {
+            /*Objects.requireNonNull(demoItems.getActiveItem()),
+            *///?} else
+            demoItems.getActiveItem(),
+            -8,
+            -8
+        );
 
         DrawUtils.popMatrix(context);
 

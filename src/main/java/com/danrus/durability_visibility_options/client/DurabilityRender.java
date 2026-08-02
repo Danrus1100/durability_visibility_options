@@ -4,21 +4,53 @@ import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig.DisplayStyle;
 import com.danrus.durability_visibility_options.client.utils.DrawUtils;
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
+
+//? if >=26.1 {
+/*import net.minecraft.client.gui.GuiGraphicsExtractor;
+*///?} else
+import net.minecraft.client.gui.GuiGraphics;
 
 public class DurabilityRender {
 
-    public static void renderBar(GuiGraphics drawContext, ItemStack stack, int x, int y) {
+    public static void renderBar(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor drawContext,
+        *///?} else
+        GuiGraphics drawContext,
+
+        ItemStack stack,
+        int x,
+        int y
+    ) {
         DurabilityData data = new DurabilityData(stack);
         renderBar(drawContext, data, x, y);
     }
 
-    public static void renderBar(GuiGraphics drawContext, DurabilityData data, int x, int y) {
+    public static void renderBar(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor drawContext,
+        *///?} else
+        GuiGraphics drawContext,
+
+        DurabilityData data,
+        int x,
+        int y
+    ) {
         renderBar(drawContext, data, x, y, DurabilityConfig.fromModConfig());
     }
 
-    public static void renderBar(GuiGraphics drawContext, DurabilityData data, int x, int y, DurabilityConfig config) {
+    public static void renderBar(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor drawContext,
+        *///?} else
+        GuiGraphics drawContext,
+
+        DurabilityData data,
+        int x,
+        int y,
+        DurabilityConfig config
+    ) {
         if (!shouldDraw(config.durabilityBarDisplayStyle, data, config.showDurabilityBarFromPercent)) {
             return;
         }
@@ -43,16 +75,44 @@ public class DurabilityRender {
         DrawUtils.popMatrix(drawContext);
     }
 
-    public static void renderPercents(GuiGraphics drawContext, ItemStack stack, int x, int y) {
+    public static void renderPercents(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor drawContext,
+        *///?} else
+        GuiGraphics drawContext,
+
+        ItemStack stack,
+        int x,
+        int y
+    ) {
         DurabilityData data = new DurabilityData(stack);
         renderPercents(drawContext, data, x, y);
     }
 
-    public static void renderPercents(GuiGraphics drawContext, DurabilityData data, int x, int y) {
+    public static void renderPercents(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor drawContext,
+        *///?} else
+        GuiGraphics drawContext,
+
+        DurabilityData data,
+        int x,
+        int y
+    ) {
         renderPercents(drawContext, data, x, y, DurabilityConfig.fromModConfig());
     }
 
-    public static void renderPercents(GuiGraphics drawContext, DurabilityData data, int x, int y, DurabilityConfig config) {
+    public static void renderPercents(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor drawContext,
+        *///?} else
+        GuiGraphics drawContext,
+
+        DurabilityData data,
+        int x,
+        int y,
+        DurabilityConfig config
+    ) {
         if (!shouldDraw(config.durabilityPercentDisplayStyle, data, config.showDurabilityPercentsFromPercent)) {
             return;
         }
@@ -61,7 +121,17 @@ public class DurabilityRender {
         DrawUtils.drawTextInfo(drawContext, config, color, data.getPercentString(config), x + config.durabilityPercentOffsetX, y - config.durabilityPercentOffsetY, config.durabilityPercentScale);
     }
 
-    public static void renderAmount(GuiGraphics drawContext, DurabilityData data, int x, int y, DurabilityConfig config) {
+    public static void renderAmount(
+        //? if >=26.1 {
+        /*GuiGraphicsExtractor drawContext,
+        *///?} else
+        GuiGraphics drawContext,
+
+        DurabilityData data,
+        int x,
+        int y,
+        DurabilityConfig config
+    ) {
         if (!shouldDraw(config.durabilityAmountDisplayStyle, data, config.showDurabilityAmountsFromPercent)) {
             return;
         }

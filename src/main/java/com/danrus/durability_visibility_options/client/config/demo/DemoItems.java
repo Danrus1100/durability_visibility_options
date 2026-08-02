@@ -9,7 +9,14 @@ import java.util.Random;
 
 public class DemoItems {
     private static DemoItems instance;
-    private final ItemStack[] items = {
+
+    private ItemStack[] items = null;
+    private ItemStack activeItem = null;
+
+    public void initializeItemList() {
+        if (items != null) return;
+
+        items = new ItemStack[] {
             new ItemStack(Items.ELYTRA),
             new ItemStack(Items.NETHERITE_PICKAXE),
             new ItemStack(Items.DIAMOND_HOE),
@@ -18,8 +25,11 @@ public class DemoItems {
             new ItemStack(Items.BRUSH),
             new ItemStack(Items.WOODEN_SWORD),
             new ItemStack(Items.FLINT_AND_STEEL)
-    };
-    private ItemStack activeItem = items[0];
+        };
+
+        activeItem = items[0];
+    }
+
     private float tickCounter = 0;
 
     private DemoItems() {}
