@@ -13,6 +13,7 @@ import dev.isxander.yacl3.platform.YACLPlatform;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.network.chat.Component;
 
 import java.awt.Color;
@@ -639,7 +640,12 @@ public class ModConfig {
         ModConfig.get().doRgbBar = config.doRgbBar;
 
         HANDLER.save();
+
+        //? if >=26.2 {
+        /*Minecraft.getInstance().gui.setScreen(parent);
+        *///?} else
         Minecraft.getInstance().setScreen(parent);
+
         sendToast(
             //? if >1.20.2 {
             SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
@@ -658,12 +664,19 @@ public class ModConfig {
 
         String description
     ) {
-        //? if >1.21.1 {
+        //? if >=26.2 {
+        /*ToastManager manager = Minecraft.getInstance().gui.toastManager();
+        *///?} else if >1.21.1 {
         ToastManager manager = Minecraft.getInstance().getToastManager();
         //?} else
         /*ToastComponent manager = Minecraft.getInstance().getToasts();*/
 
-        manager.addToast(SystemToast.multiline(Minecraft.getInstance(), type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description)));
+        //? if >=26.2 {
+        /*Toast toast = new SystemToast(type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));
+        *///?} else
+        Toast toast = SystemToast.multiline(Minecraft.getInstance(), type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));
+
+        manager.addToast(toast);
     }
 
     public static void applyConfig(DurabilityConfig config, Screen parent) {
