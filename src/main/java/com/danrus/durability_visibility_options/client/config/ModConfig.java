@@ -642,9 +642,9 @@ public class ModConfig {
         HANDLER.save();
 
         //? if >=26.2 {
-        /*Minecraft.getInstance().gui.setScreen(parent);
-        *///?} else
-        Minecraft.getInstance().setScreen(parent);
+        Minecraft.getInstance().gui.setScreen(parent);
+        //?} else
+        /*Minecraft.getInstance().setScreen(parent);*/
 
         sendToast(
             //? if >1.20.2 {
@@ -665,16 +665,16 @@ public class ModConfig {
         String description
     ) {
         //? if >=26.2 {
-        /*ToastManager manager = Minecraft.getInstance().gui.toastManager();
-        *///?} else if >1.21.1 {
-        ToastManager manager = Minecraft.getInstance().getToastManager();
-        //?} else
+        ToastManager manager = Minecraft.getInstance().gui.toastManager();
+        //?} else if >1.21.1 {
+        /*ToastManager manager = Minecraft.getInstance().getToastManager();
+        *///?} else
         /*ToastComponent manager = Minecraft.getInstance().getToasts();*/
 
         //? if >=26.2 {
-        /*Toast toast = new SystemToast(type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));
-        *///?} else
-        Toast toast = SystemToast.multiline(Minecraft.getInstance(), type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));
+        Toast toast = new SystemToast(type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));
+        //?} else
+        /*Toast toast = SystemToast.multiline(Minecraft.getInstance(), type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));*/
 
         manager.addToast(toast);
     }
