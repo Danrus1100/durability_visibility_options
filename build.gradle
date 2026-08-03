@@ -43,7 +43,7 @@ repositories {
 
     maven { url "https://maven.quiltmc.org/repository/release"}
 
-    if (stonecutter.eval(stonecutter.current.version, ">=1.20.4")) {
+    if (stonecutter.current.version >= "1.20.4") {
         maven {
             url "https://maven.nucleoid.xyz/"
             name = "Nucleoid"
@@ -84,19 +84,6 @@ dependencies {
         api(modMenuString)
     }
     implementation 'com.google.code.gson:gson:2.10.1'
-
-    // todo: versioning for this
-    if (stonecutter.current.version == "1.20.4") {
-        modImplementation "eu.pb4:placeholder-api:2.4.0-pre.1+1.20.4"
-    }
-
-    if (stonecutter.current.version == "1.21.5") {
-        modImplementation "eu.pb4:placeholder-api:2.6.1+1.21.5"
-    }
-
-    if (stonecutter.current.version == "1.21.6") {
-        modImplementation "eu.pb4:placeholder-api:2.7.0+1.21.6"
-    }
 }
 
 def jarArchiveFileName = "${project.archives_base_name}-${project.version}-mc-${stonecutter.current.project}.jar"
