@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 //? if >=26.1 {
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 //?} else
-/*import net.minecraft.client.gui.GuiGraphics;*/
+//import net.minecraft.client.gui.GuiGraphics;
 
 public class DurabilityRender {
 
@@ -17,7 +17,7 @@ public class DurabilityRender {
         //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
         //?} else
-        /*GuiGraphics drawContext,*/
+        //GuiGraphics drawContext,
 
         ItemStack stack,
         int x,
@@ -31,7 +31,7 @@ public class DurabilityRender {
         //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
         //?} else
-        /*GuiGraphics drawContext,*/
+        //GuiGraphics drawContext,
 
         DurabilityData data,
         int x,
@@ -44,7 +44,7 @@ public class DurabilityRender {
         //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
         //?} else
-        /*GuiGraphics drawContext,*/
+        //GuiGraphics drawContext,
 
         DurabilityData data,
         int x,
@@ -79,7 +79,7 @@ public class DurabilityRender {
         //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
         //?} else
-        /*GuiGraphics drawContext,*/
+        //GuiGraphics drawContext,
 
         ItemStack stack,
         int x,
@@ -93,7 +93,7 @@ public class DurabilityRender {
         //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
         //?} else
-        /*GuiGraphics drawContext,*/
+        //GuiGraphics drawContext,
 
         DurabilityData data,
         int x,
@@ -106,7 +106,7 @@ public class DurabilityRender {
         //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
         //?} else
-        /*GuiGraphics drawContext,*/
+        //GuiGraphics drawContext,
 
         DurabilityData data,
         int x,
@@ -125,7 +125,7 @@ public class DurabilityRender {
         //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
         //?} else
-        /*GuiGraphics drawContext,*/
+        //GuiGraphics drawContext,
 
         DurabilityData data,
         int x,

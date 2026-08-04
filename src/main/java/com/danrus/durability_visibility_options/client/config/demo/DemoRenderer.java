@@ -5,7 +5,7 @@ import dev.isxander.yacl3.gui.image.ImageRenderer;
 //? if >=26.1 {
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 //?} else
-/*import net.minecraft.client.gui.GuiGraphics;*/
+//import net.minecraft.client.gui.GuiGraphics;
 
 public interface DemoRenderer extends ImageRenderer {
     @Override
@@ -13,7 +13,7 @@ public interface DemoRenderer extends ImageRenderer {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
 
         int x,
         int y,

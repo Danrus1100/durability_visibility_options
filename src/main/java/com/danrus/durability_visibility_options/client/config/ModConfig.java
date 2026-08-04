@@ -24,7 +24,7 @@ import org.jspecify.annotations.NonNull;
 //? if >1.21.1 {
 import net.minecraft.client.gui.components.toasts.ToastManager;
 //?} else
-/*import net.minecraft.client.gui.components.toasts.ToastComponent;*/
+//import net.minecraft.client.gui.components.toasts.ToastComponent;
 
 
 public class ModConfig {
@@ -644,13 +644,13 @@ public class ModConfig {
         //? if >=26.2 {
         Minecraft.getInstance().gui.setScreen(parent);
         //?} else
-        /*Minecraft.getInstance().setScreen(parent);*/
+        //Minecraft.getInstance().setScreen(parent);
 
         sendToast(
             //? if >1.20.2 {
             SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
             //?} else
-            /*SystemToast.SystemToastIds.PERIODIC_NOTIFICATION,*/
+            //SystemToast.SystemToastIds.PERIODIC_NOTIFICATION,
 
             "durability_visibility_options.config.presets.applied"
         );
@@ -660,7 +660,7 @@ public class ModConfig {
         //? if >1.20.2 {
         SystemToast.SystemToastId type,
         //?} else
-        /*SystemToast.SystemToastIds type,*/
+        //SystemToast.SystemToastIds type,
 
         String description
     ) {
@@ -669,12 +669,12 @@ public class ModConfig {
         //?} else if >1.21.1 {
         /*ToastManager manager = Minecraft.getInstance().getToastManager();
         *///?} else
-        /*ToastComponent manager = Minecraft.getInstance().getToasts();*/
+        //ToastComponent manager = Minecraft.getInstance().getToasts();
 
         //? if >=26.2 {
         Toast toast = new SystemToast(type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));
         //?} else
-        /*Toast toast = SystemToast.multiline(Minecraft.getInstance(), type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));*/
+        //Toast toast = SystemToast.multiline(Minecraft.getInstance(), type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));
 
         manager.addToast(toast);
     }

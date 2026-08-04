@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 //? if >=1.21.11 {
 import net.minecraft.util.Util;
 //?} else
-/*import net.minecraft.Util;*/
+//import net.minecraft.Util;
 
 import static com.danrus.durability_visibility_options.client.config.ModConfig.HANDLER;
 
@@ -66,7 +66,7 @@ public class PresetsOptions {
                                             //? if >1.20.2 {
                                             SystemToast.SystemToastId.WORLD_ACCESS_FAILURE,
                                             //?} else
-                                            /*SystemToast.SystemToastIds.WORLD_ACCESS_FAILURE,*/
+                                            //SystemToast.SystemToastIds.WORLD_ACCESS_FAILURE,
 
                                             "durability_visibility_options.config.presets.needs_name"
                                         );
@@ -83,7 +83,7 @@ public class PresetsOptions {
                                         //? if >1.20.2 {
                                         SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
                                         //?} else
-                                        /*SystemToast.SystemToastIds.PERIODIC_NOTIFICATION,*/
+                                        //SystemToast.SystemToastIds.PERIODIC_NOTIFICATION,
 
                                         "durability_visibility_options.config.presets.custom_added"
                                     );

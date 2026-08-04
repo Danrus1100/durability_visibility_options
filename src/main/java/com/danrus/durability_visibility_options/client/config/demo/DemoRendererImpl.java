@@ -14,7 +14,7 @@ import net.minecraft.client.Minecraft;
 //? if >=26.1 {
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 //?} else
-/*import net.minecraft.client.gui.GuiGraphics;*/
+//import net.minecraft.client.gui.GuiGraphics;
 
 public class DemoRendererImpl implements DemoRenderer {
     private final DemoItems demoItems = DemoItems.getInstance();
@@ -34,7 +34,7 @@ public class DemoRendererImpl implements DemoRenderer {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
 
         int x,
         int y,
@@ -54,12 +54,12 @@ public class DemoRendererImpl implements DemoRenderer {
         //? if >=26.1 {
         context.item(
         //?} else
-        /*context.renderItem(*/
+        //context.renderItem(
 
             //? if >=26.1 {
             Objects.requireNonNull(demoItems.getActiveItem()),
             //?} else
-            /*demoItems.getActiveItem(),*/
+            //demoItems.getActiveItem(),
             -8,
             -8
         );

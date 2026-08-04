@@ -15,12 +15,12 @@ import org.jspecify.annotations.NonNull;
 //? if >=26.1 {
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 //?} else
-/*import net.minecraft.client.gui.GuiGraphics;*/
+//import net.minecraft.client.gui.GuiGraphics;
 
 //? if >=1.21.11 {
 import net.minecraft.client.renderer.rendertype.RenderType;
 //?} else
-/*import net.minecraft.client.renderer.RenderType;*/
+//import net.minecraft.client.renderer.RenderType;
 
 public class DrawUtils {
 
@@ -56,7 +56,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
         int itemBarStep
     ) {
         int past_color = Color.HSBtoRGB(1, 1f, 1f) | 0xFF000000;
@@ -75,7 +75,7 @@ public class DrawUtils {
                         1,
                         -k,
                         //? if <1.21.6
-                        /*0,*/
+                        //0,
                         rgb,
                         past_color
                 );
@@ -90,7 +90,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
         int itemBarStep
     ) {
         int past_color = Color.HSBtoRGB(1, 1f, 1f) | 0xFF000000;
@@ -106,7 +106,7 @@ public class DrawUtils {
                         1,
                         25 - k,
                         //? if <1.21.6
-                        /*0,*/
+                        //0,
                         rgb,
                         past_color
                 );
@@ -119,7 +119,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
 
         int startX,
         int startY,
@@ -132,7 +132,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
 
         DurabilityConfig config,
         int startX,
@@ -152,7 +152,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
 
         DurabilityConfig config,
         DurabilityData data,
@@ -177,7 +177,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
         //?} else
-        /*GuiGraphics drawContext,*/
+        //GuiGraphics drawContext,
 
         DurabilityConfig config,
         int color,
@@ -199,7 +199,7 @@ public class DrawUtils {
         //? if >=26.1 {
         drawContext.centeredText(
         //?} else
-        /*drawContext.drawCenteredString(*/
+        //drawContext.drawCenteredString(
                 Minecraft.getInstance().font,
                 text,
                 0,
@@ -214,7 +214,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context
         //?} else
-        /*GuiGraphics context*/
+        //GuiGraphics context
     ) {
         //? if >1.21.5 {
         context.pose().pushMatrix();
@@ -227,7 +227,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context
         //?} else
-        /*GuiGraphics context*/
+        //GuiGraphics context
     ) {
         //? if >1.21.5 {
         context.pose().popMatrix();
@@ -240,7 +240,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
         float deg
     ) {
         //? if >1.21.5 {
@@ -254,7 +254,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
 
         int x,
         int y
@@ -266,7 +266,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
 
         float x,
         float y
@@ -282,7 +282,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
 
         int x,
         int y
@@ -294,7 +294,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
         float x,
         float y
     ) {
@@ -309,7 +309,7 @@ public class DrawUtils {
         //? if >=26.1 {
         GuiGraphicsExtractor context,
         //?} else
-        /*GuiGraphics context,*/
+        //GuiGraphics context,
         int x,
         int y,
         int width,
