@@ -64,9 +64,17 @@ public class DemoRendererImpl implements DemoRenderer {
         DrawUtils.translateMatrix(context, itemX, itemY);
         DrawUtils.scaleMatrix(context, scale, scale);
 
-        if (config.showDurability) {DurabilityRender.renderBar(context, demoItems.getData(), -7, -6, config);}
-        if (config.showDurabilityPercent) {DurabilityRender.renderPercents(context, demoItems.getData(),  -7, -6, config);}
-        if (config.showDurabilityAmount) {DurabilityRender.renderAmount(context, demoItems.getData(), -7, -6, config);}
+        if (config.showDurability) {
+            DurabilityRender.renderBar(context, demoItems.getData(), -7, -6, config);
+        }
+
+        if (config.showDurabilityPercent) {
+            DurabilityRender.renderPercents(context, demoItems.getData(),  -7, -6, config);
+        }
+
+        if (config.showDurabilityAmount) {
+            DurabilityRender.renderAmount(context, demoItems.getData(), -7, -6, config);
+        }
 
         DrawUtils.popMatrix(context);
 

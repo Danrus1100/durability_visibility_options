@@ -8,7 +8,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class DurabilityRender {
-
     public static void renderBar(
         GuiGraphicsExtractor drawContext,
         ItemStack stack,

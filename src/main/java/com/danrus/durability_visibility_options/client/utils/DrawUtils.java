@@ -17,7 +17,6 @@ import org.jspecify.annotations.NonNull;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class DrawUtils {
-
     public static int interpolateColorHSV(int colorStart, int colorEnd, int t) {
         float ratio = Math.max(0f, Math.min(1f, t / 100f));
 
@@ -57,20 +56,17 @@ public class DrawUtils {
             float hue = (float) k / 13f;
             int rgb = Color.HSBtoRGB(hue, 1f, 1f) | 0xFF000000;
             if (k < itemBarStep) {
-
                 context.fillGradient(
+                    0,
+                    -(k + 1),
 
-                        0,
-                        -(k + 1),
-
-                        1,
-                        -k,
-                        //? if <1.21.6
-                        //0,
-                        rgb,
-                        past_color
+                    1,
+                    -k,
+                    //? if <1.21.6
+                    //0,
+                    rgb,
+                    past_color
                 );
-
             }
             past_color = rgb;
         }
@@ -87,16 +83,15 @@ public class DrawUtils {
             int rgb = Color.HSBtoRGB(hue, 1f, 1f) | 0xFF000000;
             if (k < itemBarStep) {
                 context.fillGradient(
+                    0,
+                    25 - (k + 1),
 
-                        0,
-                        25 - (k + 1),
-
-                        1,
-                        25 - k,
-                        //? if <1.21.6
-                        //0,
-                        rgb,
-                        past_color
+                    1,
+                    25 - k,
+                    //? if <1.21.6
+                    //0,
+                    rgb,
+                    past_color
                 );
             }
             past_color = rgb;
@@ -105,7 +100,6 @@ public class DrawUtils {
 
     public static void drawGradientBar(
         GuiGraphicsExtractor context,
-
         int startX,
         int startY,
         int itemBarStep
@@ -115,24 +109,26 @@ public class DrawUtils {
 
     public static void drawGradientBar(
         GuiGraphicsExtractor context,
-
         DurabilityConfig config,
         int startX,
         int startY,
         int itemBarStep
     ) {
         if (config.isVertical) {
-            if (config.showDurabilityBarBackground) {fill(context, 0, 12, 2, 13, -16777216);}
+            if (config.showDurabilityBarBackground) {
+                fill(context, 0, 12, 2, 13, -16777216);
+            }
             drawGradientVerticalBar(context, itemBarStep);
         } else {
-            if (config.showDurabilityBarBackground) {fill(context, 0, 0, 13, 2, -16777216);}
+            if (config.showDurabilityBarBackground) {
+                fill(context, 0, 0, 13, 2, -16777216);
+            }
             drawGradientHorizontalBar(context, itemBarStep);
         }
     }
 
     public static void drawBar(
         GuiGraphicsExtractor context,
-
         DurabilityConfig config,
         DurabilityData data,
         int startX,
@@ -175,11 +171,11 @@ public class DrawUtils {
         drawContext.centeredText(
         //?} else
         //drawContext.drawCenteredString(
-                Minecraft.getInstance().font,
-                text,
-                0,
-                0,
-                color
+            Minecraft.getInstance().font,
+            text,
+            0,
+            0,
+            color
         );
 
         DrawUtils.popMatrix(drawContext);

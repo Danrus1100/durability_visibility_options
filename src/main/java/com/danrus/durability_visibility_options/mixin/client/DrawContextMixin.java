@@ -38,7 +38,6 @@ public abstract class DrawContextMixin {
 
     //? if >1.21.1 {
     @Redirect(
-
         //? if >=26.1 {
         method = "itemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V",
         //?} else
@@ -102,7 +101,6 @@ public abstract class DrawContextMixin {
 
         thisObject.pose().popPose();
         ci.cancel();
-
         *///?}
     }
 }

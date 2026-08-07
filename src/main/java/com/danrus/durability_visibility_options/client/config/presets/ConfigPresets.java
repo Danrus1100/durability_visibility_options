@@ -21,66 +21,65 @@ public class ConfigPresets {
     public static Path PRESETS_DIR;
 
     public static final List<DurabilityConfig> DEFAULT_CONFIGS = List.of(
+        DurabilityConfig.builder()
+            .setKey("only_percents")
+            .setShowDurability(false)
+            .setShowDurabilityPercent(true)
+            .build(),
 
-            DurabilityConfig.builder()
-                    .setKey("only_percents")
-                    .setShowDurability(false)
-                    .setShowDurabilityPercent(true)
-                    .build(),
+        DurabilityConfig.builder()
+            .setKey("vertical_bar_plus_percents")
+            .setVertical(true)
+            .setShowDurabilityPercent(true)
+            .setDurabilityPercentOffsetX(4)
+            .build(),
 
-            DurabilityConfig.builder()
-                    .setKey("vertical_bar_plus_percents")
-                    .setVertical(true)
-                    .setShowDurabilityPercent(true)
-                    .setDurabilityPercentOffsetX(4)
-                    .build(),
+        DurabilityConfig.builder()
+            .setKey("low_durability_alert")
+            .setShowDurability(false)
+            .setShowDurabilityPercent(true)
+            .setShowDurabilityPercentsFromPercent(25)
+            .setDurabilityPercentOffsetY(4)
+            .setDurabilityPercentColor(0xFF0000)
+            .setDurabilityPercentColorMin(0xFF0000)
+            .build(),
 
-            DurabilityConfig.builder()
-                    .setKey("low_durability_alert")
-                    .setShowDurability(false)
-                    .setShowDurabilityPercent(true)
-                    .setShowDurabilityPercentsFromPercent(25)
-                    .setDurabilityPercentOffsetY(4)
-                    .setDurabilityPercentColor(0xFF0000)
-                    .setDurabilityPercentColorMin(0xFF0000)
-                    .build(),
+        DurabilityConfig.builder()
+            .setKey("uwu")
+            .setDurabilityBarColor(0xE268FF)
+            .setDurabilityBarColorMin(0xFF9D9D)
+            .build(),
 
-            DurabilityConfig.builder()
-                    .setKey("uwu")
-                    .setDurabilityBarColor(0xE268FF)
-                    .setDurabilityBarColorMin(0xFF9D9D)
-                    .build(),
+        DurabilityConfig.builder()
+            .setKey("duraview")
+            .setShowDurability(false)
+            .setShowDurabilityPercent(true)
+            .setDurabilityPercentOffsetX(3)
+            .setDurabilityPercentColor(0x00FF00)
+            .setDurabilityPercentColorMin(0xFF0000)
+            .build(),
 
-            DurabilityConfig.builder()
-                    .setKey("duraview")
-                    .setShowDurability(false)
-                    .setShowDurabilityPercent(true)
-                    .setDurabilityPercentOffsetX(3)
-                    .setDurabilityPercentColor(0x00FF00)
-                    .setDurabilityPercentColorMin(0xFF0000)
-                    .build(),
+        DurabilityConfig.builder()
+            .setKey("ultra_accuracy")
+            .setDurabilityBarOffsetY(12)
 
-            DurabilityConfig.builder()
-                    .setKey("ultra_accuracy")
-                    .setDurabilityBarOffsetY(12)
+            .setShowDurabilityPercent(true)
+            .setPercentAccuracy(2)
+            .setDurabilityPercentOffsetX(3)
+            .setDurabilityPercentOffsetY(-2)
+            .setDurabilityPercentScale(0.3F)
+            .setDurabilityPercentColor(0x0000FF)
+            .setDurabilityPercentColorMin(0x0000FF)
 
-                    .setShowDurabilityPercent(true)
-                    .setPercentAccuracy(2)
-                    .setDurabilityPercentOffsetX(3)
-                    .setDurabilityPercentOffsetY(-2)
-                    .setDurabilityPercentScale(0.3F)
-                    .setDurabilityPercentColor(0x0000FF)
-                    .setDurabilityPercentColorMin(0x0000FF)
+            .setShowDurabilityAmount(true)
+            .setDurabilityAmountOffsetX(-6)
+            .setDurabilityAmountOffsetY(-2)
+            .setDurabilityAmountScale(0.3F)
+            .setDurabilityAmountColor(0xFF00FF)
+            .setDurabilityAmountColorMin(0xFF00FF)
 
-                    .setShowDurabilityAmount(true)
-                    .setDurabilityAmountOffsetX(-6)
-                    .setDurabilityAmountOffsetY(-2)
-                    .setDurabilityAmountScale(0.3F)
-                    .setDurabilityAmountColor(0xFF00FF)
-                    .setDurabilityAmountColorMin(0xFF00FF)
-
-                    .setDoRgbBar(true)
-                    .build()
+            .setDoRgbBar(true)
+            .build()
     );
 
     public static void initialize() {
@@ -163,13 +162,13 @@ public class ConfigPresets {
 
         try (Stream<Path> paths = Files.list(presetsDir)) {
             return paths
-                    .filter(Files::isRegularFile)
-                    .filter(path -> path.getFileName().toString().endsWith(".json"))
-                    .map(path -> {
-                        String fileName = path.getFileName().toString();
-                        return fileName.substring(0, fileName.length() - ".json".length());
-                    })
-                    .collect(Collectors.toList());
+                .filter(Files::isRegularFile)
+                .filter(path -> path.getFileName().toString().endsWith(".json"))
+                .map(path -> {
+                    String fileName = path.getFileName().toString();
+                    return fileName.substring(0, fileName.length() - ".json".length());
+                })
+                .collect(Collectors.toList());
         } catch (IOException e) {
             System.err.println("Failed to list preset files in " + presetsDir + ": " + e.getMessage());
             e.printStackTrace();

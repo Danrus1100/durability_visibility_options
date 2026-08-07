@@ -62,7 +62,6 @@ public class DurabilityConfig {
     public int durabilityAmountColor = 0xFFFFFF;
     public int durabilityAmountColorMin = 0xFFFFFF;
 
-
     public boolean doRgbBar = false;
 
     public static final class Builder {
@@ -71,38 +70,38 @@ public class DurabilityConfig {
         public Builder fromModConfig() {
             ModConfig modConfig = ModConfig.get();
             return this
-                    .setShowDurability(modConfig.showDurability)
-                    .setVertical(modConfig.isVertical)
-                    .setShowDurabilityBarUnderItem(modConfig.showDurabilityBarUnderItem)
-                    .setShowDurabilityBarBackground(modConfig.showDurabilityBarBackground)
-                    .setShowDurabilityBarFromPercent(modConfig.showDurabilityBarFromPercent)
-                    .setDurabilityBarDisplayStyle(modConfig.durabilityBarDisplayStyle)
-                    .setDurabilityBarScale(modConfig.durabilityBarScale)
-                    .setDurabilityBarOffsetX(modConfig.durabilityBarOffsetX)
-                    .setDurabilityBarOffsetY(modConfig.durabilityBarOffsetY)
-                    .setDurabilityBarColor(modConfig.durabilityBarColor)
-                    .setDurabilityBarColorMin(modConfig.durabilityBarColorMin)
+                .setShowDurability(modConfig.showDurability)
+                .setVertical(modConfig.isVertical)
+                .setShowDurabilityBarUnderItem(modConfig.showDurabilityBarUnderItem)
+                .setShowDurabilityBarBackground(modConfig.showDurabilityBarBackground)
+                .setShowDurabilityBarFromPercent(modConfig.showDurabilityBarFromPercent)
+                .setDurabilityBarDisplayStyle(modConfig.durabilityBarDisplayStyle)
+                .setDurabilityBarScale(modConfig.durabilityBarScale)
+                .setDurabilityBarOffsetX(modConfig.durabilityBarOffsetX)
+                .setDurabilityBarOffsetY(modConfig.durabilityBarOffsetY)
+                .setDurabilityBarColor(modConfig.durabilityBarColor)
+                .setDurabilityBarColorMin(modConfig.durabilityBarColorMin)
 
-                    .setShowDurabilityPercent(modConfig.showDurabilityPercent)
-                    .setShowPercentSymbol(modConfig.showPercentSymbol)
-                    .setPercentAccuracy(modConfig.percentAccuracy)
-                    .setDurabilityPercentOffsetX(modConfig.durabilityPercentOffsetX)
-                    .setDurabilityPercentOffsetY(modConfig.durabilityPercentOffsetY)
-                    .setDurabilityPercentDisplayStyle(modConfig.durabilityPercentDisplayStyle)
-                    .setShowDurabilityPercentsFromPercent(modConfig.showDurabilityPercentsFromPercent)
-                    .setDurabilityPercentScale(modConfig.durabilityPercentScale)
-                    .setDurabilityPercentColor(modConfig.durabilityPercentColor)
-                    .setDurabilityPercentColorMin(modConfig.durabilityPercentColorMin)
+                .setShowDurabilityPercent(modConfig.showDurabilityPercent)
+                .setShowPercentSymbol(modConfig.showPercentSymbol)
+                .setPercentAccuracy(modConfig.percentAccuracy)
+                .setDurabilityPercentOffsetX(modConfig.durabilityPercentOffsetX)
+                .setDurabilityPercentOffsetY(modConfig.durabilityPercentOffsetY)
+                .setDurabilityPercentDisplayStyle(modConfig.durabilityPercentDisplayStyle)
+                .setShowDurabilityPercentsFromPercent(modConfig.showDurabilityPercentsFromPercent)
+                .setDurabilityPercentScale(modConfig.durabilityPercentScale)
+                .setDurabilityPercentColor(modConfig.durabilityPercentColor)
+                .setDurabilityPercentColorMin(modConfig.durabilityPercentColorMin)
 
-                    .setShowDurabilityAmount(modConfig.showDurabilityAmount)
-                    .setDurabilityAmountOffsetX(modConfig.durabilityAmountOffsetX)
-                    .setDurabilityAmountOffsetY(modConfig.durabilityAmountOffsetY)
-                    .setDurabilityAmountDisplayStyle(modConfig.durabilityAmountDisplayStyle)
-                    .setShowDurabilityAmountsFromPercent(modConfig.showDurabilityAmountsFromPercent)
-                    .setDurabilityAmountScale(modConfig.durabilityAmountScale)
-                    .setDurabilityAmountColor(modConfig.durabilityAmountColor)
-                    .setDurabilityAmountColorMin(modConfig.durabilityAmountColorMin)
-                    .setDoRgbBar(modConfig.doRgbBar);
+                .setShowDurabilityAmount(modConfig.showDurabilityAmount)
+                .setDurabilityAmountOffsetX(modConfig.durabilityAmountOffsetX)
+                .setDurabilityAmountOffsetY(modConfig.durabilityAmountOffsetY)
+                .setDurabilityAmountDisplayStyle(modConfig.durabilityAmountDisplayStyle)
+                .setShowDurabilityAmountsFromPercent(modConfig.showDurabilityAmountsFromPercent)
+                .setDurabilityAmountScale(modConfig.durabilityAmountScale)
+                .setDurabilityAmountColor(modConfig.durabilityAmountColor)
+                .setDurabilityAmountColorMin(modConfig.durabilityAmountColorMin)
+                .setDoRgbBar(modConfig.doRgbBar);
         }
 
         public Builder setKey(String key) {
@@ -270,7 +269,6 @@ public class DurabilityConfig {
         }
     }
 
-
     public DurabilityConfig() {}
 
     public static Builder builder() {
@@ -280,5 +278,4 @@ public class DurabilityConfig {
     public static DurabilityConfig fromModConfig() {
         return builder().fromModConfig().build();
     }
-
 }

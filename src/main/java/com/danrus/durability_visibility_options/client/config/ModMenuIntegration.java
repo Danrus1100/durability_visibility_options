@@ -13,6 +13,4 @@ public class ModMenuIntegration implements ModMenuApi {
             return ModConfig.getConfigScreen(parentScreen);
         };
     }
-
 }
-

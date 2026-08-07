@@ -5,11 +5,9 @@ import com.danrus.durability_visibility_options.client.config.presets.ConfigPres
 import net.fabricmc.api.ClientModInitializer;
 
 public class DurabilityVisibilityOptions implements ClientModInitializer {
-
     @Override
     public void onInitializeClient() {
         ConfigPresets.initialize();
         ModConfig.initialize();
-
     }
 }
