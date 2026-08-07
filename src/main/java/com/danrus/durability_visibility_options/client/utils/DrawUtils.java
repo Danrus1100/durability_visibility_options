@@ -155,8 +155,8 @@ public class DrawUtils {
         //? if >=26.1
         @NonNull
         String text,
-        int x,
-        int y,
+        float x,
+        float y,
         float scale
     ) {
         DrawUtils.pushMatrix(drawContext);

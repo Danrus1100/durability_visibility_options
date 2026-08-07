@@ -56,10 +56,10 @@ public class ModConfig {
     public float durabilityBarScale = 1.0F;
 
     @SerialEntry
-    public int durabilityBarOffsetX = 0;
+    public float durabilityBarOffsetX = 0;
 
     @SerialEntry
-    public int durabilityBarOffsetY = 0;
+    public float durabilityBarOffsetY = 0;
 
     @SerialEntry(comment = "Durability bar color at maximum durability (RGB)")
     public int durabilityBarColor = 0x00FF00;
@@ -78,10 +78,10 @@ public class ModConfig {
     public int percentAccuracy = 0;
 
     @SerialEntry
-    public int durabilityPercentOffsetX = 0;
+    public float durabilityPercentOffsetX = 0;
 
     @SerialEntry
-    public int durabilityPercentOffsetY = 0;
+    public float durabilityPercentOffsetY = 0;
 
     @SerialEntry
     public DisplayStyle durabilityPercentDisplayStyle = DisplayStyle.getDefault();
@@ -103,10 +103,10 @@ public class ModConfig {
     public boolean showDurabilityAmount = false;
 
     @SerialEntry
-    public int durabilityAmountOffsetX = 0;
+    public float durabilityAmountOffsetX = 0;
 
     @SerialEntry
-    public int durabilityAmountOffsetY = 0;
+    public float durabilityAmountOffsetY = 0;
 
     @SerialEntry
     public DisplayStyle durabilityAmountDisplayStyle = DisplayStyle.getDefault();
@@ -258,14 +258,14 @@ public class ModConfig {
                             .build()
                     )
                     .option(
-                        Option.<Integer>createBuilder()
+                        Option.<Float>createBuilder()
                             .name(Component.translatable("durability_visibility_options.config.horizontal_offset"))
                             .binding(
-                                0,
+                                0F,
                                 () -> HANDLER.instance().durabilityBarOffsetX,
                                 value -> HANDLER.instance().durabilityBarOffsetX = value
                             )
-                            .controller(IntegerFieldControllerBuilder::create)
+                            .controller(FloatFieldControllerBuilder::create)
                             .addListener(((option, event) -> {
                                 ModConfig.get().durabilityBarOffsetX = option.pendingValue();
                                 HANDLER.save();
@@ -274,14 +274,14 @@ public class ModConfig {
                             .build()
                     )
                     .option(
-                        Option.<Integer>createBuilder()
+                        Option.<Float>createBuilder()
                             .name(Component.translatable("durability_visibility_options.config.vertical_offset"))
                             .binding(
-                                0,
+                                0F,
                                 () -> HANDLER.instance().durabilityBarOffsetY,
                                 value -> HANDLER.instance().durabilityBarOffsetY = value
                             )
-                            .controller(IntegerFieldControllerBuilder::create)
+                            .controller(FloatFieldControllerBuilder::create)
                             .addListener(((option, event) -> {
                                 ModConfig.get().durabilityBarOffsetY = option.pendingValue();
                                 HANDLER.save();
@@ -376,14 +376,14 @@ public class ModConfig {
                                 .build()
                         )
                         .option(
-                            Option.<Integer>createBuilder()
+                            Option.<Float>createBuilder()
                                 .name(Component.translatable("durability_visibility_options.config.horizontal_offset"))
                                 .binding(
-                                    0,
+                                    0F,
                                     () -> HANDLER.instance().durabilityPercentOffsetX,
                                     value -> HANDLER.instance().durabilityPercentOffsetX = value
                                 )
-                                .controller(IntegerFieldControllerBuilder::create)
+                                .controller(FloatFieldControllerBuilder::create)
                                 .addListener(((option, event) -> {
                                     ModConfig.get().durabilityPercentOffsetX = option.pendingValue();
                                     HANDLER.save();
@@ -392,14 +392,14 @@ public class ModConfig {
                                 .build()
                         )
                         .option(
-                            Option.<Integer>createBuilder()
+                            Option.<Float>createBuilder()
                                 .name(Component.translatable("durability_visibility_options.config.vertical_offset"))
                                 .binding(
-                                    0,
+                                    0F,
                                     () -> HANDLER.instance().durabilityPercentOffsetY,
                                     value -> HANDLER.instance().durabilityPercentOffsetY = value
                                 )
-                                .controller(IntegerFieldControllerBuilder::create)
+                                .controller(FloatFieldControllerBuilder::create)
                                 .addListener(((option, event) -> {
                                     ModConfig.get().durabilityPercentOffsetY = option.pendingValue();
                                     HANDLER.save();
@@ -515,14 +515,14 @@ public class ModConfig {
                                 .build()
                         )
                         .option(
-                            Option.<Integer>createBuilder()
+                            Option.<Float>createBuilder()
                                 .name(Component.translatable("durability_visibility_options.config.horizontal_offset"))
                                 .binding(
-                                    0,
+                                    0F,
                                     () -> HANDLER.instance().durabilityAmountOffsetX,
                                     value -> HANDLER.instance().durabilityAmountOffsetX = value
                                 )
-                                .controller(IntegerFieldControllerBuilder::create)
+                                .controller(FloatFieldControllerBuilder::create)
                                 .addListener((option, event) -> {
                                     ModConfig.get().durabilityAmountOffsetX = option.pendingValue();
                                     HANDLER.save();
@@ -531,14 +531,14 @@ public class ModConfig {
                                 .build()
                         )
                         .option(
-                            Option.<Integer>createBuilder()
+                            Option.<Float>createBuilder()
                                 .name(Component.translatable("durability_visibility_options.config.vertical_offset"))
                                 .binding(
-                                    0,
+                                    0F,
                                     () -> HANDLER.instance().durabilityAmountOffsetY,
                                     value -> HANDLER.instance().durabilityAmountOffsetY = value
                                 )
-                                .controller(IntegerFieldControllerBuilder::create)
+                                .controller(FloatFieldControllerBuilder::create)
                                 .addListener((option, event) -> {
                                     ModConfig.get().durabilityAmountOffsetY = option.pendingValue();
                                     HANDLER.save();
