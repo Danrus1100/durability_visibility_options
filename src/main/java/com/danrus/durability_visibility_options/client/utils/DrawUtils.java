@@ -14,10 +14,7 @@ import net.minecraft.client.renderer.RenderType;
 //? if >=26.1
 import org.jspecify.annotations.NonNull;
 
-//? if >=26.1 {
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-//?} else
-//import net.minecraft.client.gui.GuiGraphics;
 
 public class DrawUtils {
 
@@ -50,10 +47,7 @@ public class DrawUtils {
     }
 
     public static void drawGradientHorizontalBar(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
         int itemBarStep
     ) {
         int past_color = Color.HSBtoRGB(1, 1f, 1f) | 0xFF000000;
@@ -84,10 +78,7 @@ public class DrawUtils {
     }
 
     public static void drawGradientVerticalBar(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
         int itemBarStep
     ) {
         int past_color = Color.HSBtoRGB(1, 1f, 1f) | 0xFF000000;
@@ -113,10 +104,7 @@ public class DrawUtils {
     }
 
     public static void drawGradientBar(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
 
         int startX,
         int startY,
@@ -126,10 +114,7 @@ public class DrawUtils {
     }
 
     public static void drawGradientBar(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
 
         DurabilityConfig config,
         int startX,
@@ -146,10 +131,7 @@ public class DrawUtils {
     }
 
     public static void drawBar(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
 
         DurabilityConfig config,
         DurabilityData data,
@@ -171,11 +153,7 @@ public class DrawUtils {
     }
 
     public static void drawTextInfo(
-        //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
-        //?} else
-        //GuiGraphics drawContext,
-
         DurabilityConfig config,
         int color,
         //? if >=26.1
@@ -207,25 +185,15 @@ public class DrawUtils {
         DrawUtils.popMatrix(drawContext);
     }
 
-    public static void pushMatrix(
-        //? if >=26.1 {
-        GuiGraphicsExtractor context
-        //?} else
-        //GuiGraphics context
-    ) {
+    public static void pushMatrix(GuiGraphicsExtractor context) {
         //? if >1.21.5 {
         context.pose().pushMatrix();
-         //?} else {
+        //?} else {
         /*context.pose().pushPose();
         *///?}
     }
 
-    public static void popMatrix(
-        //? if >=26.1 {
-        GuiGraphicsExtractor context
-        //?} else
-        //GuiGraphics context
-    ) {
+    public static void popMatrix(GuiGraphicsExtractor context) {
         //? if >1.21.5 {
         context.pose().popMatrix();
          //?} else {
@@ -234,10 +202,7 @@ public class DrawUtils {
     }
 
     public static void rotateMatrix(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
         float deg
     ) {
         //? if >1.21.5 {
@@ -248,11 +213,7 @@ public class DrawUtils {
     }
 
     public static void translateMatrix(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
-
         int x,
         int y
     ) {
@@ -260,11 +221,7 @@ public class DrawUtils {
     }
 
     public static void translateMatrix(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
-
         float x,
         float y
     ) {
@@ -276,11 +233,7 @@ public class DrawUtils {
     }
 
     public static void scaleMatrix(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
-
         int x,
         int y
     ) {
@@ -288,10 +241,7 @@ public class DrawUtils {
     }
 
     public static void scaleMatrix(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
         float x,
         float y
     ) {
@@ -303,10 +253,7 @@ public class DrawUtils {
     }
 
     public static void fill(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
         int x,
         int y,
         int width,

@@ -5,20 +5,12 @@ import com.danrus.durability_visibility_options.client.config.DurabilityConfig.D
 import com.danrus.durability_visibility_options.client.utils.DrawUtils;
 
 import net.minecraft.world.item.ItemStack;
-
-//? if >=26.1 {
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-//?} else
-//import net.minecraft.client.gui.GuiGraphics;
 
 public class DurabilityRender {
 
     public static void renderBar(
-        //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
-        //?} else
-        //GuiGraphics drawContext,
-
         ItemStack stack,
         int x,
         int y
@@ -28,11 +20,7 @@ public class DurabilityRender {
     }
 
     public static void renderBar(
-        //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
-        //?} else
-        //GuiGraphics drawContext,
-
         DurabilityData data,
         int x,
         int y
@@ -41,11 +29,7 @@ public class DurabilityRender {
     }
 
     public static void renderBar(
-        //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
-        //?} else
-        //GuiGraphics drawContext,
-
         DurabilityData data,
         int x,
         int y,
@@ -76,11 +60,7 @@ public class DurabilityRender {
     }
 
     public static void renderPercents(
-        //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
-        //?} else
-        //GuiGraphics drawContext,
-
         ItemStack stack,
         int x,
         int y
@@ -90,11 +70,7 @@ public class DurabilityRender {
     }
 
     public static void renderPercents(
-        //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
-        //?} else
-        //GuiGraphics drawContext,
-
         DurabilityData data,
         int x,
         int y
@@ -103,11 +79,7 @@ public class DurabilityRender {
     }
 
     public static void renderPercents(
-        //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
-        //?} else
-        //GuiGraphics drawContext,
-
         DurabilityData data,
         int x,
         int y,
@@ -122,11 +94,7 @@ public class DurabilityRender {
     }
 
     public static void renderAmount(
-        //? if >=26.1 {
         GuiGraphicsExtractor drawContext,
-        //?} else
-        //GuiGraphics drawContext,
-
         DurabilityData data,
         int x,
         int y,

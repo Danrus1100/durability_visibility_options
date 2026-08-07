@@ -23,15 +23,9 @@ import net.minecraft.client.renderer.RenderType;
 *///? } else
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-//? if >=26.1 {
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-//?} else
-//import net.minecraft.client.gui.GuiGraphics;
 
-//? if >=26.1 {
 @Mixin(GuiGraphicsExtractor.class)
-//?} else
-//@Mixin(GuiGraphics.class)
 public abstract class DrawContextMixin {
 
     //? if >=26.1 {
@@ -55,15 +49,11 @@ public abstract class DrawContextMixin {
             //? if >=26.1 {
             target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;itemBar(Lnet/minecraft/world/item/ItemStack;II)V"
             //?} else
-            //target = "Lnet/minecraft/client/gui/GuiGraphics;renderItemBar(Lnet/minecraft/world/item/ItemStack;II)V"
+            //target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;renderItemBar(Lnet/minecraft/world/item/ItemStack;II)V"
         )
     )
     private void drawStackOverlayMixin(
-        //? if >=26.1 {
         GuiGraphicsExtractor instance,
-        //?} else
-        //GuiGraphics instance,
-
         ItemStack stack,
         int x,
         int y
@@ -81,10 +71,7 @@ public abstract class DrawContextMixin {
         cancellable = true)
     *///?}
     private void drawItemInSlotMixin(Font textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
-        //? if >=26.1 {
         GuiGraphicsExtractor thisObject = (GuiGraphicsExtractor) (Object) this;
-        //?} else
-        //GuiGraphics thisObject = (GuiGraphics) (Object) this;
 
         if (stack.isDamageableItem()) {
             if (ModConfig.get().showDurability) {

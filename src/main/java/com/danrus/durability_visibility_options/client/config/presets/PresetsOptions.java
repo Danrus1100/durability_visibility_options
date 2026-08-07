@@ -11,15 +11,11 @@ import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Util;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
-
-//? if >=1.21.11 {
-import net.minecraft.util.Util;
-//?} else
-//import net.minecraft.Util;
 
 import static com.danrus.durability_visibility_options.client.config.ModConfig.HANDLER;
 
@@ -63,11 +59,7 @@ public class PresetsOptions {
                                 .action((screen -> {
                                     if (HANDLER.instance().presetsName.isEmpty()) {
                                         ModConfig.sendToast(
-                                            //? if >1.20.2 {
                                             SystemToast.SystemToastId.WORLD_ACCESS_FAILURE,
-                                            //?} else
-                                            //SystemToast.SystemToastIds.WORLD_ACCESS_FAILURE,
-
                                             "durability_visibility_options.config.presets.needs_name"
                                         );
                                         return;
@@ -80,11 +72,7 @@ public class PresetsOptions {
                                     screen.onClose();
                                     ModConfig.get().presetsName = "";
                                     ModConfig.sendToast(
-                                        //? if >1.20.2 {
                                         SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
-                                        //?} else
-                                        //SystemToast.SystemToastIds.PERIODIC_NOTIFICATION,
-
                                         "durability_visibility_options.config.presets.custom_added"
                                     );
                                 }))

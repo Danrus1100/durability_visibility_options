@@ -8,12 +8,10 @@ import com.danrus.durability_visibility_options.client.DurabilityRender;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import com.danrus.durability_visibility_options.client.utils.DrawUtils;
 import net.minecraft.client.Minecraft;
-
-//? if >=26.1 {
-import java.util.Objects;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-//?} else
-//import net.minecraft.client.gui.GuiGraphics;
+
+//? if >=26.1
+import java.util.Objects;
 
 public class DemoRendererImpl implements DemoRenderer {
     private final DemoItems demoItems = DemoItems.getInstance();
@@ -30,11 +28,7 @@ public class DemoRendererImpl implements DemoRenderer {
 
     @Override
     public int render(
-        //? if >=26.1 {
         GuiGraphicsExtractor context,
-        //?} else
-        //GuiGraphics context,
-
         int x,
         int y,
         int width,

@@ -13,6 +13,7 @@ import dev.isxander.yacl3.platform.YACLPlatform;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.network.chat.Component;
 
@@ -20,12 +21,6 @@ import java.awt.Color;
 
 //? if >=26.1
 import org.jspecify.annotations.NonNull;
-
-//? if >1.21.1 {
-import net.minecraft.client.gui.components.toasts.ToastManager;
-//?} else
-//import net.minecraft.client.gui.components.toasts.ToastComponent;
-
 
 public class ModConfig {
     public static final ConfigClassHandler</*? if >=26.1 >>*/@NonNull ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
@@ -647,20 +642,13 @@ public class ModConfig {
         //Minecraft.getInstance().setScreen(parent);
 
         sendToast(
-            //? if >1.20.2 {
             SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
-            //?} else
-            //SystemToast.SystemToastIds.PERIODIC_NOTIFICATION,
-
             "durability_visibility_options.config.presets.applied"
         );
     }
 
     public static void sendToast(
-        //? if >1.20.2 {
         SystemToast.SystemToastId type,
-        //?} else
-        //SystemToast.SystemToastIds type,
 
         String description
     ) {
@@ -669,7 +657,10 @@ public class ModConfig {
         //?} else if >1.21.1 {
         /*ToastManager manager = Minecraft.getInstance().getToastManager();
         *///?} else
-        //ToastComponent manager = Minecraft.getInstance().getToasts();
+        //ToastManager manager = Minecraft.getInstance().getToasts();
+        // ^^^ yes one of the two branches will be incorrectly replaced by stonecutter's
+        // string replacements on any given config, but it's okay because the correct
+        // name is always config'd for the correct version
 
         //? if >=26.2 {
         Toast toast = new SystemToast(type, Component.translatable("durability_visibility_options.config.title"), Component.translatable(description));

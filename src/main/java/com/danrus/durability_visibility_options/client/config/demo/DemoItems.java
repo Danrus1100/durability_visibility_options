@@ -103,8 +103,7 @@ public class DemoItems {
 
     //? if >=26.1 {
     // minecraft 26.1+ makes item components be bound later than in earlier versions
-    // the effect is that the preview screen won't work if you haven't joined a world
-    // yet.
+    // the effect is that the preview screen won't work if you haven't joined a world yet.
     // so we basically "bootstrap" our own versions of the components for the items we want here
     private static class ItemStacks {
         public static final ItemStack ELYTRA = itemStack(

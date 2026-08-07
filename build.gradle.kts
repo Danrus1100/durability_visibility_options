@@ -93,6 +93,36 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 }
 
+stonecutter {
+    replacements.string(current.parsed >= "1.20.4") {
+        replace(
+            "SystemToast.SystemToastIds",
+            "SystemToast.SystemToastId"
+        )
+    }
+
+    replacements.string(current.parsed >= "1.21.2") {
+        replace(
+            "ToastComponent",
+            "ToastManager"
+        )
+    }
+
+    replacements.string(current.parsed >= "1.21.11") {
+        replace(
+            "net.minecraft.Util",
+            "net.minecraft.util.Util"
+        )
+    }
+
+    replacements.string(current.parsed >= "26.1") {
+        replace(
+            "GuiGraphics",
+            "GuiGraphicsExtractor"
+        )
+    }
+}
+
 val jarArchiveFileName = "${projectArchivesName}-${modVersion}-mc-${stonecutter.current.project}.jar"
 
 if (stonecutter.current.version < "26.1") {
