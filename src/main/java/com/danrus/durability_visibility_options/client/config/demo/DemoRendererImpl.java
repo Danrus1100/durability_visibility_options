@@ -1,7 +1,5 @@
 package com.danrus.durability_visibility_options.client.config.demo;
 
-import java.util.Objects;
-
 // DISCLAIMER:
 // I cant write a good code, so try to make this better if
 // u wanna use it in your mod.
@@ -12,6 +10,7 @@ import com.danrus.durability_visibility_options.client.utils.DrawUtils;
 import net.minecraft.client.Minecraft;
 
 //? if >=26.1 {
+import java.util.Objects;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 //?} else
 //import net.minecraft.client.gui.GuiGraphics;

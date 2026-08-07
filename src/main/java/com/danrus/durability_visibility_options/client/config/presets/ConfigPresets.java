@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import net.fabricmc.loader.api.FabricLoader;
 
-import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -176,11 +175,5 @@ public class ConfigPresets {
             e.printStackTrace();
             return List.of();
         }
-    }
-
-    public static void openPresetsFolderInExplorer() {
-        Path presetsDir = getPresetsDirectory();
-
-        
     }
 }

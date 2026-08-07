@@ -3,11 +3,13 @@ package com.danrus.durability_visibility_options.client.utils;
 import com.danrus.durability_visibility_options.client.DurabilityData;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
-
-import com.mojang.math.Axis;
 
 import java.awt.*;
+
+//? if <=1.21.5 {
+/*import com.mojang.math.Axis;
+import net.minecraft.client.renderer.RenderType;
+*///? }
 
 //? if >=26.1
 import org.jspecify.annotations.NonNull;
@@ -16,11 +18,6 @@ import org.jspecify.annotations.NonNull;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 //?} else
 //import net.minecraft.client.gui.GuiGraphics;
-
-//? if >=1.21.11 {
-import net.minecraft.client.renderer.rendertype.RenderType;
-//?} else
-//import net.minecraft.client.renderer.RenderType;
 
 public class DrawUtils {
 

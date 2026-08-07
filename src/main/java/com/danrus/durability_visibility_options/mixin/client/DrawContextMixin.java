@@ -4,31 +4,29 @@ import com.danrus.durability_visibility_options.client.DurabilityData;
 import com.danrus.durability_visibility_options.client.DurabilityRender;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import com.danrus.durability_visibility_options.client.config.ModConfig;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.player.LocalPlayer;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
-import org.spongepowered.asm.mixin.Final;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+//? if <=1.21.1 {
+/*import net.minecraft.util.Mth;
+import org.spongepowered.asm.mixin.injection.Inject;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.RenderType;
+*///? } else
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 //? if >=26.1 {
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 //?} else
 //import net.minecraft.client.gui.GuiGraphics;
-
-
-//? if >=1.21.11 {
-import net.minecraft.client.renderer.rendertype.RenderType;
-//?} else
-//import net.minecraft.client.renderer.RenderType;
 
 //? if >=26.1 {
 @Mixin(GuiGraphicsExtractor.class)
@@ -78,10 +76,9 @@ public abstract class DrawContextMixin {
 
     //? if <=1.21.1 {
     /*@Inject(
-            method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isBarVisible()Z"),
-            cancellable = true)
-
+        method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V",
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isBarVisible()Z"),
+        cancellable = true)
     *///?}
     private void drawItemInSlotMixin(Font textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
         //? if >=26.1 {

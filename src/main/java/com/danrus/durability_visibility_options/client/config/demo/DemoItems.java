@@ -2,13 +2,13 @@ package com.danrus.durability_visibility_options.client.config.demo;
 
 import com.danrus.durability_visibility_options.client.DurabilityData;
 
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.core.Holder;
-import net.minecraft.network.chat.Component;
 
 //? if >=26.1 {
+import net.minecraft.world.item.Item;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
