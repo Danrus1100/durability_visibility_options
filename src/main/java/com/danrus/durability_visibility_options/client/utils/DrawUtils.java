@@ -2,14 +2,21 @@ package com.danrus.durability_visibility_options.client.utils;
 
 import com.danrus.durability_visibility_options.client.DurabilityData;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.util.math.RotationAxis;
+import net.minecraft.client.Minecraft;
 
 import java.awt.*;
-public class DrawUtils {
 
+//? if <=1.21.5 {
+/*import com.mojang.math.Axis;
+import net.minecraft.client.renderer.RenderType;
+*///? }
+
+//? if >=26.1
+import org.jspecify.annotations.NonNull;
+
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+
+public class DrawUtils {
     public static int interpolateColorHSV(int colorStart, int colorEnd, int t) {
         float ratio = Math.max(0f, Math.min(1f, t / 100f));
 
@@ -38,7 +45,10 @@ public class DrawUtils {
         return Color.HSBtoRGB(h, s, v);
     }
 
-    public static void drawGradientHorizontalBar(DrawContext context, int itemBarStep) {
+    public static void drawGradientHorizontalBar(
+        GuiGraphicsExtractor context,
+        int itemBarStep
+    ) {
         int past_color = Color.HSBtoRGB(1, 1f, 1f) | 0xFF000000;
         pushMatrix(context);
         rotateMatrix(context, 90);
@@ -46,79 +56,109 @@ public class DrawUtils {
             float hue = (float) k / 13f;
             int rgb = Color.HSBtoRGB(hue, 1f, 1f) | 0xFF000000;
             if (k < itemBarStep) {
-
                 context.fillGradient(
+                    0,
+                    -(k + 1),
 
-                        0,
-                        -(k + 1),
-
-                        1,
-                        -k,
-                        //? if <1.21.6
-                        0,
-                        rgb,
-                        past_color
+                    1,
+                    -k,
+                    //? if <1.21.6
+                    //0,
+                    rgb,
+                    past_color
                 );
-
             }
             past_color = rgb;
         }
         popMatrix(context);
     }
 
-    public static void drawGradientVerticalBar(DrawContext context, int itemBarStep) {
+    public static void drawGradientVerticalBar(
+        GuiGraphicsExtractor context,
+        int itemBarStep
+    ) {
         int past_color = Color.HSBtoRGB(1, 1f, 1f) | 0xFF000000;
         for (int k = 0; k < 13; k++) {
             float hue = (float) k / 13f;
             int rgb = Color.HSBtoRGB(hue, 1f, 1f) | 0xFF000000;
             if (k < itemBarStep) {
                 context.fillGradient(
+                    0,
+                    25 - (k + 1),
 
-                        0,
-                        13 - (k + 1),
-
-                        1,
-                        13 - k,
-                        //? if <1.21.6
-                        0,
-                        rgb,
-                        past_color
+                    1,
+                    25 - k,
+                    //? if <1.21.6
+                    //0,
+                    rgb,
+                    past_color
                 );
             }
             past_color = rgb;
         }
     }
 
-    public static void drawGradientBar(DrawContext context, int startX, int startY, int itemBarStep){
+    public static void drawGradientBar(
+        GuiGraphicsExtractor context,
+        int startX,
+        int startY,
+        int itemBarStep
+    ) {
         drawGradientBar(context, DurabilityConfig.builder().fromModConfig().build(), startX, startY, itemBarStep) ;
     }
 
-    public static void drawGradientBar(DrawContext context, DurabilityConfig config, int startX, int startY, int itemBarStep) {
+    public static void drawGradientBar(
+        GuiGraphicsExtractor context,
+        DurabilityConfig config,
+        int startX,
+        int startY,
+        int itemBarStep
+    ) {
         if (config.isVertical) {
-            if (config.showDurabilityBarBackground) {fill(context, 0, 0, 2, 13, -16777216);}
+            if (config.showDurabilityBarBackground) {
+                fill(context, 0, 12, 2, 13, -16777216);
+            }
             drawGradientVerticalBar(context, itemBarStep);
         } else {
-            if (config.showDurabilityBarBackground) {fill(context, 0, 0, 13, 2, -16777216);}
+            if (config.showDurabilityBarBackground) {
+                fill(context, 0, 0, 13, 2, -16777216);
+            }
             drawGradientHorizontalBar(context, itemBarStep);
         }
     }
 
-    public static void drawBar(DrawContext context, DurabilityConfig config, DurabilityData data, int startX, int startY){
+    public static void drawBar(
+        GuiGraphicsExtractor context,
+        DurabilityConfig config,
+        DurabilityData data,
+        int startX,
+        int startY
+    ) {
         if (config.doRgbBar){
             drawGradientBar(context, config, startX, startY, data.barStep);
             return;
         }
 
         if (config.isVertical){
-            if (config.showDurabilityBarBackground) {fill(context, 0, 0, 2, 13, -16777216);}
-            fill(context, 0, 13, 1, -data.barStep, DrawUtils.interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, data.getPercentsInt()));
+            if (config.showDurabilityBarBackground) {fill(context, 0, 12, 2, 13, -16777216);}
+            fill(context, 0, 25, 1, -data.barStep, DrawUtils.interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, data.getPercentsInt()));
         } else {
             if (config.showDurabilityBarBackground) {fill(context, 0, 0, 13, 2, -16777216);}
-            fill(context, 0 , 0, data.barStep, 1, DrawUtils.interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, data.getPercentsInt()));
+            fill(context, 0, 0, data.barStep, 1, DrawUtils.interpolateColorHSV(config.durabilityBarColorMin, config.durabilityBarColor, data.getPercentsInt()));
         }
     }
 
-    public static void drawTextInfo(DrawContext drawContext, DurabilityConfig config, int color, String text, int x, int y, float scale) {
+    public static void drawTextInfo(
+        GuiGraphicsExtractor drawContext,
+        DurabilityConfig config,
+        int color,
+        //? if >=26.1
+        @NonNull
+        String text,
+        float x,
+        float y,
+        float scale
+    ) {
         DrawUtils.pushMatrix(drawContext);
 
         float targetX = x + 9;
@@ -127,71 +167,99 @@ public class DrawUtils {
         DrawUtils.translateMatrix(drawContext, targetX, targetY);
         DrawUtils.scaleMatrix(drawContext, scale, scale);
 
-        drawContext.drawCenteredTextWithShadow(
-                MinecraftClient.getInstance().textRenderer,
-                text,
-                0,
-                0,
-                color
+        //? if >=26.1 {
+        drawContext.centeredText(
+        //?} else
+        //drawContext.drawCenteredString(
+            Minecraft.getInstance().font,
+            text,
+            0,
+            0,
+            color
         );
 
         DrawUtils.popMatrix(drawContext);
     }
 
-    public static void pushMatrix(DrawContext context) {
+    public static void pushMatrix(GuiGraphicsExtractor context) {
         //? if >1.21.5 {
-        /*context.getMatrices().pushMatrix();
-         *///?} else {
-        context.getMatrices().push();
-        //?}
+        context.pose().pushMatrix();
+        //?} else {
+        /*context.pose().pushPose();
+        *///?}
     }
 
-    public static void popMatrix(DrawContext context) {
+    public static void popMatrix(GuiGraphicsExtractor context) {
         //? if >1.21.5 {
-        /*context.getMatrices().popMatrix();
-         *///?} else {
-        context.getMatrices().pop();
-         //?}
+        context.pose().popMatrix();
+         //?} else {
+        /*context.pose().popPose();
+         *///?}
     }
 
-    public static void rotateMatrix(DrawContext context, float deg) {
+    public static void rotateMatrix(
+        GuiGraphicsExtractor context,
+        float deg
+    ) {
         //? if >1.21.5 {
-        /*context.getMatrices().rotate((float) Math.toRadians(deg));
-         *///?} else {
-        context.getMatrices().multiply(RotationAxis.POSITIVE_Z.rotationDegrees(deg));
-        //?}
+        context.pose().rotate((float) Math.toRadians(deg));
+        //?} else {
+        /*context.pose().mulPose(Axis.ZP.rotationDegrees(deg));
+        *///?}
     }
 
-    public static void translateMatrix(DrawContext context, int x, int y) {
+    public static void translateMatrix(
+        GuiGraphicsExtractor context,
+        int x,
+        int y
+    ) {
         translateMatrix(context, (float) x, (float) y);
     }
 
-    public static void translateMatrix(DrawContext context, float x, float y) {
+    public static void translateMatrix(
+        GuiGraphicsExtractor context,
+        float x,
+        float y
+    ) {
         //? if >1.21.5 {
-        /*context.getMatrices().translate(x, y);
-         *///?} else {
-        context.getMatrices().translate(x, y, 200.0F);
-        //?}
+        context.pose().translate(x, y);
+        //?} else {
+        /*context.pose().translate(x, y, 200.0F);
+        *///?}
     }
 
-    public static void scaleMatrix(DrawContext context, int x, int y) {
+    public static void scaleMatrix(
+        GuiGraphicsExtractor context,
+        int x,
+        int y
+    ) {
         scaleMatrix(context, (float) x, (float) y);
     }
 
-    public static void scaleMatrix(DrawContext context, float x, float y) {
+    public static void scaleMatrix(
+        GuiGraphicsExtractor context,
+        float x,
+        float y
+    ) {
         //? if >1.21.5 {
-        /*context.getMatrices().scale(x, y);
-         *///?} else {
-        context.getMatrices().scale(x, y, 1.0F);
-        //?}
+        context.pose().scale(x, y);
+        //?} else {
+        /*context.pose().scale(x, y, 1.0F);
+        *///?}
     }
 
-    public static void fill(DrawContext context, int x, int y, int width, int height, int color) {
+    public static void fill(
+        GuiGraphicsExtractor context,
+        int x,
+        int y,
+        int width,
+        int height,
+        int color
+    ) {
         //? if >1.21.5 {
-        /*context.fill(x, y, x+width, y+height, color);
-         *///?} else {
-        context.fill(RenderLayer.getGui(), x, y, x + width, y + height, 200, color);
-        //?}
-
+        context.fill(x, y, x+width, y+height, color);
+        //?} else {
+        /*context.fill(RenderType.gui(), x, y, x + width, y + height, 0, color);
+        *///?}
     }
 }

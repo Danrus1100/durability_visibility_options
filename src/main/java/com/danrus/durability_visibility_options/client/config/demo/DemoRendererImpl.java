@@ -7,8 +7,11 @@ package com.danrus.durability_visibility_options.client.config.demo;
 import com.danrus.durability_visibility_options.client.DurabilityRender;
 import com.danrus.durability_visibility_options.client.config.DurabilityConfig;
 import com.danrus.durability_visibility_options.client.utils.DrawUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+
+//? if >=26.1
+import java.util.Objects;
 
 public class DemoRendererImpl implements DemoRenderer {
     private final DemoItems demoItems = DemoItems.getInstance();
@@ -20,12 +23,19 @@ public class DemoRendererImpl implements DemoRenderer {
     public DemoRendererImpl(DurabilityConfig config) {
         this.config = config;
         this.useSpecificConfig = true;
+        demoItems.initializeItemList();
     }
 
     @Override
-    public int render(DrawContext context, int x, int y, int width, float deltaTime) {
+    public int render(
+        GuiGraphicsExtractor context,
+        int x,
+        int y,
+        int width,
+        float deltaTime
+    ) {
 
-        int itemX = (int) (x + MinecraftClient.getInstance().getWindow().getScaledWidth() / 7.5);
+        int itemX = (int) (x + Minecraft.getInstance().getWindow().getGuiScaledWidth() / 7.5);
         int itemY = y + 45;
         float scale = 6F;
 
@@ -34,7 +44,18 @@ public class DemoRendererImpl implements DemoRenderer {
         DrawUtils.translateMatrix(context, itemX + 8, itemY + 8);
         DrawUtils.scaleMatrix(context, scale, scale);
 
-        context.drawItem(demoItems.getActiveItem(), -8, -8);
+        //? if >=26.1 {
+        context.item(
+        //?} else
+        //context.renderItem(
+
+            //? if >=26.1 {
+            Objects.requireNonNull(demoItems.getActiveItem()),
+            //?} else
+            //demoItems.getActiveItem(),
+            -8,
+            -8
+        );
 
         DrawUtils.popMatrix(context);
 
@@ -43,9 +64,17 @@ public class DemoRendererImpl implements DemoRenderer {
         DrawUtils.translateMatrix(context, itemX, itemY);
         DrawUtils.scaleMatrix(context, scale, scale);
 
-        if (config.showDurability) {DurabilityRender.renderBar(context, demoItems.getData(), -7, -6, config);}
-        if (config.showDurabilityPercent) {DurabilityRender.renderPercents(context, demoItems.getData(),  -7, -6, config);}
-        if (config.showDurabilityAmount) {DurabilityRender.renderAmount(context, demoItems.getData(), -7, -6, config);}
+        if (config.showDurability) {
+            DurabilityRender.renderBar(context, demoItems.getData(), -7, -6, config);
+        }
+
+        if (config.showDurabilityPercent) {
+            DurabilityRender.renderPercents(context, demoItems.getData(),  -7, -6, config);
+        }
+
+        if (config.showDurabilityAmount) {
+            DurabilityRender.renderAmount(context, demoItems.getData(), -7, -6, config);
+        }
 
         DrawUtils.popMatrix(context);
 
